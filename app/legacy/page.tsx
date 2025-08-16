@@ -18,22 +18,24 @@ export default function LegacyPage() {
     "2021": { image: "https://picsum.photos/800/500?random=4", description: "Lorem ipsum dolor sit amet consectetur." },
   }
 
-  const galleryImages = [
-    "https://picsum.photos/300/200?random=5",
-    "https://picsum.photos/300/200?random=6",
-    "https://picsum.photos/300/200?random=7",
-    "https://picsum.photos/300/200?random=8",
-    "https://picsum.photos/300/200?random=9",
-    "https://picsum.photos/300/200?random=10",
-    "https://picsum.photos/300/200?random=11",
-    "https://picsum.photos/300/200?random=12",
-  ]
+const galleryImages = [
+  "/legacy/img1.jpg",
+  "/legacy/img4.jpg",
+  "/legacy/img6.jpg",
+  "/legacy/img2.jpg",
+  "/legacy/img7.jpg",
+  "/legacy/img3.jpg",
+  "/legacy/img5.jpg",
+  "/legacy/img8.jpg",
+];
+
 
   const testimonialVideos = [
-    "https://picsum.photos/250/180?random=13",
-    "https://picsum.photos/250/180?random=14",
-    "https://picsum.photos/250/180?random=15",
-    "https://picsum.photos/250/180?random=16",
+    "/legacy/testimonial.jpg",
+    "/legacy/testimonial.jpg",
+    "/legacy/testimonial.jpg",
+    "/legacy/testimonial.jpg",
+
   ]
 
   const nextSlide = () => {
@@ -46,28 +48,48 @@ export default function LegacyPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="relative bg-black text-white min-h-[500px] flex items-center">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url('https://picsum.photos/1200/600?random=20')` }}
-        >
-          <div className="absolute inset-0 bg-black bg-opacity-60"></div>
-        </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">National Astronomy Challenge:</h1>
-            <p className="text-xl mb-6">Celebrating the Legacy (2018-2024)</p>
-          </div>
-        </div>
-      </section>
+
+<section className="relative bg-black text-white min-h-screen flex items-end">
+  {/* Background image */}
+  <div
+    className="absolute inset-0 bg-cover bg-center"
+    style={{ backgroundImage: `url('/legacy/bghero.jpg')` }}
+  >
+    {/* Overlay gradients */}
+    <div className="absolute inset-0 pointer-events-none">
+      {/* Top gradient */}
+      <div className="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-b from-black/70 to-transparent"></div>
+      {/* Bottom gradient */}
+      <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent"></div>
+    </div>
+  </div>
+
+  {/* Foreground content */}
+  <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+    <div className="flex items-center justify-between gap-6">
+      <div className="max-w-2xl">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          National Astronomy Challenge:
+        </h1>
+        <p className="text-xl">Celebrating the Legacy (2018-2024)</p>
+      </div>
+      <div className="w-40 h-40 relative">
+        <img
+          src="/home/arrow-right.png"
+          alt="Arrow"
+          className="w-full h-full object-contain"
+        />
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Inspiring Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              <h2 className="text-4xl md:text-5xl  text-gray-900 mb-6">
                 Inspiring Young Astronomers Across the Globe
               </h2>
               <p className="text-gray-600 mb-4">
@@ -80,7 +102,7 @@ export default function LegacyPage() {
             </div>
             <div className="relative">
               <img
-                src="https://picsum.photos/600/400?random=21"
+                src="/legacy/section2.jpg"
                 alt="Award ceremony"
                 className="rounded-lg shadow-lg w-full"
               />
@@ -222,15 +244,15 @@ export default function LegacyPage() {
                 {testimonialVideos.map((video, index) => (
                   <div key={index} className="relative group cursor-pointer">
                     <img
-                      src={video || "/placeholder.svg"}
+                      src={video || "/legacy/bghero.jpg"}
                       alt={`Student testimonial ${index + 1}`}
                       className="w-full h-48 object-cover rounded-lg shadow-md"
                     />
-                    <div className="absolute inset-0 bg-black bg-opacity-30 rounded-lg flex items-center justify-center group-hover:bg-opacity-40 transition-all">
+                    {/* <div className="absolute inset-0 bg-black bg-opacity-30 rounded-lg flex items-center justify-center group-hover:bg-opacity-40 transition-all">
                       <div className="bg-white bg-opacity-90 p-3 rounded-full">
                         <Play className="w-6 h-6 text-gray-800" />
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 ))}
               </div>
