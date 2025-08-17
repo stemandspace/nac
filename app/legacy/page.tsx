@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Play, User, GraduationCap } from "lucide-react"
 import Link from "next/link"
+import Support from '@/components/school-registration/support';
 
 export default function LegacyPage() {
   const [selectedYear, setSelectedYear] = useState("2018")
@@ -111,8 +112,90 @@ const galleryImages = [
         </div>
       </section>
 
+      {/* Timeline Section */}
+    <section className="relative">
+        <div
+          className="relative h-[600px] bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url('/home/img2.png')`,
+          }}
+        >
+          {/* Navigation arrows */}
+          <button className="absolute left-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-black bg-opacity-30 hover:bg-opacity-50 rounded-full flex items-center justify-center text-white transition-all">
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button className="absolute right-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-black bg-opacity-30 hover:bg-opacity-50 rounded-full flex items-center justify-center text-white transition-all">
+            <ChevronRight className="w-6 h-6" />
+          </button>
+
+          {/* Content overlay */}
+          <div className="absolute bottom-8 left-8 text-white z-10">
+            <h3 className="text-6xl font-bold mb-2">2019</h3>
+            <p className="text-lg text-gray-200">
+              Lorem ipsum dolor sit amet consectetur,
+            </p>
+          </div>
+
+          {/* Year pagination */}
+          <div className="absolute bottom-8 right-8 flex gap-4 text-white z-10">
+            <button className="text-gray-400 hover:text-white transition-colors">
+              2019
+            </button>
+            <button className="text-gray-400 hover:text-white transition-colors">
+              2018
+            </button>
+            <button className="text-white font-semibold">2019</button>
+            <button className="text-gray-400 hover:text-white transition-colors">
+              2020
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Student Testimonials */}
+<section className="py-16 bg-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+      Students love National Astronomy Challenge
+    </h2>
+    <div className="relative">
+      {/* Full-width responsive grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+        {testimonialVideos.map((video, index) => (
+          <div key={index} className="relative group cursor-pointer w-full">
+            <img
+              src={video || "/legacy/bghero.jpg"}
+              alt={`Student testimonial ${index + 1}`}
+              className="w-full h-72 md:h-96 object-cover rounded-xl shadow-lg"
+            />
+            {/* Optional play overlay */}
+            {/* <div className="absolute inset-0 bg-black bg-opacity-30 rounded-xl flex items-center justify-center group-hover:bg-opacity-40 transition-all">
+              <div className="bg-white bg-opacity-90 p-3 rounded-full">
+                <Play className="w-6 h-6 text-gray-800" />
+              </div>
+            </div> */}
+          </div>
+        ))}
+      </div>
+      {/* Navigation buttons */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white shadow-lg p-2 rounded-full hover:bg-gray-50"
+      >
+        <ChevronLeft className="w-5 h-5" />
+      </button>
+      <button
+        onClick={nextSlide}
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white shadow-lg p-2 rounded-full hover:bg-gray-50"
+      >
+        <ChevronRight className="w-5 h-5" />
+      </button>
+    </div>
+  </div>
+</section>
+
       {/* Gallery Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-[#5BB0E01C]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-3xl font-bold text-gray-900">Gallery of Impact</h2>
@@ -145,133 +228,54 @@ const galleryImages = [
         </div>
       </section>
 
-      {/* Timeline Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative">
-            <img
-              src={timelineData[selectedYear as keyof typeof timelineData].image || "/placeholder.svg"}
-              alt={`NAC ${selectedYear}`}
-              className="w-full h-96 object-cover rounded-lg"
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
-            <div className="absolute bottom-8 left-8 text-white">
-              <h3 className="text-4xl font-bold mb-2">{selectedYear}</h3>
-              <p className="text-lg">{timelineData[selectedYear as keyof typeof timelineData].description}</p>
-            </div>
-            <div className="absolute bottom-8 right-8 flex items-center gap-2">
-              <button
-                onClick={() => {
-                  const currentIndex = years.indexOf(selectedYear)
-                  const prevIndex = currentIndex > 0 ? currentIndex - 1 : years.length - 1
-                  setSelectedYear(years[prevIndex])
-                }}
-                className="bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-2 rounded-full"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <div className="flex gap-2">
-                {years.map((year) => (
-                  <button
-                    key={year}
-                    onClick={() => setSelectedYear(year)}
-                    className={`px-3 py-1 rounded text-sm ${
-                      selectedYear === year
-                        ? "bg-white text-black"
-                        : "bg-white bg-opacity-20 text-white hover:bg-opacity-30"
-                    }`}
-                  >
-                    {year}
-                  </button>
-                ))}
-              </div>
-              <button
-                onClick={() => {
-                  const currentIndex = years.indexOf(selectedYear)
-                  const nextIndex = currentIndex < years.length - 1 ? currentIndex + 1 : 0
-                  setSelectedYear(years[nextIndex])
-                }}
-                className="bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-2 rounded-full"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Registration CTA */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Join NAC 2025</h2>
-          <p className="text-xl text-gray-600 mb-8">Registrations Open Now!</p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <div className="flex items-center gap-4">
-              <div className="bg-blue-500 text-white p-3 rounded-lg">
-                <GraduationCap className="w-6 h-6" />
-              </div>
-              <span className="text-lg font-medium">Are you a School?</span>
-              <Link href="/school-registration">
-                <Button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full">
-                  Register Your School
-                </Button>
-              </Link>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="bg-blue-500 text-white p-3 rounded-lg">
-                <User className="w-6 h-6" />
-              </div>
-              <span className="text-lg font-medium">Are you a Student?</span>
-              <Link href="/direct-registration">
-                <Button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full">
-                  Register Directly
-                </Button>
-              </Link>
-            </div>
+<section className="py-16 bg-gray-50">
+  <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 className="text-3xl font-bold text-gray-900">Join NAC 2025</h2>
+    <p className="text-2xl text-gray-900 mb-10">Registrations Open Now!</p>
+    <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+      <div className="flex items-center justify-between w-full sm:w-[520px] bg-[#EDF6FC] px-6 py-5 rounded-lg shadow">
+        <div className="flex items-center gap-3">
+          <div className="bg-[#5BB0E0] text-white p-3 rounded-lg">
+            <GraduationCap className="w-6 h-6" />
           </div>
+          <span className="text-base sm:text-lg font-medium whitespace-nowrap">
+            Are you a School?
+          </span>
         </div>
-      </section>
+        <Link href="/school-registration">
+          <Button className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-4 sm:px-6 py-4 rounded-full whitespace-nowrap text-sm sm:text-base">
+            Register Your School
+          </Button>
+        </Link>
+      </div>
 
-      {/* Student Testimonials */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            Students love National Astronomy Challenge
-          </h2>
-          <div className="relative">
-            <div className="flex justify-center">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl">
-                {testimonialVideos.map((video, index) => (
-                  <div key={index} className="relative group cursor-pointer">
-                    <img
-                      src={video || "/legacy/bghero.jpg"}
-                      alt={`Student testimonial ${index + 1}`}
-                      className="w-full h-48 object-cover rounded-lg shadow-md"
-                    />
-                    {/* <div className="absolute inset-0 bg-black bg-opacity-30 rounded-lg flex items-center justify-center group-hover:bg-opacity-40 transition-all">
-                      <div className="bg-white bg-opacity-90 p-3 rounded-full">
-                        <Play className="w-6 h-6 text-gray-800" />
-                      </div>
-                    </div> */}
-                  </div>
-                ))}
-              </div>
-            </div>
-            <button
-              onClick={prevSlide}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white shadow-lg p-2 rounded-full hover:bg-gray-50"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={nextSlide}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white shadow-lg p-2 rounded-full hover:bg-gray-50"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
+      {/* Student Card */}
+      <div className="flex items-center justify-between w-full sm:w-[520px] bg-[#EDF6FC] px-6 py-5 rounded-lg shadow">
+        <div className="flex items-center gap-3">
+          <div className="bg-[#5BB0E0] text-white p-3 rounded-lg">
+            <User className="w-6 h-6" />
           </div>
+          <span className="text-base sm:text-lg font-medium whitespace-nowrap">
+            Are you a Student?
+          </span>
         </div>
-      </section>
+        <Link href="/direct-registration">
+          <Button className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-4 sm:px-6 py-4 rounded-full whitespace-nowrap text-sm sm:text-base">
+            Register Directly
+          </Button>
+        </Link>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<Support /> 
+
+
+
+
     </div>
   )
 }
