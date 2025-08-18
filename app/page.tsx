@@ -10,6 +10,10 @@ import {
   ChevronDown,
 } from "lucide-react";
 import Image from "next/image";
+import AwardsCeremonyCarousel from "@/components/awards-ceremony-carousel";
+
+const HeroImage1 = "/s1.jpg";
+const HeroImage2 = "/s2.jpg";
 
 export default function HomePage() {
   return (
@@ -19,7 +23,7 @@ export default function HomePage() {
         <div
           className="relative min-h-screen bg-cover bg-center"
           style={{
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/home/header1.jpg')`,
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${HeroImage1})`,
           }}
         >
           <div className="flex flex-col justify-end pb-6 h-full px-8 md:px-12 lg:px-16 text-white space-y-6">
@@ -49,7 +53,7 @@ export default function HomePage() {
         <div
           className="relative min-h-screen bg-cover bg-center"
           style={{
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/home/header2.jpg')`,
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${HeroImage2})`,
           }}
         >
           <div className="flex flex-col justify-end pb-6 h-full px-8 md:px-12 lg:px-16 text-white space-y-6">
@@ -236,44 +240,7 @@ export default function HomePage() {
       </section>
 
       {/* Awards Ceremony Section */}
-      <section className="relative">
-        <div
-          className="relative h-[600px] bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url('/home/img2.png')`,
-          }}
-        >
-          {/* Navigation arrows */}
-          <button className="absolute left-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-black bg-opacity-30 hover:bg-opacity-50 rounded-full flex items-center justify-center text-white transition-all">
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-          <button className="absolute right-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-black bg-opacity-30 hover:bg-opacity-50 rounded-full flex items-center justify-center text-white transition-all">
-            <ChevronRight className="w-6 h-6" />
-          </button>
-
-          {/* Content overlay */}
-          <div className="absolute bottom-8 left-8 text-white z-10">
-            <h3 className="text-6xl font-bold mb-2">2019</h3>
-            <p className="text-lg text-gray-200">
-              Lorem ipsum dolor sit amet consectetur,
-            </p>
-          </div>
-
-          {/* Year pagination */}
-          <div className="absolute bottom-8 right-8 flex gap-4 text-white z-10">
-            <button className="text-gray-400 hover:text-white transition-colors">
-              2019
-            </button>
-            <button className="text-gray-400 hover:text-white transition-colors">
-              2018
-            </button>
-            <button className="text-white font-semibold">2019</button>
-            <button className="text-gray-400 hover:text-white transition-colors">
-              2020
-            </button>
-          </div>
-        </div>
-      </section>
+      <AwardsCeremonyCarousel />
 
       {/* Spacetopia Section */}
       <section className="py-10 bg-white">
@@ -309,7 +276,7 @@ export default function HomePage() {
                   <div key={i} className="flex items-start gap-3">
                     {/* Arrow image */}
                     <img
-                      src="/home/arrow-right.png" 
+                      src="/home/arrow-right.png"
                       alt="Arrow"
                       className="w-5 h-5 mt-1"
                     />
