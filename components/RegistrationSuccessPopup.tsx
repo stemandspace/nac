@@ -12,7 +12,7 @@ export default function RegistrationSuccessPopup({
   onClose,
 }: RegistrationSuccessPopupProps) {
   const copyToClipboard = async () => {
-    const url = `${window.location.origin}/st/reg/${schoolId}`;
+    const url = `${window.location.origin}/st/reg?schoolId=${schoolId}`;
     try {
       await navigator.clipboard.writeText(url);
       // You could add a toast notification here
@@ -51,7 +51,7 @@ export default function RegistrationSuccessPopup({
 
           <div className="bg-gray-50 rounded-lg p-3 mb-4">
             <p className="text-sm font-mono text-blue-600 break-all">
-              {`${window.location.origin}/st/reg/${schoolId}`}
+              {`${window.location.origin}/st/reg?schoolId=${schoolId}`}
             </p>
           </div>
 
