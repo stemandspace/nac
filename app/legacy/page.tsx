@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Play, User, GraduationCap } from "lucide-react"
 import Link from "next/link"
 import Support from '@/components/school-registration/support';
+import Subscribe from '@/components/school-registration/subscribe'
 
 export default function LegacyPage() {
   const [selectedYear, setSelectedYear] = useState("2018")
@@ -270,12 +271,8 @@ const galleryImages = [
   </div>
 </section>
 
-
 <Support /> 
-
-
-
-
+<Subscribe />
     </div>
   )
 }

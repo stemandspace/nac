@@ -4,6 +4,8 @@ import Section1 from '@/components/study-material/section1';
 import Section2 from '@/components/study-material/section2';
 import Section3 from '@/components/study-material/section3';
 import Support from '@/components/school-registration/support';
+import Subscribe from '@/components/school-registration/subscribe'
+import Contact from '@/components/school-registration/contact';
 
 export default function StudyMaterialPage() {
   return (
@@ -26,12 +28,12 @@ export default function StudyMaterialPage() {
         </div>
 
         <div className="max-w-6xl mx-auto px-4 text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h2 className="text-4xl md:text-5xl text-white mb-6">
             Learn Through Fun and Imagine Your
             <br />
             Future in Space
           </h2>
-          <p className="text-blue-200 text-lg mb-12 max-w-3xl mx-auto">
+          <p className="text-blue-200 text-sm mb-12 max-w-2xl mx-auto">
             Explore engaging space comics for young minds and join exclusive career seminars with
             <br />
             scientists & space professionals.
@@ -205,6 +207,8 @@ export default function StudyMaterialPage() {
   </div>
 </section>
 <Support />
+<Subscribe />
+<Contact />
     </div>
   )
 }

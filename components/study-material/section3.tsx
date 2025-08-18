@@ -75,70 +75,70 @@ export default function StudyMaterialSection() {
             </div>
 
             {/* Bottom Pricing Table */}
-            <div className="mt-16 overflow-x-auto">
-            <table className="min-w-full border border-gray-200 rounded-2xl overflow-hidden text-sm">
-                <thead className="bg-gray-100 text-left">
-                <tr>
-                    <th className="px-6 py-3 font-semibold">Plan</th>
-                    <th className="px-6 py-3 font-semibold">Credits Included</th>
-                    <th className="px-6 py-3 font-semibold">
-                    NAC 2025 Material Access
-                    </th>
-                    <th className="px-6 py-3 font-semibold">Extra Benefits</th>
-                    <th className="px-6 py-3 font-semibold">Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr className="border-t">
-                    <td className="px-6 py-4">Free Access Included (With Registration)</td>
-                    <td className="px-6 py-4">15 Credits</td>
-                    <td className="px-6 py-4">
-                    Limited sample papers, basic quizzes, and introductory content
-                    </td>
-                    <td className="px-6 py-4">-</td>
-                    <td className="px-6 py-4">Free</td>
-                </tr>
+           <div className="mt-16 overflow-x-auto">
+  <table className="min-w-full bg-white shadow-md rounded-2xl overflow-hidden text-sm">
+<thead className="bg-[#EDF6FC]">
+  <tr>
+    <th className="px-6 py-4 font-bold text-black text-base text-left">Plan</th>
+    <th className="px-6 py-4 font-bold text-black text-base text-left">Credits Included</th>
+    <th className="px-6 py-4 font-bold text-black text-base text-left">
+      NAC 2025 Material Access
+    </th>
+    <th className="px-6 py-4 font-bold text-black text-base text-left">Extra Benefits</th>
+    <th className="px-6 py-4 font-bold text-black text-base text-left">Price</th>
+  </tr>
+</thead>
 
-                <tr className="border-t">
-                    <td className="px-6 py-4">Credit Top-Up</td>
-                    <td className="px-6 py-4">26 Credits (adds to your free 15)</td>
-                    <td className="px-6 py-4">Full NAC 2025 study pack (41 credits total)</td>
-                    <td className="px-6 py-4">-</td>
-                    <td className="px-6 py-4">XXX (Per 26 credits)</td>
-                </tr>
+    <tbody className="divide-y divide-gray-200 rounded-4xl">
+      <tr>
+        <td className="px-6 py-4">Free Access Included (With Registration)</td>
+        <td className="px-6 py-4">15 Credits</td>
+        <td className="px-6 py-4">
+          Limited sample papers, basic quizzes, and introductory content
+        </td>
+        <td className="px-6 py-4">-</td>
+        <td className="px-6 py-4 font-medium">Free</td>
+      </tr>
 
-                <tr className="border-t">
-                    <td className="px-6 py-4">Protostar Membership</td>
-                    <td className="px-6 py-4">Unlimited Credits</td>
-                    <td className="px-6 py-4">
-                    Full NAC 2025 study pack + All Spacetopia content
-                    </td>
-                    <td className="px-6 py-4">
-                    Exclusive live sessions, engagement activities, year-round
-                    access
-                    </td>
-                    <td className="px-6 py-4">
-                    ₹2,499/year (40% NAC Discount)
-                    </td>
-                </tr>
+      <tr>
+        <td className="px-6 py-4">Credit Top-Up</td>
+        <td className="px-6 py-4">26 Credits (adds to your free 15)</td>
+        <td className="px-6 py-4">Full NAC 2025 study pack (41 credits total)</td>
+        <td className="px-6 py-4">-</td>
+        <td className="px-6 py-4 font-medium">XXX (Per 26 credits)</td>
+      </tr>
 
-                <tr className="border-t">
-                    <td className="px-6 py-4">Supernova Membership</td>
-                    <td className="px-6 py-4">Unlimited Credits</td>
-                    <td className="px-6 py-4">
-                    Full NAC 2025 study pack + All Spacetopia content
-                    </td>
-                    <td className="px-6 py-4">
-                    Everything in Protostar + premium event invites & advanced
-                    workshops
-                    </td>
-                    <td className="px-6 py-4">
-                    ₹2,999/year (40% NAC Discount)
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            </div>
+      <tr>
+        <td className="px-6 py-4">Protostar Membership</td>
+        <td className="px-6 py-4">Unlimited Credits</td>
+        <td className="px-6 py-4">
+          Full NAC 2025 study pack + All Spacetopia content
+        </td>
+        <td className="px-6 py-4">
+          Exclusive live sessions, engagement activities, year-round access
+        </td>
+        <td className="px-6 py-4 font-medium text-[#2D7A0B]">
+          ₹2,499/year (40% NAC Discount)
+        </td>
+      </tr>
+
+      <tr>
+        <td className="px-6 py-4">Supernova Membership</td>
+        <td className="px-6 py-4">Unlimited Credits</td>
+        <td className="px-6 py-4">
+          Full NAC 2025 study pack + All Spacetopia content
+        </td>
+        <td className="px-6 py-4">
+          Everything in Protostar + premium event invites & advanced workshops
+        </td>
+        <td className="px-6 py-4 font-medium text-[#2D7A0B]">
+          ₹2,999/year (40% NAC Discount)
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
         </div>
         </section>
     );

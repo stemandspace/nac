@@ -1,6 +1,5 @@
 import React from 'react';
 
-// Import all components
 import AwardSection from '@/components/school-registration/awardsection';
 import Contact from '@/components/school-registration/contact';
 import ExamInfo from '@/components/school-registration/examinfo';
@@ -11,6 +10,7 @@ import Spacetopia from '@/components/school-registration/spacetopia';
 import Support from '@/components/school-registration/support';
 import TwoStep from '@/components/school-registration/twostep';
 import Wp from '@/components/school-registration/wp'
+import Subscribe from '@/components/school-registration/subscribe'
 
 const SchoolRegistrationPage = () => {
   return (
@@ -20,10 +20,10 @@ const SchoolRegistrationPage = () => {
       <Process />
       <TwoStep />
       <Spacetopia />
-      <Wp />
       <ExamInfo />
       <AwardSection />
       <Support />
+      <Subscribe />
       <Contact />
     </main>
   );

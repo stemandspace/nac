@@ -1,235 +1,284 @@
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Section3 from "@/components/study-material/awards1";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Play,
+  User,
+  GraduationCap,
+} from "lucide-react";
+import Support from "@/components/school-registration/support";
+import Subscribe from "@/components/school-registration/subscribe";
+import Contact from "@/components/school-registration/contact";
 
 export default function RewardsPage() {
   return (
     <>
-
-        <section className="relative h-screen flex items-end justify-center pb-6">
+      <section className="relative h-screen flex items-end pb-6">
         <div className="absolute inset-0">
-            <Image
+          <Image
             src="/home/header2.jpg"
             alt="NAC 2025 Award Ceremony"
             fill
             className="object-cover"
-            />
-            <div className="absolute inset-0 bg-black/50" />
+          />
+          <div className="absolute inset-0 bg-black/30" />
         </div>
 
-        <div className="relative z-10 text-white max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-start justify-between gap-8">
-            {/* Left: Heading + Paragraph */}
-            <div className="text-left md:text-left max-w-2xl">
-            <h1 className="text-3xl md:text-4xl font-bold mb-6">
-                Celebrating Excellence in Space Learning
-            </h1>
-            <p className="text-xl mb-6">
+        <div className="relative z-10 text-white px-6 max-w-2xl ml-20">
+          <h1 className="text-3xl md:text-4xl font-bold mb-6">
+            Celebrating Excellence in Space Learning
+          </h1>
+          <p className="text-xl mb-6">
             Every great achievement deserves to be celebrated!
-            </p>
-            </div>
+          </p>
         </div>
+      </section>
+
+      <Section3 />
+
+      <div className="min-h-screen bg-white">
+        {/* Student Awards Section */}
+        <section className="py-16 px-4 max-w-7xl mx-auto bg-[#F1F8FC] rounded-lg">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8">
+            Student Awards
+          </h2>
+
+          {/* Header */}
+          <div className="grid grid-cols-3 gap-6 font-semibold text-gray-900 mb-4">
+            <div>Award Name</div>
+            <div>Criteria</div>
+            <div>Recognition</div>
+          </div>
+
+          {/* Rows */}
+          <div className="grid grid-cols-3 gap-6 mb-4">
+            <div className="bg-white rounded-lg px-4 py-3">
+              Galaxy Gold Award
+            </div>
+            <div className="bg-white rounded-lg px-4 py-3">
+              Rank 1 student in respective grade
+            </div>
+            <div className="bg-white rounded-lg px-4 py-3">
+              Invited for Award Ceremony and Space Expedition along with school
+              representative
+            </div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-6 mb-4">
+            <div className="bg-white rounded-lg px-4 py-3">
+              Lunar Silver Award
+            </div>
+            <div className="bg-white rounded-lg px-4 py-3">
+              Rank 2 student in respective grade
+            </div>
+            <div className="bg-white rounded-lg px-4 py-3">
+              Invited for Award Ceremony and Space Expedition along with school
+              representative
+            </div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-6 mb-8">
+            <div className="bg-white rounded-lg px-4 py-3">
+              Cosmic Bronze Award
+            </div>
+            <div className="bg-white rounded-lg px-4 py-3">
+              Rank 3 student in respective grade
+            </div>
+            <div className="bg-white rounded-lg px-4 py-3">
+              Invited for Award Ceremony and Space Expedition along with school
+              representative
+            </div>
+          </div>
+
+          {/* Divider */}
+          <hr className="my-10 border-gray-300" />
+
+          {/* Certificate Section */}
+          <h2 className="text-3xl font-bold text-gray-900 mb-8">
+            Certificate of Excellence
+          </h2>
+
+          {/* Header */}
+          <div className="grid grid-cols-3 gap-6 font-semibold text-gray-900 mb-4">
+            <div>Certificate Type</div>
+            <div>Criteria</div>
+            <div>Recognition</div>
+          </div>
+
+          {/* Row */}
+          <div className="grid grid-cols-3 gap-6">
+            <div className="bg-white rounded-lg px-4 py-3">
+              Certificate of Excellence
+            </div>
+            <div className="bg-white rounded-lg px-4 py-3">
+              Achieving over 75 percentile in NAC 2025
+            </div>
+            <div className="bg-white rounded-lg px-4 py-3">
+              Certificate awarded
+            </div>
+          </div>
         </section>
 
-    <div className="min-h-screen bg-gray-50">
-      {/* Student Awards Section */}
-      <section className="py-16 px-4 max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">Student Awards</h2>
-        <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-          <table className="w-full">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Award Name</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Criteria</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Recognition</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200">
-              <tr>
-                <td className="px-6 py-4 text-sm text-gray-900">Galaxy Gold Award</td>
-                <td className="px-6 py-4 text-sm text-gray-700">Rank 1 student in respective grade</td>
-                <td className="px-6 py-4 text-sm text-gray-700">
-                  Invited for Award Ceremony and Space Expedition along with school representative
-                </td>
-              </tr>
-              <tr>
-                <td className="px-6 py-4 text-sm text-gray-900">Lunar Silver Award</td>
-                <td className="px-6 py-4 text-sm text-gray-700">Rank 2 student in respective grade</td>
-                <td className="px-6 py-4 text-sm text-gray-700">
-                  Invited for Award Ceremony and Space Expedition along with school representative
-                </td>
-              </tr>
-              <tr>
-                <td className="px-6 py-4 text-sm text-gray-900">Cosmic Bronze Award</td>
-                <td className="px-6 py-4 text-sm text-gray-700">Rank 3 student in respective grade</td>
-                <td className="px-6 py-4 text-sm text-gray-700">
-                  Invited for Award Ceremony and Space Expedition along with school representative
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+        {/* School Awards Section */}
+        <section className="py-16 px-4 max-w-7xl mx-auto bg-[#F1F8FC] rounded-lg">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8">
+            School Awards
+          </h2>
 
-      {/* Certificate of Excellence Section */}
-      <section className="py-16 px-4 max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">Certificate of Excellence</h2>
-        <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-          <table className="w-full">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Certificate Type</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Criteria</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Recognition</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="px-6 py-4 text-sm text-gray-900">Certificate of Excellence</td>
-                <td className="px-6 py-4 text-sm text-gray-700">Achieving over 70 percentile in NAC 2025</td>
-                <td className="px-6 py-4 text-sm text-gray-700">Certificate awarded</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      {/* School Awards Section */}
-      <section className="py-16 px-4 max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">School Awards</h2>
-        <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-          <table className="w-full">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Award</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Criteria</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Reward</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200">
-              <tr>
-                <td className="px-6 py-4 text-sm text-gray-900">Galaxy Gold Award</td>
-                <td className="px-6 py-4 text-sm text-gray-700">Student of school receiving Rank 1</td>
-                <td className="px-6 py-4 text-sm text-gray-700">Science Expedition of nominated teacher</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-4 text-sm text-gray-900">Lunar Silver Award</td>
-                <td className="px-6 py-4 text-sm text-gray-700">Student of school receiving Rank 1</td>
-                <td className="px-6 py-4 text-sm text-gray-700">Science Expedition of nominated teacher</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-4 text-sm text-gray-900">Cosmic Bronze Award</td>
-                <td className="px-6 py-4 text-sm text-gray-700">Student of school receiving Rank 3</td>
-                <td className="px-6 py-4 text-sm text-gray-700">Science Expedition of nominated teacher</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-4 text-sm text-gray-900">Meteor Shower Awards</td>
-                <td className="px-6 py-4 text-sm text-gray-700">
-                  School with highest number of silent achievers (75 percentile & above)
-                </td>
-                <td className="px-6 py-4 text-sm text-gray-700">Science Expedition of nominated teacher</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        {/* Additional Certificates */}
-        <div className="mt-12 bg-white rounded-lg shadow-sm overflow-hidden">
-          <table className="w-full">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Certificate Type</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Criteria</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Recognition</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200">
-              <tr>
-                <td className="px-6 py-4 text-sm text-gray-900">Cosmic Constellation Champion</td>
-                <td className="px-6 py-4 text-sm text-gray-700">School with highest number of participants</td>
-                <td className="px-6 py-4 text-sm text-gray-700">Science Expedition of nominated teacher</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-4 text-sm text-gray-900">Space School of the Year</td>
-                <td className="px-6 py-4 text-sm text-gray-700">
-                  School with highest engagement through CEC free webinars
-                </td>
-                <td className="px-6 py-4 text-sm text-gray-700">Science Expedition of nominated teacher</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      {/* Support and Partners Section */}
-      <section className="py-16 px-4 max-w-7xl mx-auto">
-        {/* Support Cards */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
-          <div className="bg-white p-6 rounded-lg shadow-sm text-center">
-            <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-white font-bold">?</span>
-            </div>
-            <h3 className="font-semibold text-gray-900 mb-2">Have a Question</h3>
-            <p className="text-sm text-gray-600 mb-4">
-              Check our most common queries about NAC registration and participation.
-            </p>
-            <Button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full w-full">
-              Click here for FAQs
-            </Button>
+          {/* Header */}
+          <div className="grid grid-cols-3 gap-6 font-semibold text-gray-900 mb-4">
+            <div>Award</div>
+            <div>Criteria</div>
+            <div>Reward</div>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-sm text-center">
-            <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-white font-bold">!</span>
+          {/* Rows */}
+          <div className="grid grid-cols-3 gap-6 mb-4">
+            <div className="bg-white rounded-lg px-4 py-3">
+              Galaxy Gold Award
             </div>
-            <h3 className="font-semibold text-gray-900 mb-2">Understand the Rules</h3>
-            <p className="text-sm text-gray-600 mb-4">Read about the participation terms for NAC.</p>
-            <Button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full w-full">
-              Download PDF
-            </Button>
-          </div>
-
-          <div className="bg-white p-6 rounded-lg shadow-sm text-center">
-            <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-white font-bold">?</span>
+            <div className="bg-white rounded-lg px-4 py-3">
+              Student of school receiving Rank 1
             </div>
-            <h3 className="font-semibold text-gray-900 mb-2">Need Help?</h3>
-            <p className="text-sm text-gray-600 mb-4">
-              Email: nationalastronomy@gmail.com Call us to help in case of any query.
-            </p>
-            <Button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full w-full">
-              Contact Support
-            </Button>
-          </div>
-        </div>
-
-        {/* Partner Cards */}
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="bg-green-500 p-8 rounded-lg text-center text-white">
-            <h3 className="text-xl font-bold mb-2">Subscribe our YouTube Channel</h3>
-            <div className="bg-white text-green-500 p-4 rounded-lg mx-auto w-fit">
-              <div className="text-2xl font-bold">SPACETOPIA</div>
-              <div className="text-sm">SPACE SCIENCE MADE SIMPLE</div>
+            <div className="bg-white rounded-lg px-4 py-3">
+              Science Expedition of nominated teacher
             </div>
           </div>
 
-          <div className="bg-green-600 p-8 rounded-lg text-center text-white">
-            <h3 className="text-xl font-bold mb-4">Join NAC WhatsApp Community</h3>
-            <div className="bg-white p-4 rounded-lg mx-auto w-fit">
-              <div className="w-24 h-24 bg-black mx-auto flex items-center justify-center">
-                <div className="text-white text-xs">QR CODE</div>
-              </div>
+          <div className="grid grid-cols-3 gap-6 mb-4">
+            <div className="bg-white rounded-lg px-4 py-3">
+              Lunar Silver Award
+            </div>
+            <div className="bg-white rounded-lg px-4 py-3">
+              Student of school receiving Rank 1
+            </div>
+            <div className="bg-white rounded-lg px-4 py-3">
+              Science Expedition of nominated teacher
             </div>
           </div>
 
-          <div className="bg-green-700 p-8 rounded-lg text-center text-white">
-            <h3 className="text-xl font-bold mb-2">Subscribe Stories from the Universe</h3>
-            <div className="bg-purple-600 text-white p-4 rounded-lg mx-auto w-fit">
-              <div className="text-lg font-bold">STORIES</div>
-              <div className="text-sm">FROM THE UNIVERSE</div>
+          <div className="grid grid-cols-3 gap-6 mb-4">
+            <div className="bg-white rounded-lg px-4 py-3">
+              Cosmic Bronze Award
+            </div>
+            <div className="bg-white rounded-lg px-4 py-3">
+              Student of school receiving Rank 3
+            </div>
+            <div className="bg-white rounded-lg px-4 py-3">
+              Science Expedition of nominated teacher
             </div>
           </div>
-        </div>
-      </section>
-    </div>
+
+          <div className="grid grid-cols-3 gap-6 mb-8">
+            <div className="bg-white rounded-lg px-4 py-3">
+              Meteor Shower Awards
+            </div>
+            <div className="bg-white rounded-lg px-4 py-3">
+              School with highest number of silent achievers (75 percentile &
+              above)
+            </div>
+            <div className="bg-white rounded-lg px-4 py-3">
+              Science Expedition of nominated teacher
+            </div>
+          </div>
+
+          {/* Divider */}
+          <hr className="my-10 border-gray-300" />
+
+          {/* Certificates Section */}
+          <h2 className="text-3xl font-bold text-gray-900 mb-8">
+            Certificates
+          </h2>
+
+          {/* Header */}
+          <div className="grid grid-cols-3 gap-6 font-semibold text-gray-900 mb-4">
+            <div>Certificate Type</div>
+            <div>Criteria</div>
+            <div>Recognition</div>
+          </div>
+
+          {/* Rows */}
+          <div className="grid grid-cols-3 gap-6 mb-4">
+            <div className="bg-white rounded-lg px-4 py-3">
+              Cosmic Constellation Champion
+            </div>
+            <div className="bg-white rounded-lg px-4 py-3">
+              School with highest number of participants
+            </div>
+            <div className="bg-white rounded-lg px-4 py-3">
+              Science Expedition of nominated teacher
+            </div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-6">
+            <div className="bg-white rounded-lg px-4 py-3">
+              Space School of the Year
+            </div>
+            <div className="bg-white rounded-lg px-4 py-3">
+              School with highest engagement through CEC free webinars
+            </div>
+            <div className="bg-white rounded-lg px-4 py-3">
+              Science Expedition of nominated teacher
+            </div>
+          </div>
+        </section>
+
+        <section className=" py-20 px-4 text-center max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Journey Beyond the Classroom – NAC Space Expeditions Since 2018
+          </h2>
+          <p className="text-gray-600 text-base md:text-lg leading-relaxed">
+            Every year, NAC winners embark on unforgettable space & science
+            expeditions, exploring observatories, interacting with scientists,
+            and experiencing astronomy up close.
+          </p>
+        </section>
+
+        <section className="relative">
+          <div
+            className="relative h-[600px] bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url('/home/img2.png')`,
+            }}
+          >
+            {/* Navigation arrows */}
+            <button className="absolute left-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-black bg-opacity-30 hover:bg-opacity-50 rounded-full flex items-center justify-center text-white transition-all">
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button className="absolute right-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-black bg-opacity-30 hover:bg-opacity-50 rounded-full flex items-center justify-center text-white transition-all">
+              <ChevronRight className="w-6 h-6" />
+            </button>
+
+            {/* Content overlay */}
+            <div className="absolute bottom-8 left-8 text-white z-10">
+              <h3 className="text-6xl font-bold mb-2">2019</h3>
+              <p className="text-lg text-gray-200">
+                Lorem ipsum dolor sit amet consectetur,
+              </p>
+            </div>
+
+            {/* Year pagination */}
+            <div className="absolute bottom-8 right-8 flex gap-4 text-white z-10">
+              <button className="text-gray-400 hover:text-white transition-colors">
+                2019
+              </button>
+              <button className="text-gray-400 hover:text-white transition-colors">
+                2018
+              </button>
+              <button className="text-white font-semibold">2019</button>
+              <button className="text-gray-400 hover:text-white transition-colors">
+                2020
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <Support />
+        <Subscribe />
+        <Contact />
+      </div>
     </>
-  )
+  );
 }

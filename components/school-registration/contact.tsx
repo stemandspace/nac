@@ -1,19 +1,24 @@
-    // components/ContactSection.tsx
-    import React from "react";
+// components/ContactSection.tsx
+import React from "react";
 
     export default function ContactSection() {
     return (
-        <section className="py-4 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
+        <section className="w-full bg-black text-white">
+        <div className="max-w-7xl mx-auto px-6 py-10">
             {/* Contact Section */}
-            <div className="bg-black text-white rounded-lg p-8 flex items-center justify-between">
-            <div>
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+            {/* Left text */}
+            <div className="text-center lg:text-left">
                 <div className="text-orange-500 text-sm font-semibold mb-2">
                 CONTACT US ANYTIME
                 </div>
-                <h3 className="text-2xl font-bold">Need Help with Registration?</h3>
+                <h3 className="text-2xl md:text-3xl font-bold">
+                Need Help with Registration?
+                </h3>
             </div>
-            <div className="flex justify-center items-center gap-4">
+
+            {/* Right side (arrow + info) */}
+            <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
                 <div className="w-16 h-16">
                 <svg viewBox="0 0 100 50" className="w-full h-full text-white">
                     <path
@@ -37,14 +42,17 @@
                     </defs>
                 </svg>
                 </div>
-                <div className="text-right">
-                <div>Our NAC 2025 Support Team is here to guide you.</div>
-                <div className="font-bold">Email: nac@stemands.space</div>
+                <div>
+                <p className="text-sm sm:text-base">
+                    Our NAC 2025 Support Team is here to guide you.
+                </p>
+                <p className="font-bold text-sm sm:text-base">
+                    Email: nac@stemands.space
+                </p>
                 </div>
-  
             </div>
             </div>
         </div>
         </section>
     );
-    }
+}
