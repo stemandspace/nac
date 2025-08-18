@@ -16,66 +16,67 @@ import Image from "next/image";
 export default function HomePage() {
   return (
     <main className="relative">
-      <div className="grid grid-cols-1 md:grid-cols-2">
-  {/* Left Hero */}
-  <div
-    className="relative min-h-[70vh] md:min-h-screen bg-cover bg-center"
-    style={{
-      backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/home/header1.jpg')`,
-    }}
-  >
-    <div className="flex flex-col justify-end h-full px-4 sm:px-6 md:px-12 lg:px-16 pb-6 text-white space-y-4 sm:space-y-6">
-      <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
-        NAC 2025 is Here!
-        <br /> Be Part of India's Biggest
-        <br /> Astronomy Challenge
-      </h1>
-      <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-100 max-w-lg">
-        Open To Schools And Individual Students Across India And The World.
-        <br /> Exciting Prizes, National Recognition & A Journey Into Space
-        Learning Awaits!
-      </p>
-      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4">
-        <button className="bg-white text-gray-900 hover:bg-gray-100 px-4 sm:px-5 py-2 rounded-lg text-sm sm:text-base font-semibold">
-          Register As An Indian Student
-        </button>
-        <button className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 px-4 sm:px-5 py-2 rounded-lg text-sm sm:text-base font-semibold">
-          Register As A Foreign Student
-        </button>
-      </div>
-    </div>
-  </div>
+      <div className="grid md:grid-cols-2">
+        {/* Left Hero */}
+        <div
+          className="relative min-h-screen bg-cover bg-center"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/home/header1.jpg')`,
+          }}
+        >
+          <div className="flex flex-col justify-end pb-6 h-full px-8 md:px-12 lg:px-16 text-white space-y-6">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
+              NAC 2025 is Here!
+              <br /> Be Part of India's Biggest
+              <br /> Astronomy Challenge
+            </h1>
+            <p className="text-base md:text-lg lg:text-xl text-gray-100 max-w-xl">
+              Open To Schools And Individual Students Across India And The
+              World.
+              <br /> Exciting Prizes, National Recognition & A Journey Into
+              Space Learning Awaits!
+            </p>
+            <div className="flex flex-wrap gap-4 pt-4">
+              <button className="bg-white text-gray-900 hover:bg-gray-100 px-5 py-2 rounded-lg text-base font-semibold">
+                Register As An Indian Student
+              </button>
+              <button className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 px-5 py-2 rounded-lg text-base font-semibold">
+                Register As A Foreign Student
+              </button>
+            </div>
+          </div>
+        </div>
 
-  {/* Right Hero */}
-  <div
-    className="relative min-h-[70vh] md:min-h-screen bg-cover bg-center"
-    style={{
-      backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/home/header2.jpg')`,
-    }}
-  >
-    <div className="flex flex-col justify-end h-full px-4 sm:px-6 md:px-12 lg:px-16 pb-6 text-white space-y-4 sm:space-y-6">
-      <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
-        NAC 2025 is Here!
-        <br /> Be Part of India's Biggest
-        <br /> Astronomy Challenge
-      </h1>
-      <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-100 max-w-lg">
-        Open To Schools And Individual Students Across India And The World.
-        <br /> Exciting Prizes, National Recognition & A Journey Into Space
-        Learning Awaits!
-      </p>
-      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4">
-        <button className="bg-white text-gray-900 hover:bg-gray-100 px-4 sm:px-5 py-2 rounded-lg text-sm sm:text-base font-semibold">
-          Register As An Indian School
-        </button>
-        <button className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 px-4 sm:px-5 py-2 rounded-lg text-sm sm:text-base font-semibold">
-          Register As A Foreign School
-        </button>
+        {/* Right Hero */}
+        <div
+          className="relative min-h-screen bg-cover bg-center"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/home/header2.jpg')`,
+          }}
+        >
+          <div className="flex flex-col justify-end pb-6 h-full px-8 md:px-12 lg:px-16 text-white space-y-6">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
+              NAC 2025 is Here!
+              <br /> Be Part of India's Biggest
+              <br /> Astronomy Challenge
+            </h1>
+            <p className="text-base md:text-lg lg:text-xl text-gray-100 max-w-xl">
+              Open To Schools And Individual Students Across India And The
+              World.
+              <br /> Exciting Prizes, National Recognition & A Journey Into
+              Space Learning Awaits!
+            </p>
+            <div className="flex flex-wrap gap-4 pt-4">
+              <button className="bg-white text-gray-900 hover:bg-gray-100 px-5 py-2 rounded-lg text-base font-semibold">
+                Register As An Indian School
+              </button>
+              <button className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 px-5 py-2 rounded-lg text-base font-semibold">
+                Register As A Foreign School
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
-
 
       {/* What is NAC Section */}
       <section className="py-6 bg-white">
