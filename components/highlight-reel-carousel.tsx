@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { Button } from "./ui/button";
-import "./highlight-reel-carousel.css";
 
 // Import Swiper styles
 import "swiper/css";
@@ -66,10 +65,30 @@ const highlightReelData: HighlightReelItem[] = [
 
 export default function HighlightReelCarousel() {
   const swiperRef = useRef<any>(null);
+  const [isInitialized, setIsInitialized] = useState(false);
+  const [currentBreakpoint, setCurrentBreakpoint] = useState<string>("");
 
   useEffect(() => {
     // Debug: Log the number of slides
     console.log("Highlight Reel Data:", highlightReelData.length, "items");
+
+    // Add resize listener to debug breakpoint changes
+    const handleResize = () => {
+      if (swiperRef.current) {
+        const swiper = swiperRef.current.swiper;
+        if (swiper) {
+          console.log(
+            "Window resized - Current breakpoint:",
+            swiper.currentBreakpoint
+          );
+          console.log("Current slidesPerView:", swiper.params.slidesPerView);
+          setCurrentBreakpoint(swiper.currentBreakpoint || "unknown");
+        }
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
@@ -77,7 +96,7 @@ export default function HighlightReelCarousel() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl text-gray-900 mb-6 font-bold">
+          <h2 className="text-4xl md:text-4xl text-gray-900 mb-6 font-medium">
             Highlight Reel
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -87,12 +106,12 @@ export default function HighlightReelCarousel() {
         </div>
 
         {/* Swiper Carousel */}
-        <div className="mb-12 relative">
+        <div className="mb-12 relative w-full">
           <Swiper
             ref={swiperRef}
-            modules={[Navigation, Pagination, Autoplay]}
+            modules={[Navigation, Autoplay]}
             spaceBetween={24}
-            slidesPerView={4}
+            slidesPerView={1}
             navigation={true}
             pagination={{
               clickable: true,
@@ -103,42 +122,54 @@ export default function HighlightReelCarousel() {
               disableOnInteraction: false,
             }}
             loop={true}
+            watchSlidesProgress={true}
             breakpoints={{
-              0: {
+              320: {
                 slidesPerView: 1,
-                spaceBetween: 12,
+                spaceBetween: 16,
               },
               640: {
-                slidesPerView: 2,
+                slidesPerView: 1,
                 spaceBetween: 20,
               },
+              768: {
+                slidesPerView: 1,
+                spaceBetween: 24,
+              },
               1024: {
-                slidesPerView: 3,
+                slidesPerView: 2,
                 spaceBetween: 24,
               },
               1280: {
-                slidesPerView: 4,
+                slidesPerView: 3,
                 spaceBetween: 24,
               },
+              1536: {
+                slidesPerView: 3,
+                spaceBetween: 32,
+              },
             }}
-            className="highlight-reel-swiper"
+            className=""
             onSwiper={(swiper) => {
-              console.log(
-                "Swiper initialized with",
-                swiper.slides.length,
-                "slides"
-              );
-              console.log("Current breakpoint:", swiper.currentBreakpoint);
-              console.log("Swiper instance:", swiper);
+              setIsInitialized(true);
+              setCurrentBreakpoint(swiper.currentBreakpoint || "unknown");
             }}
             onSlideChange={(swiper) => {
               console.log("Slide changed to:", swiper.activeIndex);
             }}
+            onBreakpoint={(swiper, breakpoint) => {
+              console.log("Breakpoint changed to:", breakpoint);
+              console.log(
+                "Current slidesPerView:",
+                swiper.params.slidesPerView
+              );
+              setCurrentBreakpoint(String(breakpoint));
+            }}
           >
             {highlightReelData.map((item, index) => (
-              <SwiperSlide key={item.id}>
-                <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                  <div className="aspect-video relative overflow-hidden">
+              <SwiperSlide key={item.id} className="rounded-xl overflow-hidden">
+                <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 h-full">
+                  <div className="aspect-video relative overflow-hidden rounded-t-xl">
                     <img
                       src={item.image}
                       alt={item.title}
@@ -148,18 +179,6 @@ export default function HighlightReelCarousel() {
                         e.currentTarget.src = "/placeholder.jpg";
                       }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-600 text-sm mb-3 line-clamp-2">
-                      {item.description}
-                    </p>
-                    <p className="text-[#EE7E1A] text-sm font-medium">
-                      {item.date}
-                    </p>
                   </div>
                 </div>
               </SwiperSlide>
