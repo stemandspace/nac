@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import AwardsCeremonyCarousel from "@/components/awards-ceremony-carousel";
+import HighlightReelCarousel from "@/components/highlight-reel-carousel";
 
 const HeroImage1 = "/s1.jpg";
 const HeroImage2 = "/s2.jpg";
@@ -586,102 +587,7 @@ export default function HomePage() {
       </section>
 
       {/* Highlight Reel - NAC Legacy Carousel */}
-      <section className="py-10 bg-[#F4F4F4]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl text-gray-900 mb-12">
-              Highlight Reel - NAC Legacy Carousel
-            </h2>
-          </div>
-
-          {/* Carousel Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            {/* Card 1 */}
-            <div className="bg-white rounded-xl overflow-hidden shadow-sm">
-              <div className="aspect-video">
-                <img
-                  src=" /home/reel.jpg"
-                  alt="NAC Legacy Event"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-4">
-                <p className="text-gray-600 text-sm mb-2">
-                  Lorem ipsum dolor sit amet
-                </p>
-                <p className="text-gray-500 text-xs">
-                  23 November Gandhinagar Road, Fort, Mumbai, adipisci
-                </p>
-              </div>
-            </div>
-
-            {/* Card 2 */}
-            <div className="bg-white rounded-xl overflow-hidden shadow-sm">
-              <div className="aspect-video">
-                <img
-                  src="/home/reel.jpg"
-                  alt="NAC Legacy Event"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-4">
-                <p className="text-gray-600 text-sm mb-2">
-                  Lorem ipsum dolor sit amet
-                </p>
-                <p className="text-gray-500 text-xs">
-                  23 November Gandhinagar Road, Fort, Mumbai, adipisci
-                </p>
-              </div>
-            </div>
-
-            {/* Card 3 */}
-            <div className="bg-white rounded-xl overflow-hidden shadow-sm">
-              <div className="aspect-video">
-                <img
-                  src="/home/reel.jpg"
-                  alt="NAC Legacy Event"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-4">
-                <p className="text-gray-600 text-sm mb-2">
-                  Lorem ipsum dolor sit amet
-                </p>
-                <p className="text-gray-500 text-xs">
-                  23 November Gandhinagar Road, Fort, Mumbai, adipisci
-                </p>
-              </div>
-            </div>
-
-            {/* Card 4 */}
-            <div className="bg-white rounded-xl overflow-hidden shadow-sm">
-              <div className="aspect-video">
-                <img
-                  src="/home/reel.jpg"
-                  alt="NAC Legacy Event"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-4">
-                <p className="text-gray-600 text-sm mb-2">
-                  Lorem ipsum dolor sit amet
-                </p>
-                <p className="text-gray-500 text-xs">
-                  23 November Gandhinagar Road, Fort, Mumbai, adipisci
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* View More Button */}
-          <div className="text-center">
-            <Button className="bg-[#EE7E1A] text-white px-12 py-6 rounded-4xl text-lg font-semibold">
-              Know More
-            </Button>
-          </div>
-        </div>
-      </section>
+      <HighlightReelCarousel />
 
       {/* Stay Connected Section */}
       <section className="py-10 bg-white">

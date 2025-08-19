@@ -1,0 +1,184 @@
+/* Highlight Reel Carousel Styles */
+
+.highlight-reel-swiper {
+  position: relative;
+  padding-bottom: 60px;
+  /* Debug: Add border to see carousel container */
+  border: 2px solid transparent;
+}
+
+.highlight-reel-swiper .swiper-slide {
+  height: auto;
+  /* Debug: Add border to see individual slides */
+  border: 1px solid transparent;
+}
+
+/* Swiper Navigation Arrows */
+.highlight-reel-swiper .swiper-button-next,
+.highlight-reel-swiper .swiper-button-prev {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.highlight-reel-swiper .swiper-button-next {
+  right: -24px;
+}
+
+.highlight-reel-swiper .swiper-button-prev {
+  left: -24px;
+}
+
+.highlight-reel-swiper .swiper-button-next:hover,
+.highlight-reel-swiper .swiper-button-prev:hover {
+  background: #f9fafb;
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.highlight-reel-swiper .swiper-button-next::after,
+.highlight-reel-swiper .swiper-button-prev::after {
+  font-size: 18px;
+  font-weight: bold;
+  color: #374151;
+}
+
+/* Swiper Pagination */
+.highlight-reel-swiper .swiper-pagination {
+  position: relative;
+  bottom: 0;
+  margin-top: 20px;
+}
+
+.highlight-reel-swiper .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background: #d1d5db;
+  opacity: 1;
+  margin: 0 4px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.highlight-reel-swiper .swiper-pagination-bullet-active {
+  background: #ee7e1a;
+  transform: scale(1.2);
+}
+
+.highlight-reel-swiper .swiper-pagination-bullet:hover {
+  background: #ee7e1a;
+  opacity: 0.8;
+}
+
+/* Card hover effects */
+.highlight-reel-swiper .swiper-slide .bg-white {
+  transition: all 0.3s ease;
+  /* Debug: Ensure cards have proper dimensions */
+  min-height: 300px;
+}
+
+.highlight-reel-swiper .swiper-slide .bg-white:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Image hover effects */
+.highlight-reel-swiper .swiper-slide img {
+  transition: transform 0.3s ease;
+  /* Debug: Ensure images are visible */
+  min-height: 200px;
+}
+
+.highlight-reel-swiper .swiper-slide:hover img {
+  transform: scale(1.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .highlight-reel-swiper .swiper-button-next,
+  .highlight-reel-swiper .swiper-button-prev {
+    width: 40px;
+    height: 40px;
+  }
+
+  .highlight-reel-swiper .swiper-button-next {
+    right: -20px;
+  }
+
+  .highlight-reel-swiper .swiper-button-prev {
+    left: -20px;
+  }
+
+  .highlight-reel-swiper .swiper-button-next::after,
+  .highlight-reel-swiper .swiper-button-prev::after {
+    font-size: 16px;
+  }
+
+  .highlight-reel-swiper .swiper-pagination {
+    margin-top: 16px;
+  }
+
+  .highlight-reel-swiper .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    margin: 0 3px;
+  }
+}
+
+@media (max-width: 640px) {
+  .highlight-reel-swiper .swiper-button-next,
+  .highlight-reel-swiper .swiper-button-prev {
+    display: none;
+  }
+}
+
+/* Custom scrollbar for webkit browsers */
+.highlight-reel-swiper .swiper-scrollbar {
+  background: #e5e7eb;
+  border-radius: 4px;
+}
+
+.highlight-reel-swiper .swiper-scrollbar-drag {
+  background: #ee7e1a;
+  border-radius: 4px;
+}
+
+/* Animation for slide transitions */
+.highlight-reel-swiper .swiper-slide {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.highlight-reel-swiper .swiper-slide-active {
+  opacity: 1;
+}
+
+/* Focus states for accessibility */
+.highlight-reel-swiper .swiper-button-next:focus,
+.highlight-reel-swiper .swiper-button-prev:focus {
+  outline: 2px solid #ee7e1a;
+  outline-offset: 2px;
+}
+
+.highlight-reel-swiper .swiper-pagination-bullet:focus {
+  outline: 2px solid #ee7e1a;
+  outline-offset: 2px;
+}
+
+/* Line clamp utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

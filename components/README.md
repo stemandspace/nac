@@ -1,90 +1,103 @@
-# Awards Ceremony Carousel Component
+# Components
 
-A responsive, interactive carousel component for displaying awards ceremony images with simple navigation and accessibility features.
+This directory contains reusable React components for the NAC frontend application.
 
-## Features
+## Available Components
 
-- **Auto-play functionality** with 5-second intervals
-- **Manual navigation** with left/right arrow buttons
-- **Touch/swipe support** for mobile devices
-- **Keyboard navigation** (Arrow keys)
-- **Progress bar** showing current position
-- **Loading states** with smooth transitions
-- **Accessibility features** including ARIA labels and keyboard support
-- **Responsive design** for all screen sizes
-- **Pause/Play toggle** for auto-play functionality
+### AwardsCeremonyCarousel
 
-## Usage
+A carousel component for displaying awards ceremony images with touch/swipe support and auto-play functionality.
+
+**Features:**
+
+- Touch/swipe navigation
+- Auto-play with pause on interaction
+- Responsive design
+- Custom navigation controls
+
+**Usage:**
 
 ```tsx
 import AwardsCeremonyCarousel from "@/components/awards-ceremony-carousel";
 
-export default function Page() {
-  return (
-    <div>
-      <AwardsCeremonyCarousel />
-    </div>
-  );
+<AwardsCeremonyCarousel />;
+```
+
+### HighlightReelCarousel
+
+A modern carousel component for displaying highlight reel content using Swiper.js.
+
+**Features:**
+
+- Swiper.js integration for smooth carousel functionality
+- Responsive breakpoints (1-4 slides per view)
+- Auto-play with 5-second intervals
+- Custom navigation buttons and pagination
+- Hover effects and smooth transitions
+- Touch/swipe support
+
+**Usage:**
+
+```tsx
+import HighlightReelCarousel from "@/components/highlight-reel-carousel";
+
+<HighlightReelCarousel />;
+```
+
+**Props:** None (data is configured internally)
+
+**Data Structure:**
+The component uses an internal array of `HighlightReelItem` objects:
+
+```typescript
+interface HighlightReelItem {
+  id: number;
+  image: string;
+  title: string;
+  description: string;
+  date: string;
 }
 ```
 
-## Props
+**Customization:**
 
-This component doesn't accept any props. All configuration is handled internally.
+- Modify the `highlightReelData` array to change content
+- Adjust Swiper configuration in the component
+- Customize styles in `highlight-reel-carousel.css`
 
-## Image Configuration
+### Header
 
-The carousel uses images from the `/public/home/` directory. To add or modify images, update the `awardImages` array in the component:
+Main navigation header component with responsive design.
 
-```tsx
-const awardImages: AwardImage[] = [
-  {
-    id: 1,
-    src: "/home/img2.png",
-    alt: "Awards Ceremony 2019",
-  },
-  // ... more images
-];
-```
+### Footer
 
-## Navigation
+Footer component with links and information.
 
-- **Arrow Buttons**: Click left/right navigation arrows
-- **Touch/Swipe**: Swipe left/right on mobile devices
-- **Keyboard**: Use left/right arrow keys
-- **Auto-play**: Automatically advances every 5 seconds
+### RegistrationSuccessPopup
 
-## Accessibility
+Modal component for displaying registration success messages.
 
-- ARIA labels for all interactive elements
-- Keyboard navigation support
-- Screen reader friendly
-- High contrast mode support
-- Focus indicators for keyboard users
+### UI Components
 
-## Styling
+Located in the `ui/` subdirectory:
 
-The component uses Tailwind CSS classes and includes a separate CSS file (`awards-ceremony-carousel.css`) for custom animations and responsive behavior.
+- Button
+- Input
+- Select
+- Textarea
 
-## Browser Support
+## Component Guidelines
 
-- Modern browsers with ES6+ support
-- Touch devices with swipe gestures
-- Keyboard navigation support
-- Responsive design for all screen sizes
-
-## Customization
-
-To customize the carousel:
-
-1. Modify the `awardImages` array to change images and content
-2. Adjust timing in the auto-play functionality
-3. Update CSS classes for styling changes
-4. Modify transition durations and animations
+1. **File Naming**: Use kebab-case for file names (e.g., `highlight-reel-carousel.tsx`)
+2. **CSS**: Create separate CSS files for complex styling
+3. **Props**: Use TypeScript interfaces for prop definitions
+4. **Responsive**: Ensure components work on all screen sizes
+5. **Accessibility**: Include proper ARIA labels and keyboard navigation
+6. **Performance**: Use React.memo and useCallback when appropriate
 
 ## Dependencies
 
-- React 18+
-- TypeScript
-- Tailwind CSS
-- Lucide React (for icons)
+- **Swiper.js**: For carousel functionality in HighlightReelCarousel
+- **Lucide React**: For icons
+- **Tailwind CSS**: For styling
+- **Radix UI**: For accessible UI primitives

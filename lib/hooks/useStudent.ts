@@ -35,17 +35,45 @@ export interface StudentResponse {
   };
 }
 
+// Enhanced error handling for Strapi responses
 function parseStudentResponse(data: any): StudentResponse | null {
   if (!data) return null;
-  // Strapi v4 returns { data: { id, attributes } }
-  if ('id' in data && 'attributes' in data) {
-    return data as StudentResponse;
+
+  try {
+    // Strapi v4 returns { data: { id, attributes } }
+    if ('id' in data && 'attributes' in data) {
+      return data as StudentResponse;
+    }
+    // Strapi v4 single returns { data: { id, attributes } }
+    if ('data' in data && data.data && 'id' in data.data && 'attributes' in data.data) {
+      return data.data as StudentResponse;
+    }
+    // Handle direct response with id and attributes
+    if (data.id && data.attributes) {
+      return data as StudentResponse;
+    }
+    return null;
+  } catch (error) {
+    console.error('Error parsing student response:', error);
+    return null;
   }
-  // Strapi v4 single returns { data: { id, attributes } }
-  if ('data' in data && data.data && 'id' in data.data && 'attributes' in data.data) {
-    return data.data as StudentResponse;
+}
+
+// Enhanced error message extraction
+function extractErrorMessage(error: any): string {
+  if (error?.response?.data?.error?.message) {
+    return error.response.data.error.message;
   }
-  return null;
+  if (error?.response?.data?.error) {
+    return error.response.data.error;
+  }
+  if (error?.message) {
+    return error.message;
+  }
+  if (typeof error === 'string') {
+    return error;
+  }
+  return 'An unexpected error occurred';
 }
 
 export const useStudent = () => {
@@ -64,9 +92,14 @@ export const useStudent = () => {
         },
       });
 
-      return parseStudentResponse(response);
+      const parsedResponse = parseStudentResponse(response);
+      if (!parsedResponse) {
+        throw new Error('Invalid response structure from server');
+      }
+
+      return parsedResponse;
     } catch (err: any) {
-      const errorMessage = err?.response?.data?.error?.message || err?.message || 'Failed to create student';
+      const errorMessage = extractErrorMessage(err);
       setError(errorMessage);
       throw new Error(errorMessage);
     } finally {
@@ -80,12 +113,20 @@ export const useStudent = () => {
 
     try {
       const response = await client.collection('students').find();
+
       if ('data' in response && Array.isArray(response.data)) {
-        return response.data as StudentResponse[];
+        return response.data.map(item => parseStudentResponse(item)).filter(Boolean) as StudentResponse[];
       }
+
+      // Handle single item response
+      if (response && typeof response === 'object') {
+        const parsed = parseStudentResponse(response);
+        return parsed ? [parsed] : [];
+      }
+
       return [];
     } catch (err: any) {
-      const errorMessage = err?.response?.data?.error?.message || err?.message || 'Failed to fetch students';
+      const errorMessage = extractErrorMessage(err);
       setError(errorMessage);
       throw new Error(errorMessage);
     } finally {
@@ -99,9 +140,15 @@ export const useStudent = () => {
 
     try {
       const response = await client.collection('students').findOne(String(id));
-      return parseStudentResponse(response);
+      const parsedResponse = parseStudentResponse(response);
+
+      if (!parsedResponse) {
+        throw new Error('Student not found');
+      }
+
+      return parsedResponse;
     } catch (err: any) {
-      const errorMessage = err?.response?.data?.error?.message || err?.message || 'Failed to fetch student';
+      const errorMessage = extractErrorMessage(err);
       setError(errorMessage);
       throw new Error(errorMessage);
     } finally {
@@ -118,9 +165,14 @@ export const useStudent = () => {
         data: studentData,
       });
 
-      return parseStudentResponse(response);
+      const parsedResponse = parseStudentResponse(response);
+      if (!parsedResponse) {
+        throw new Error('Invalid response structure from server');
+      }
+
+      return parsedResponse;
     } catch (err: any) {
-      const errorMessage = err?.response?.data?.error?.message || err?.message || 'Failed to update student';
+      const errorMessage = extractErrorMessage(err);
       setError(errorMessage);
       throw new Error(errorMessage);
     } finally {
@@ -136,12 +188,17 @@ export const useStudent = () => {
       await client.collection('students').delete(String(id));
       return true;
     } catch (err: any) {
-      const errorMessage = err?.response?.data?.error?.message || err?.message || 'Failed to delete student';
+      const errorMessage = extractErrorMessage(err);
       setError(errorMessage);
       throw new Error(errorMessage);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  // Clear error state
+  const clearError = () => {
+    setError(null);
   };
 
   return {
@@ -152,5 +209,6 @@ export const useStudent = () => {
     getStudentById,
     updateStudent,
     deleteStudent,
+    clearError,
   };
 };
