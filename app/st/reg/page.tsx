@@ -38,7 +38,6 @@ export default async function StudentRegistrationPage({
 
   return (
     <>
-      {JSON.stringify(school?.data)}
       <StudentRegistrationForm school={school?.data as any} />
     </>
   );

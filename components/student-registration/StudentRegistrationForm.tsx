@@ -206,7 +206,7 @@ export default function StudentRegistrationForm({
       });
 
       const response = await fetch(
-        "http://localhost:1337/api/v1/save-draft-and-create-order",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/save-draft-and-create-order`,
         {
           method: "POST",
           headers: {
@@ -236,7 +236,7 @@ export default function StudentRegistrationForm({
         amount: result.order.amount,
         currency: result.order.currency,
         name: "NAC Education",
-        description: `${selectedAddon.title} - Student Registration`,
+        description: `NAC25 - ${selectedAddon.title} - Student Registration`,
         order_id: result.order.id,
         prefill: {
           name: studentData.name,
