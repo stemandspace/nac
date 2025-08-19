@@ -1,36 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
 import { useStudent, StudentData, AddressData } from "@/lib/hooks/useStudent";
 import { client } from "@/api";
-
-// Razorpay types
-declare global {
-  interface Window {
-    Razorpay: any;
-  }
-}
-
-interface RazorpayOptions {
-  key: string;
-  amount: number;
-  currency: string;
-  name: string;
-  description: string;
-  order_id: string;
-  prefill: {
-    name: string;
-    email: string;
-    contact: string;
-  };
-  handler: (response: any) => void;
-  modal: {
-    ondismiss: () => void;
-  };
-}
+import { useRazorpay } from "react-razorpay";
 
 interface SchoolData {
   id: number;
@@ -85,19 +61,22 @@ export default function StudentRegistrationForm({
     error: studentError,
   } = useStudent();
 
+  // Move useRazorpay hook to the top level
+  const { Razorpay } = useRazorpay();
+
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
   const [formData, setFormData] = useState<StudentData>({
-    name: "",
-    email: "",
-    phone: "",
-    dob: "",
-    school_name: school?.name || "",
-    grade: "",
-    section: "",
-    city: "",
+    name: "deepak",
+    email: "deepak@gmail.com",
+    phone: "9876543210",
+    dob: "2000-01-01",
+    school_name: school?.name || "NAC Education",
+    grade: "10",
+    section: "A",
+    city: "New York",
     is_overseas: school?.is_overseas || false,
   });
 
@@ -184,18 +163,6 @@ export default function StudentRegistrationForm({
     },
   ]);
 
-  // Load Razorpay script
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://checkout.razorpay.com/v1/checkout.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
   const handleInputChange = (
     field: keyof StudentData,
     value: string | boolean
@@ -220,52 +187,6 @@ export default function StudentRegistrationForm({
     );
   };
 
-  const createRazorpayOrder = async (
-    amount: number,
-    currency: string,
-    studentData: StudentData
-  ) => {
-    try {
-      // This should call your Strapi backend API to create a Razorpay order
-      const response = await fetch(
-        "http://localhost:1337/api/students/create-razorpay-order",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            amount: amount * 100, // Razorpay expects amount in paise
-            currency: currency === "USD" ? "USD" : "INR",
-            studentData, // Pass student data to create draft
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error?.message || "Failed to create order");
-      }
-
-      const order = await response.json();
-
-      // Handle Strapi response structure
-      if (order.data) {
-        return order.data;
-      } else if (order.id) {
-        return order;
-      } else {
-        throw new Error("Invalid order response structure");
-      }
-    } catch (error) {
-      console.error("Error creating order:", error);
-      if (error instanceof Error) {
-        throw new Error(error.message);
-      }
-      throw new Error("Failed to create payment order");
-    }
-  };
-
   const handlePayment = async (
     studentData: StudentData,
     selectedAddon: AddonOption
@@ -278,21 +199,45 @@ export default function StudentRegistrationForm({
         : selectedAddon.priceInr;
       const currency = formData.is_overseas ? "USD" : "INR";
 
-      // Create Razorpay order (this will also create draft student)
-      const order = await createRazorpayOrder(amount, currency, studentData);
+      // Call the new backend API to create order and save draft
+      console.log("Sending data to backend:", {
+        data: studentData,
+        selectedAddon,
+      });
 
-      // Validate order response
-      if (!order || !order.id) {
-        throw new Error("Invalid order response from server");
+      const response = await fetch(
+        "http://localhost:1337/api/v1/save-draft-and-create-order",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            data: studentData,
+            selectedAddon,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error?.message || "Failed to create order");
       }
 
-      const options: RazorpayOptions = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_test_YOUR_KEY", // Replace with your key
-        amount: order.amount || amount * 100,
-        currency: order.currency || currency,
+      const result = await response.json();
+
+      if (!result.success || !result.order) {
+        throw new Error("Failed to create payment order");
+      }
+
+      // Initialize Razorpay payment
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_test_YOUR_KEY",
+        amount: result.order.amount,
+        currency: result.order.currency,
         name: "NAC Education",
         description: `${selectedAddon.title} - Student Registration`,
-        order_id: order.id,
+        order_id: result.order.id,
         prefill: {
           name: studentData.name,
           email: studentData.email,
@@ -300,9 +245,9 @@ export default function StudentRegistrationForm({
         },
         handler: async (response: any) => {
           try {
-            // Verify payment on your Strapi backend
+            // Verify payment on backend
             const verificationResponse = await fetch(
-              "http://localhost:1337/api/students/verify-razorpay-payment",
+              "http://localhost:1337/api/v1/verify-payment-and-publish",
               {
                 method: "POST",
                 headers: {
@@ -312,7 +257,7 @@ export default function StudentRegistrationForm({
                   razorpay_payment_id: response.razorpay_payment_id,
                   razorpay_order_id: response.razorpay_order_id,
                   razorpay_signature: response.razorpay_signature,
-                  student_id: order.student_id || order.id, // Use student_id from order or fallback to order.id
+                  student_id: result.student.id,
                   selectedAddon,
                 }),
               }
@@ -369,8 +314,13 @@ export default function StudentRegistrationForm({
         },
       };
 
-      const razorpay = new window.Razorpay(options);
-      razorpay.open();
+      // Use the Razorpay instance from the hook
+      if (Razorpay) {
+        const razorpay = new Razorpay(options);
+        razorpay.open();
+      } else {
+        throw new Error("Razorpay not initialized");
+      }
     } catch (error) {
       console.error("Payment error:", error);
       const errorMessage =
@@ -1062,7 +1012,7 @@ export default function StudentRegistrationForm({
                               {formData.is_overseas ? "$40" : "₹3,320"}
                             </div>
                             <div className="text-sm text-gray-500 line-through">
-                              {formData.is_overseas ? "$50" : "₹4,150"}
+                              {formData.is_overseas ? "$40" : "₹4,150"}
                             </div>
                             <span className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
                               20% OFF
