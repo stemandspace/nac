@@ -8,6 +8,11 @@ import { useStudent, StudentData, AddressData } from "@/lib/hooks/useStudent";
 import { client } from "@/api";
 import { useRazorpay } from "react-razorpay";
 
+const registrationFee = {
+  price: 12,
+  priceInr: 550,
+};
+
 interface SchoolData {
   id: number;
   name: string;
@@ -189,21 +194,14 @@ export default function StudentRegistrationForm({
 
   const handlePayment = async (
     studentData: StudentData,
-    selectedAddon: AddonOption
+    selectedAddon: AddonOption | undefined
   ) => {
     try {
       setIsProcessingPayment(true);
 
-      const amount = formData.is_overseas
-        ? selectedAddon.price
-        : selectedAddon.priceInr;
-      const currency = formData.is_overseas ? "USD" : "INR";
-
-      // Call the new backend API to create order and save draft
-      console.log("Sending data to backend:", {
-        data: studentData,
-        selectedAddon,
-      });
+      const registrationFeeComputed = formData.is_overseas
+        ? registrationFee.price
+        : registrationFee.priceInr;
 
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/v1/save-draft-and-create-order`,
@@ -214,7 +212,8 @@ export default function StudentRegistrationForm({
           },
           body: JSON.stringify({
             data: studentData,
-            selectedAddon,
+            registrationFee: registrationFeeComputed,
+            selectedAddon: selectedAddon ?? null,
           }),
         }
       );
@@ -236,7 +235,9 @@ export default function StudentRegistrationForm({
         amount: result.order.amount,
         currency: result.order.currency,
         name: "NAC Education",
-        description: `NAC25 - ${selectedAddon.title} - Student Registration`,
+        description: `NAC25 - ${
+          selectedAddon?.title ?? "No Addon"
+        } - Student Registration`,
         order_id: result.order.id,
         prefill: {
           name: studentData.name,
@@ -376,45 +377,7 @@ export default function StudentRegistrationForm({
       // Check if an addon is selected
       const selectedAddon = addonOptions.find((opt) => opt.checked);
 
-      if (selectedAddon) {
-        // If addon is selected, proceed with payment
-        await handlePayment(studentData, selectedAddon);
-      } else {
-        // If no addon selected, create student as draft and publish immediately (free registration)
-        try {
-          const student = await client.collection("students").create({
-            data: {
-              ...studentData,
-              publishedAt: new Date().toISOString(), // Publish immediately for free registration
-            },
-          });
-
-          if (student) {
-            setSuccess(true);
-            // Reset form
-            setFormData({
-              name: "",
-              email: "",
-              phone: "",
-              dob: "",
-              school_name: school?.name || "",
-              grade: "",
-              section: "",
-              city: "",
-              is_overseas: school?.is_overseas || false,
-            });
-          } else {
-            throw new Error("Failed to create student record");
-          }
-        } catch (error) {
-          console.error("Error creating student:", error);
-          const errorMessage =
-            error instanceof Error
-              ? error.message
-              : "Registration failed. Please try again.";
-          setError(errorMessage);
-        }
-      }
+      await handlePayment(studentData, selectedAddon);
     } catch (err: any) {
       const errorMessage =
         err?.message || "Registration failed. Please try again.";
@@ -424,9 +387,16 @@ export default function StudentRegistrationForm({
 
   const calculateTotal = () => {
     const selectedAddon = addonOptions.find((opt) => opt.checked);
-    if (!selectedAddon) return 0;
+    const baseFee = formData.is_overseas
+      ? registrationFee.price
+      : registrationFee.priceInr;
 
-    return formData.is_overseas ? selectedAddon.price : selectedAddon.priceInr;
+    if (!selectedAddon) return baseFee;
+
+    return (
+      baseFee +
+      (formData.is_overseas ? selectedAddon.price : selectedAddon.priceInr)
+    );
   };
 
   const getSelectedAddonDetails = () => {
@@ -458,7 +428,7 @@ export default function StudentRegistrationForm({
           <p className="text-sm text-gray-600 mb-4">
             {getSelectedAddonDetails()
               ? "Your student registration and payment have been completed successfully."
-              : "Your student registration has been completed successfully."}
+              : "Your student registration has been completed successfully. Registration fee has been charged."}
           </p>
           <Button onClick={() => setSuccess(false)} className="w-full">
             Register Another Student
@@ -488,6 +458,10 @@ export default function StudentRegistrationForm({
                 Complete your student registration form
               </p>
             )}
+            <p className="text-xs text-gray-500 mt-2">
+              Registration fee: {formData.is_overseas ? "$12" : "₹500"}{" "}
+              (mandatory for all registrations)
+            </p>
           </div>
 
           {/* Error Display */}
@@ -688,7 +662,12 @@ export default function StudentRegistrationForm({
               </h2>
               <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">
                 Select one of the following options to include with your
-                registration
+                registration.{" "}
+                <strong>
+                  Note: A registration fee of{" "}
+                  {formData.is_overseas ? "$12" : "₹500"} applies to all
+                  registrations.
+                </strong>
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -1052,22 +1031,50 @@ export default function StudentRegistrationForm({
               )}
 
               {/* Total Calculation */}
-              {getSelectedAddonDetails() && (
-                <div className="mt-4 p-3 sm:p-4 bg-blue-50 rounded-lg">
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-0">
-                    <span className="text-base sm:text-lg font-medium text-gray-900">
-                      Total Additional Cost:
+              <div className="mt-4 p-3 sm:p-4 bg-blue-50 rounded-lg">
+                <div className="space-y-2">
+                  {/* Registration Fee */}
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium text-gray-700">
+                      Registration Fee:
                     </span>
-                    <span className="text-xl sm:text-2xl font-bold text-blue-600">
+                    <span className="text-sm font-semibold text-gray-900">
                       {formData.is_overseas ? "$" : "₹"}
-                      {calculateTotal()}
+                      {formData.is_overseas
+                        ? registrationFee.price
+                        : registrationFee.priceInr}
                     </span>
                   </div>
-                  <p className="text-xs sm:text-sm text-gray-600 mt-2">
-                    This amount will be added to your registration fee
-                  </p>
+
+                  {/* Addon Cost (if selected) */}
+                  {getSelectedAddonDetails() && (
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm font-medium text-gray-700">
+                        {getSelectedAddonDetails()?.title}:
+                      </span>
+                      <span className="text-sm font-semibold text-gray-900">
+                        {formData.is_overseas ? "$" : "₹"}
+                        {formData.is_overseas
+                          ? getSelectedAddonDetails()?.price
+                          : getSelectedAddonDetails()?.priceInr}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Total */}
+                  <div className="border-t pt-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-base sm:text-lg font-medium text-gray-900">
+                        Total Amount:
+                      </span>
+                      <span className="text-xl sm:text-2xl font-bold text-blue-600">
+                        {formData.is_overseas ? "$" : "₹"}
+                        {calculateTotal()}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              )}
+              </div>
             </div>
 
             <div className="pt-4 sm:pt-6">
@@ -1078,7 +1085,13 @@ export default function StudentRegistrationForm({
               >
                 {isSubmitting || isProcessingPayment
                   ? "Processing..."
-                  : "Complete Registration"}
+                  : `Complete Registration (${
+                      formData.is_overseas ? "$" : "₹"
+                    }${
+                      formData.is_overseas
+                        ? registrationFee.price
+                        : registrationFee.priceInr
+                    })`}
               </Button>
             </div>
           </form>
