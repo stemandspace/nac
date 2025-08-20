@@ -4,7 +4,7 @@ interface HeroProps {
   bgimage: string;
   title: string;
   desc: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const Hero: React.FC<HeroProps> = ({ bgimage, title, desc, children }) => {
