@@ -82,6 +82,9 @@ export default function Header() {
             <Link href="/faqs" className="text-gray-700 hover:text-black">
               FAQs
             </Link>
+            <Link href="/list-of-pages" className="text-gray-700 hover:text-black">
+              All Pages
+            </Link>
           </nav>
 
           {/* Register Button */}
@@ -139,6 +142,13 @@ export default function Header() {
                 onClick={() => setMenuOpen(false)}
               >
                 FAQs
+              </Link>
+              <Link
+                href="/list-of-pages"
+                className="text-gray-700 hover:text-black"
+                onClick={() => setMenuOpen(false)}
+              >
+                All Pages
               </Link>
               <Link
                 href="/school-registration"
