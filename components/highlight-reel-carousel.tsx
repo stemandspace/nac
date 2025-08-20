@@ -4,6 +4,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 // Import Swiper styles
 import "swiper/css";
@@ -188,9 +189,12 @@ export default function HighlightReelCarousel() {
 
         {/* View More Button */}
         <div className="text-center">
-          <Button className="bg-[#EE7E1A] hover:bg-[#D67015] text-white px-12 py-6 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+          <Link
+            href="/legacy"
+            className="bg-[#EE7E1A] hover:bg-[#D67015] text-white px-12 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+          >
             Know More
-          </Button>
+          </Link>
         </div>
       </div>
     </section>

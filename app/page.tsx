@@ -10,6 +10,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import AwardsCeremonyCarousel from "@/components/awards-ceremony-carousel";
 import HighlightReelCarousel from "@/components/highlight-reel-carousel";
 import SupportHelpSection from "@/components/SupportHelpSection";
@@ -44,9 +45,12 @@ export default function HomePage() {
               Space Learning Awaits!
             </p>
             <div className="flex flex-wrap gap-3 sm:gap-4 pt-2 sm:pt-4">
-              <button className="bg-white text-gray-900 hover:bg-gray-100 px-4 sm:px-5 py-2 sm:py-3 rounded-lg text-sm sm:text-base font-semibold transition-colors duration-200">
+              <Link
+                href="/st/reg"
+                className="bg-white text-gray-900 hover:bg-gray-100 px-4 sm:px-5 py-2 sm:py-3 rounded-lg text-sm sm:text-base font-semibold transition-colors duration-200"
+              >
                 Register as Student
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -72,9 +76,12 @@ export default function HomePage() {
               Space Learning Awaits!
             </p>
             <div className="flex flex-wrap gap-3 sm:gap-4 pt-2 sm:pt-4">
-              <button className="bg-white text-gray-900 hover:bg-gray-100 px-4 sm:px-5 py-2 sm:py-3 rounded-lg text-sm sm:text-base font-semibold transition-colors duration-200">
+              <Link
+                href="/st/reg"
+                className="bg-white text-gray-900 hover:bg-gray-100 px-4 sm:px-5 py-2 sm:py-3 rounded-lg text-sm sm:text-base font-semibold transition-colors duration-200"
+              >
                 Register as Student
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -123,9 +130,12 @@ export default function HomePage() {
                 ))}
               </div>
 
-              <button className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-6 py-2.5 rounded-full text-base font-semibold transition">
+              <Link
+                href="/school-registration"
+                className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-6 py-2.5 rounded-full text-base font-semibold transition"
+              >
                 Learn More About NAC
-              </button>
+              </Link>
             </div>
 
             {/* Right Column (Video/Image) */}
@@ -179,7 +189,9 @@ export default function HomePage() {
                   </p>
                 </div>
                 <Button className="bg-[#EE7E1A] text-white px-5 py-2 rounded-full text-sm font-semibold shadow-md hover:bg-[#d96f16]">
-                  Know More
+                  <Link href="/school-registration" className="text-white">
+                    Know More
+                  </Link>
                 </Button>
               </div>
 
@@ -218,7 +230,9 @@ export default function HomePage() {
                   </p>
                 </div>
                 <Button className="bg-[#EE7E1A] text-white px-5 py-2 rounded-full text-sm font-semibold shadow-md hover:bg-[#d96f16]">
-                  Know More
+                  <Link href="/st/reg" className="text-white">
+                    Know More
+                  </Link>
                 </Button>
               </div>
 
@@ -293,9 +307,12 @@ export default function HomePage() {
               </div>
 
               {/* Button */}
-              <button className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-8 py-3 rounded-full text-lg font-semibold transition">
+              <Link
+                href="/study-material"
+                className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-8 py-3 rounded-full text-lg font-semibold transition"
+              >
                 Know More
-              </button>
+              </Link>
             </div>
 
             {/* Right video/image */}
@@ -330,9 +347,12 @@ export default function HomePage() {
               purus commodo. Cursus praesent feugiat vestibulum ferme velit
               mauris blandit.
             </p>
-            <button className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-8 py-3 rounded-full text-lg font-semibold transition">
+            <Link
+              href="/awards"
+              className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-8 py-3 rounded-full text-lg font-semibold transition"
+            >
               Know More
-            </button>
+            </Link>
           </div>
 
           {/* Awards Image */}
@@ -444,7 +464,9 @@ export default function HomePage() {
             {/* School Dropdown */}
             <div className="relative group">
               <Button className="bg-black hover:bg-gray-800 text-white px-8 py-6 rounded-4xl font-semibold uppercase tracking-wide flex items-center gap-2">
-                REGISTER AS School
+                <Link href="/school-registration" className="text-white">
+                  REGISTER AS School
+                </Link>
                 <span>
                   <svg
                     className="w-4 h-4 group-hover:hidden"
@@ -490,7 +512,9 @@ export default function HomePage() {
             {/* Student Dropdown */}
             <div className="relative group">
               <Button className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-6 rounded-4xl font-semibold uppercase tracking-wide flex items-center gap-2">
-                Register As Student
+                <Link href="/st/reg" className="text-white hover:text-blue-600">
+                  Register As Student
+                </Link>
                 <span>
                   <svg
                     className="w-4 h-4 group-hover:hidden"
@@ -549,11 +573,18 @@ export default function HomePage() {
             {/* Registration Buttons */}
             <div className="flex gap-4">
               <Button className="bg-[#EE7E1A] text-white px-10 py-6 rounded-4xl font-semibold uppercase tracking-wide flex items-center gap-2">
-                REGISTER AS School
+                <Link href="/school-registration" className="text-white">
+                  REGISTER AS School
+                </Link>
                 <ChevronDown className="w-4 h-4" />
               </Button>
               <Button className="bg-transparent border-2 border-gray-300 text-gray-700 hover:bg-gray-50 px-8 py-6 rounded-4xl font-semibold flex items-center gap-2">
-                Register As Student
+                <Link
+                  href="/st/reg"
+                  className="text-gray-700 hover:text-gray-700"
+                >
+                  Register As Student
+                </Link>
                 <ChevronDown className="w-4 h-4" />
               </Button>
             </div>
