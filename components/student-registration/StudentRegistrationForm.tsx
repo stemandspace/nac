@@ -74,14 +74,14 @@ export default function StudentRegistrationForm({
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
   const [formData, setFormData] = useState<StudentData>({
-    name: "deepak",
-    email: "deepak@gmail.com",
-    phone: "9876543210",
-    dob: "2000-01-01",
+    name: "",
+    email: "",
+    phone: "",
+    dob: "",
     school_name: school?.name || "NAC Education",
-    grade: "10",
-    section: "A",
-    city: "New York",
+    grade: "",
+    section: "",
+    city: "",
     is_overseas: school?.is_overseas || false,
   });
 
@@ -439,7 +439,7 @@ export default function StudentRegistrationForm({
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-6 sm:py-12 px-3 sm:px-4">
+    <div className="min-h-screen bg-gray-50 py-6 sm:py-12 px-3 sm:px-4 md:mt-[5rem]">
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl p-4 sm:p-8">
           <div className="text-center mb-6 sm:mb-8">

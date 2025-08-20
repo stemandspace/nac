@@ -36,9 +36,5 @@ export default async function StudentRegistrationPage({
     }
   }
 
-  return (
-    <>
-      <StudentRegistrationForm school={school?.data as any} />
-    </>
-  );
+  return <StudentRegistrationForm school={school?.data as any} />;
 }
