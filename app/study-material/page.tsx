@@ -1,14 +1,20 @@
-import { Button } from "@/components/ui/button"
-import Hero from '@/components/study-material/hero';
-import Section1 from '@/components/study-material/section1';
-import Section2 from '@/components/study-material/section2';
-import Section3 from '@/components/study-material/section3';
-import Support from '@/components/school-registration/support';
+import { Button } from "@/components/ui/button";
+import Hero from "@/components/hero";
+import Section1 from "@/components/study-material/section1";
+import Section2 from "@/components/study-material/section2";
+import Section3 from "@/components/study-material/section3";
+import Support from "@/components/school-registration/support";
+import SpacetopiaSubscriptionSection from "@/components/SpacetopiaSubscriptionSection";
+import ContactSupportBanner from "@/components/ContactSupportBanner";
 
 export default function StudyMaterialPage() {
   return (
-    <div className="min-h-screen">
-      <Hero />
+    <>
+      <Hero
+        bgimage="/home/header2.jpg"
+        title="Get Ready to Excel with Comprehensive & Engaging Study Material for NAC 2025"
+        desc="Whether your child is participating via school or directly, our curated learning resources will prepare them for success in the National Astronomy Challenge."
+      />
       <Section1 />
       <Section2 />
       <Section3 />
@@ -26,13 +32,14 @@ export default function StudyMaterialPage() {
         </div>
 
         <div className="max-w-6xl mx-auto px-4 text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h2 className="text-4xl md:text-5xl font-medium text-white mb-6">
             Learn Through Fun and Imagine Your
             <br />
             Future in Space
           </h2>
-          <p className="text-blue-200 text-lg mb-12 max-w-3xl mx-auto">
-            Explore engaging space comics for young minds and join exclusive career seminars with
+          <p className="text-blue-200 text-lg font-medium mb-12 max-w-3xl mx-auto">
+            Explore engaging space comics for young minds and join exclusive
+            career seminars with
             <br />
             scientists & space professionals.
           </p>
@@ -69,7 +76,10 @@ export default function StudyMaterialPage() {
             </div>
 
             {/* Connecting Lines */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 800 400">
+            <svg
+              className="absolute inset-0 w-full h-full pointer-events-none"
+              viewBox="0 0 800 400"
+            >
               <path
                 d="M200 200 Q400 100 600 200"
                 stroke="rgba(255,255,255,0.2)"
@@ -89,12 +99,12 @@ export default function StudyMaterialPage() {
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-8 py-6 rounded-full text-lg">
+            <Button className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-8 py-6 rounded-full text-lg font-medium">
               Buy Space Comics
             </Button>
             <Button
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-blue-900 px-8 py-6 rounded-full text-lg bg-transparent"
+              className="border-white text-white hover:bg-white hover:text-blue-900 px-8 py-6 rounded-full text-lg bg-transparent font-medium"
             >
               Register for Career Seminar
             </Button>
@@ -103,108 +113,118 @@ export default function StudyMaterialPage() {
       </section>
 
       {/* Spacetopia Sessions Grid */}
-     <section className="py-16 bg-white">
-  <div className="max-w-7xl mx-auto px-4">
-    <div className="text-center mb-12">
-      <h2 className="text-4xl font-bold text-gray-900 mb-4">
-        Live & Interactive Spacetopia Sessions
-      </h2>
-      <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-        Join engaging live sessions, Practice Master Classes to deepen your
-        space knowledge, specially designed for aspiring astronomers and keen
-        space enthusiasts.
-      </p>
-    </div>
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-medium text-gray-900 mb-4">
+              Live & Interactive Spacetopia Sessions
+            </h2>
+            <p className="text-gray-600 text-lg font-medium max-w-3xl mx-auto">
+              Join engaging live sessions, Practice Master Classes to deepen
+              your space knowledge, specially designed for aspiring astronomers
+              and keen space enthusiasts.
+            </p>
+          </div>
 
-    {/* Grade 1-4 */}
-    <div className="mb-12">
-      <h3 className="text-2xl font-bold text-gray-900 mb-6">Grade 1-4</h3>
-      <div className="grid md:grid-cols-3 gap-6">
-        {[1, 2, 3].map((item) => (
-          <div
-            key={item}
-            className="relative group cursor-pointer rounded-4xl overflow-hidden"
-          >
-            <img
-              src="/study/sessions.jpg"
-              alt="Spacetopia Session"
-              className="w-full h-64 object-cover"
-            />
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-            {/* Text */}
-            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-              <h4 className="text-lg font-semibold mb-2">
-                Lorem ipsum dolor sit amet consectetur.
-              </h4>
-              <p className="text-sm flex items-center gap-2 opacity-90">
-                8.12.2025 <span>•</span> 25 min <span>•</span> 5 credit require
-              </p>
+          {/* Grade 1-4 */}
+          <div className="mb-12">
+            <h3 className="text-2xl font-medium text-gray-900 mb-6">
+              Grade 1-4
+            </h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              {[1, 2, 3].map((item) => (
+                <div
+                  key={item}
+                  className="relative group cursor-pointer rounded-4xl overflow-hidden"
+                >
+                  <img
+                    src="/study/sessions.jpg"
+                    alt="Spacetopia Session"
+                    className="w-full h-64 object-cover"
+                  />
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                  {/* Text */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                    <h4 className="text-lg font-medium mb-2">
+                      Lorem ipsum dolor sit amet consectetur.
+                    </h4>
+                    <p className="text-sm font-medium flex items-center gap-2 opacity-90">
+                      8.12.2025 <span>•</span> 25 min <span>•</span> 5 credit
+                      require
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        ))}
-      </div>
-    </div>
 
-    {/* Grade 5-7 */}
-    <div className="mb-12">
-      <h3 className="text-2xl font-bold text-gray-900 mb-6">Grade 5-7</h3>
-      <div className="grid md:grid-cols-3 gap-6">
-        {[1, 2, 3].map((item) => (
-          <div
-            key={item}
-            className="relative group cursor-pointer rounded-4xl overflow-hidden"
-          >
-            <img
-              src="/study/sessions.jpg"
-              alt="Spacetopia Session"
-              className="w-full h-64 object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-              <h4 className="text-lg font-semibold mb-2">
-                Lorem ipsum dolor sit amet consectetur.
-              </h4>
-              <p className="text-sm flex items-center gap-2 opacity-90">
-                10.12.2025 <span>•</span> 30 min <span>•</span> 8 credit require
-              </p>
+          {/* Grade 5-7 */}
+          <div className="mb-12">
+            <h3 className="text-2xl font-medium text-gray-900 mb-6">
+              Grade 5-7
+            </h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              {[1, 2, 3].map((item) => (
+                <div
+                  key={item}
+                  className="relative group cursor-pointer rounded-4xl overflow-hidden"
+                >
+                  <img
+                    src="/study/sessions.jpg"
+                    alt="Spacetopia Session"
+                    className="w-full h-64 object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                    <h4 className="text-lg font-medium mb-2">
+                      Lorem ipsum dolor sit amet consectetur.
+                    </h4>
+                    <p className="text-sm font-medium flex items-center gap-2 opacity-90">
+                      10.12.2025 <span>•</span> 30 min <span>•</span> 8 credit
+                      require
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        ))}
-      </div>
-    </div>
 
-    {/* Grade 8-10 */}
-    <div>
-      <h3 className="text-2xl font-bold text-gray-900 mb-6">Grade 8-10</h3>
-      <div className="grid md:grid-cols-3 gap-6">
-        {[1, 2, 3].map((item) => (
-          <div
-            key={item}
-            className="relative group cursor-pointer rounded-4xl overflow-hidden"
-          >
-            <img
-              src="/study/sessions.jpg"
-              alt="Spacetopia Session"
-              className="w-full h-64 object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-              <h4 className="text-lg font-semibold mb-2">
-                Lorem ipsum dolor sit amet consectetur.
-              </h4>
-              <p className="text-sm flex items-center gap-2 opacity-90">
-                12.12.2025 <span>•</span> 40 min <span>•</span> 10 credit
-                require
-              </p>
+          {/* Grade 8-10 */}
+          <div>
+            <h3 className="text-2xl font-medium text-gray-900 mb-6">
+              Grade 8-10
+            </h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              {[1, 2, 3].map((item) => (
+                <div
+                  key={item}
+                  className="relative group cursor-pointer rounded-4xl overflow-hidden"
+                >
+                  <img
+                    src="/study/sessions.jpg"
+                    alt="Spacetopia Session"
+                    className="w-full h-64 object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                    <h4 className="text-lg font-medium mb-2">
+                      Lorem ipsum dolor sit amet consectetur.
+                    </h4>
+                    <p className="text-sm font-medium flex items-center gap-2 opacity-90">
+                      12.12.2025 <span>•</span> 40 min <span>•</span> 10 credit
+                      require
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        ))}
-      </div>
-    </div>
-  </div>
-</section>
-<Support />
-    </div>
-  )
+        </div>
+      </section>
+      <Support />
+      <SpacetopiaSubscriptionSection />
+      <ContactSupportBanner />
+    </>
+  );
 }
