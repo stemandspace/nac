@@ -74,7 +74,7 @@ export default function LegacyPage() {
         title="National Astronomy Challenge: Celebrating the Legacy (2018-2024)"
         desc="From our humble beginning in 2018, NAC has become a launchpad for over 500+ schools, 100,000+ students, and countless dreams. Award Ceremonies, Space Expeditions, and Global Participation - witness the journey through the years."
       >
-        <div className="flex flex-col sm:flex-row gap-4 mt-4"></div>
+        <div className="flex flex-col sm:flex-row gap-4 mt-4 font-medium"></div>
       </Hero>
 
       {/* Inspiring Section */}
@@ -233,7 +233,6 @@ export default function LegacyPage() {
           </div>
         </div>
       </section>
-
       <Support />
     </div>
   );
