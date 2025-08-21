@@ -404,16 +404,6 @@ export default function HomePage() {
 
       {/* Highlight Reel - NAC Legacy Carousel */}
       <HighlightReelCarousel />
-
-      {/* Support & Help Section */}
-      <SupportHelpSection />
-
-      {/* Spacetopia Subscription Section */}
-      <SpacetopiaSubscriptionSection />
-
-      {/* Contact Support Banner */}
-      <ContactSupportBanner />
-      {/* Stay Connected Section */}
     </main>
   );
 }

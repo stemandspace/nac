@@ -1,10 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
+import route from "@/lib/route";
 
 export default function ExamInfoSection() {
   return (
     <section className="py-8 px-6 bg-white">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-        
         {/* Left Section */}
         <div>
           <div className="mb-4">
@@ -46,7 +47,9 @@ export default function ExamInfoSection() {
             <div className="grid grid-cols-2 gap-6">
               <span className="font-semibold">QUESTION TYPES:</span>
               <ol className="list-decimal list-inside space-y-1">
-                <li>Application-Based – Real-world scenarios & problem-solving</li>
+                <li>
+                  Application-Based – Real-world scenarios & problem-solving
+                </li>
                 <li>Knowledge-Based – Core concepts & factual understanding</li>
               </ol>
             </div>
@@ -54,8 +57,11 @@ export default function ExamInfoSection() {
             {/* MODE */}
             <div className="grid grid-cols-2 gap-6">
               <span className="font-semibold">MODE:</span>
-              
-              <p>Online through SHL – the world’s largest secured assessment platform</p>
+
+              <p>
+                Online through SHL – the world’s largest secured assessment
+                platform
+              </p>
             </div>
 
             {/* PREPARATION SUPPORT */}
@@ -68,10 +74,11 @@ export default function ExamInfoSection() {
             </div>
           </div>
 
-          <button className="mt-8 bg-[#EE7E1A] hover:bg-orange-600 transition text-white px-6 py-3 rounded-full font-semibold flex items-center gap-2">
-            REGISTER AS: School
-            <span className="text-lg">⌄</span>
-          </button>
+          <Link href={route.SCHOOL_REGISTRATION_FORM}>
+            <button className="mt-8 bg-[#EE7E1A] hover:bg-orange-600 transition text-white px-6 py-3 rounded-full font-semibold flex items-center gap-2">
+              REGISTER YOUR SCHOOL
+            </button>
+          </Link>
         </div>
 
         {/* Right Section - Image */}

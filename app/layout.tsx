@@ -4,6 +4,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import SupportHelpSection from "@/components/SupportHelpSection";
+import SpacetopiaSubscriptionSection from "@/components/SpacetopiaSubscriptionSection";
+import ContactSupportBanner from "@/components/ContactSupportBanner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,6 +30,9 @@ export default function RootLayout({
       <body className="font-inter">
         <Header />
         {children}
+        <SupportHelpSection />
+        <SpacetopiaSubscriptionSection />
+        <ContactSupportBanner />
         <Footer />
       </body>
     </html>

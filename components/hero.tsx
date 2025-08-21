@@ -18,13 +18,13 @@ const Hero: React.FC<HeroProps> = ({ bgimage, title, desc, children }) => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="max-w-7xl mx-auto w-full py-8 sm:py-12 md:py-16">
+      <div className="max-w-7xl mx-auto w-full py-8">
         <div>
-          <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl max-w-xl sm:max-w-2xl font-light text-white leading-tight mb-4 sm:mb-6">
+          <h1 className="text-xl md:text-3xl font-medium leading-tight text-white mb-2 max-w-xl">
             {title}
           </h1>
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 justify-between">
-            <p className="max-w-xl sm:max-w-3xl text-sm sm:text-base md:text-lg text-white mb-6 sm:mb-8 leading-relaxed">
+            <p className="max-w-xl text-sm text-white mb-6 sm:mb-8 leading-relaxed">
               {desc}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
