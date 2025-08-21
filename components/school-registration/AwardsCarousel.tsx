@@ -26,7 +26,7 @@ const Awards = [
   },
   {
     description: "Exclusive access to advanced space science workshops",
-    image: "/rewards/R5.jpg",
+    image: "/rewards/R5.JPG",
   },
   {
     description:
