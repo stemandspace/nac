@@ -14,7 +14,7 @@ import RegistrationSuccessPopup from "@/components/RegistrationSuccessPopup";
 // Form validation schema
 const schoolFormSchema = z.object({
   name: z.string().min(2, "School name must be at least 2 characters"),
-  address: z.string().min(10, "Address must be at least 10 characters"),
+  address: z.string().min(2, "Country or City must be at least 2 characters"),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
   email: z.string().email("Please enter a valid email address"),
   is_overseas: z.boolean(),
@@ -103,7 +103,11 @@ export default function SchoolRegistrationPage() {
                 School Registration
               </h1>
               <p className="text-gray-600">
-                Register your school to join our educational network
+                Fil in the details to get your own school specific registration
+                link
+              </p>
+              <p className="text-gray-600">
+                For assistance, call at 91 8506955554
               </p>
             </div>
 
@@ -191,7 +195,7 @@ export default function SchoolRegistrationPage() {
                   htmlFor="address"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
-                  Address *
+                  Country or City *
                 </label>
                 <Input
                   id="address"
@@ -271,7 +275,8 @@ export default function SchoolRegistrationPage() {
                     htmlFor="branch"
                     className="block text-sm font-medium text-gray-700 mb-2"
                   >
-                    Branch *
+                    Branch* <br />
+                    <small>(in case you are not a branch, mention “NA”)</small>
                   </label>
                   <Input
                     id="branch"
