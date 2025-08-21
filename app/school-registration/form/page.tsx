@@ -89,11 +89,6 @@ export default function SchoolRegistrationPage() {
 
   return (
     <>
-      <Hero
-        bgimage="/home/header2.jpg"
-        title="School Registration"
-        desc="Register your school to join our educational network"
-      />
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto">
           <div className="bg-white rounded-2xl shadow-xl p-8">
