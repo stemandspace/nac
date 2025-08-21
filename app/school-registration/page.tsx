@@ -89,7 +89,7 @@ export default function StudentRegistrationPage() {
               <div className="flex justify-between items-start mb-8">
                 <div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">
-                    Path 1: For Shools
+                    Path 1: For Schools
                   </h3>
                   <p className="text-gray-900">
                     Registration via School <del> INR 500</del>{" "}
