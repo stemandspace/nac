@@ -44,10 +44,11 @@ export default function StudentRegistrationPage() {
       <section className="py-16 px-6 bg-gray-50">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-4">
-            A Simple 3-Step Process to Join NAC 2025
+            A Simple Process for Schoos to Join for NAC
           </h2>
           <p className="text-gray-600 mb-12">
-            Learn how to register, pay securely, and start your NAC journey.
+            Watch this video to learn how schools can register, generate their
+            dedicated link, and share with their students to register.
           </p>
 
           <div className="grid gap-8 items-center">

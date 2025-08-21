@@ -1,20 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { client } from "@/api";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { client } from "@/api";
+import { useState } from "react";
 import Hero from "@/components/hero";
-import RegistrationSuccessPopup from "@/components/RegistrationSuccessPopup";
+import { useForm } from "react-hook-form";
+import { Input } from "@/components/ui/input";
 import { sendTemplateMail } from "@/lib/mail";
-
-const getRandomEmail = () => {
-  const randomNumber = Math.floor(Math.random() * 10000);
-  return `test${randomNumber}@example.com`;
-};
+import { Button } from "@/components/ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
+import RegistrationSuccessPopup from "@/components/RegistrationSuccessPopup";
 
 // Form validation schema
 const schoolFormSchema = z.object({
