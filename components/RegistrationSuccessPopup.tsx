@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 
 interface RegistrationSuccessPopupProps {
@@ -14,13 +14,22 @@ export default function RegistrationSuccessPopup({
 }: RegistrationSuccessPopupProps) {
   const [copied, setCopied] = useState(false);
 
-  const registrationUrl = `${window.location.origin}/st/reg?schoolId=${schoolId}`;
+  // Only access window if it exists (client-side)
+  const registrationUrl = useMemo(() => {
+    if (typeof window !== "undefined") {
+      return `${window.location.origin}/student-registration/form?schoolId=${schoolId}`;
+    }
+    // Fallback for SSR (will be replaced on client)
+    return `/student-registration/form?schoolId=${schoolId}`;
+  }, [schoolId]);
 
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(registrationUrl);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      if (typeof navigator !== "undefined" && navigator.clipboard) {
+        await navigator.clipboard.writeText(registrationUrl);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }
     } catch (err) {
       console.error("Failed to copy: ", err);
     }
