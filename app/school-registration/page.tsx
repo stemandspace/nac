@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Hero from "@/components/hero";
 import RegistrationSuccessPopup from "@/components/RegistrationSuccessPopup";
+import { sendTemplateMail } from "@/lib/mail";
 
 const getRandomEmail = () => {
   const randomNumber = Math.floor(Math.random() * 10000);
@@ -55,6 +56,21 @@ export default function SchoolRegistrationPage() {
     setSubmitStatus("idle");
     try {
       const response = await client.collection("schools").create(data);
+
+      const recipients = [
+        {
+          address: data.email,
+          name: data.name,
+        },
+      ];
+
+      await sendTemplateMail({
+        recipients,
+        globalMergeInfo: {
+          link: `${process.env.NEXT_PUBLIC_WEBSITE_URL}/st/reg?schoolId=${response.data.documentId}`,
+        },
+      });
+
       if (response) {
         // Extract school ID from the parsed response
         setSchoolId(String(response.data.documentId));

@@ -74,14 +74,14 @@ export default function StudentRegistrationForm({
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
   const [formData, setFormData] = useState<StudentData>({
-    name: "",
-    email: "",
-    phone: "",
-    dob: "",
+    name: "Robin Hood",
+    email: "deepakvish7354@gmail.com",
+    phone: "9876543210",
+    dob: "2000-01-01",
     school_name: school?.name || "NAC Education",
-    grade: "",
-    section: "",
-    city: "",
+    grade: "10",
+    section: "A",
+    city: "New York",
     is_overseas: school?.is_overseas || false,
   });
 
