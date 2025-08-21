@@ -1,12 +1,10 @@
-import { Button } from "@/components/ui/button";
-import { Play, Calendar, Users, BookOpen, Edit, Trophy } from "lucide-react";
-import ReactPlayer from "react-player";
 import Image from "next/image";
-import ExamInfo from "@/components/school-registration/examinfo";
-import AwardSection from "@/components/school-registration/awardsection";
-import Support from "@/components/school-registration/support";
-import ContactSupportBanner from "@/components/ContactSupportBanner";
 import Hero from "@/components/hero";
+import { Button } from "@/components/ui/button";
+import Support from "@/components/school-registration/support";
+import ExamInfo from "@/components/school-registration/examinfo";
+import ContactSupportBanner from "@/components/ContactSupportBanner";
+import AwardSection from "@/components/school-registration/awardsection";
 
 export default function DirectRegistrationPage() {
   return (

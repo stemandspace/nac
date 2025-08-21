@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { client } from "@/api";
 import StudentRegistrationForm from "@/components/student-registration/StudentRegistrationForm";
+import NacStudyMaterialSection from "@/components/student-registration/NacStudyMaterialSection";
 
 interface PageProps {
   searchParams: { schoolId?: string };
@@ -20,5 +21,10 @@ export default async function StudentRegistrationPage({
     }
   }
 
-  return <StudentRegistrationForm school={school?.data as any} />;
+  return (
+    <>
+      <StudentRegistrationForm school={school?.data as any} />
+      <NacStudyMaterialSection />
+    </>
+  );
 }
