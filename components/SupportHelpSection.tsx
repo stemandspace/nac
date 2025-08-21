@@ -1,3 +1,5 @@
+import route from "@/lib/route";
+import Link from "next/link";
 import React from "react";
 
 const SupportHelpSection: React.FC = () => {
@@ -31,9 +33,12 @@ const SupportHelpSection: React.FC = () => {
                 participation.
               </p>
             </div>
-            <button className="w-full bg-[#EE7E1A] hover:bg-[#D67015] text-white font-semibold py-3 px-6 rounded-full transition-all duration-200 shadow-md hover:scale-105 mt-auto">
-              Click Here For FAQs
-            </button>
+            <Link
+              href={route.FAQ}
+              className="w-full bg-[#EE7E1A] hover:bg-[#D67015] text-white font-semibold py-3 px-6 rounded-full transition-all duration-200 shadow-md hover:scale-105 mt-auto flex justify-center items-center"
+            >
+              <span className="text-white">Click Here For FAQs</span>
+            </Link>
           </div>
 
           {/* Understand the Rules Card */}
@@ -100,9 +105,12 @@ const SupportHelpSection: React.FC = () => {
                 Our team is here to assist schools and parents.
               </p>
             </div>
-            <button className="w-full bg-[#EE7E1A] hover:bg-[#D67015] text-white font-semibold py-3 px-6 rounded-full transition-all duration-200 shadow-md hover:scale-105 mt-auto">
-              Contact Support
-            </button>
+            <a
+              href="mailto:hello@nationalastronomy.org"
+              className="w-full bg-[#EE7E1A] hover:bg-[#D67015] text-white font-semibold py-3 px-6 rounded-full transition-all duration-200 shadow-md hover:scale-105 mt-auto flex justify-center items-center"
+            >
+              <span className="text-white">Contact Support</span>
+            </a>
           </div>
         </div>
       </div>

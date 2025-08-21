@@ -5,34 +5,36 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 
+import route from "@/lib/route";
+
 const navItems = [
   {
     label: "Home",
-    href: "/",
+    href: route.HOME,
   },
   {
     label: "Participation Via School",
-    href: "/direct-registration",
+    href: route.SCHOOL_REGISTRATION,
   },
   {
     label: "Direct Participation",
-    href: "/legacy",
+    href: route.STUDENT_REGISTRATION,
   },
   {
     label: "NAC Legacy",
-    href: "/legacy",
+    href: route.LEGACY_NAC,
   },
   {
     label: "Study Material",
-    href: "/study-material",
+    href: route.STUDY_MATERIAL,
   },
   {
     label: "Awards",
-    href: "/rewards",
+    href: route.AWARDS,
   },
   {
     label: "FAQs",
-    href: "/faqs",
+    href: route.FAQ,
   },
 ];
 
@@ -133,13 +135,13 @@ export default function Header() {
             </button>
             <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 pointer-events-none group-hover:pointer-events-auto group-focus-within:pointer-events-auto transition-opacity duration-150 z-50">
               <Link
-                href="/school-registration"
+                href={route.SCHOOL_REGISTRATION}
                 className="block px-4 py-2 text-gray-700 hover:bg-gray-100 font-semibold"
               >
                 School
               </Link>
               <Link
-                href="/st/reg"
+                href={route.STUDENT_REGISTRATION}
                 className="block px-4 py-2 text-gray-700 hover:bg-gray-100 font-semibold"
               >
                 Student
@@ -168,14 +170,17 @@ export default function Header() {
               ))}
 
               <Link
-                href="/school-registration"
+                href={route.SCHOOL_REGISTRATION}
                 onClick={() => setMenuOpen(false)}
               >
                 <Button className="bg-[#EE7E1A] hover:bg-orange-500 text-white w-full px-6 py-2 rounded-full flex items-center gap-2 font-semibold">
                   Register as School
                 </Button>
               </Link>
-              <Link href="/st/reg" onClick={() => setMenuOpen(false)}>
+              <Link
+                href={route.STUDENT_REGISTRATION}
+                onClick={() => setMenuOpen(false)}
+              >
                 <Button className="border-2 border-[#EE7E1A] text-[#EE7E1A] bg-white hover:bg-[#EE7E1A] hover:text-white w-full px-6 py-2 rounded-full flex items-center gap-2 font-semibold transition-colors duration-200">
                   Register as Student
                 </Button>

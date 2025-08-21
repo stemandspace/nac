@@ -1,5 +1,12 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
+
+const YOUTUBE_URL =
+  "https://youtube.com/@spacetopia.official?si=kRHNha5iERUq60Oc";
+const WHATSAPP_URL = "https://whatsapp.com/channel/0029VbAESlf6rsQqEgT6DZ2n";
+const STORIES_URL =
+  "https://youtube.com/@storiesbyspacetopia?si=Fe1H1QU9sj3xf27K";
 
 const SpacetopiaSubscriptionSection: React.FC = () => {
   return (
@@ -24,9 +31,14 @@ const SpacetopiaSubscriptionSection: React.FC = () => {
               />
             </div>
 
-            <button className="w-full bg-[#EE7E1A] hover:bg-[#D67015] text-white font-semibold py-3 px-6 rounded-full transition-all duration-200 shadow-md hover:scale-105">
+            <Link
+              href={YOUTUBE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full bg-[#EE7E1A] hover:bg-[#D67015] text-white font-semibold py-3 px-6 rounded-full transition-all duration-200 shadow-md hover:scale-105 flex justify-center items-center text-center"
+            >
               Subscribe
-            </button>
+            </Link>
           </div>
 
           {/* WhatsApp Community Card */}
@@ -40,13 +52,18 @@ const SpacetopiaSubscriptionSection: React.FC = () => {
             {/* QR Code Container */}
             <div className="bg-white rounded-xl p-6 mb-6 flex-1 flex items-center justify-center">
               <div className="w-32 h-32 bg-gray-200 rounded-lg flex items-center justify-center">
-                <Image src="/qr1.png" alt="QR Code" width={100} height={100} />
+                <Image src="/wa.jpg" alt="QR Code" width={100} height={100} />
               </div>
             </div>
 
-            <button className="w-full bg-[#EE7E1A] hover:bg-[#D67015] text-white font-semibold py-3 px-6 rounded-full transition-all duration-200 shadow-md hover:scale-105">
+            <Link
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full bg-[#EE7E1A] hover:bg-[#D67015] text-white font-semibold py-3 px-6 rounded-full transition-all duration-200 shadow-md hover:scale-105 flex justify-center items-center text-center"
+            >
               Join Community
-            </button>
+            </Link>
           </div>
 
           {/* Stories of the Universe Card */}
@@ -68,9 +85,14 @@ const SpacetopiaSubscriptionSection: React.FC = () => {
               />
             </div>
 
-            <button className="w-full bg-[#EE7E1A] hover:bg-[#D67015] text-white font-semibold py-3 px-6 rounded-full transition-all duration-200 shadow-md hover:scale-105">
+            <Link
+              href={STORIES_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full bg-[#EE7E1A] hover:bg-[#D67015] text-white font-semibold py-3 px-6 rounded-full transition-all duration-200 shadow-md hover:scale-105 flex justify-center items-center text-center"
+            >
               Subscribe
-            </button>
+            </Link>
           </div>
         </div>
       </div>

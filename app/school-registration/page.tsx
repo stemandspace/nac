@@ -1,401 +1,345 @@
-"use client";
-
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { client } from "@/api";
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import Hero from "@/components/hero";
-import RegistrationSuccessPopup from "@/components/RegistrationSuccessPopup";
-import { sendTemplateMail } from "@/lib/mail";
+import Image from "next/image";
+import ReactPlayer from "react-player";
+import { Button } from "@/components/ui/button";
+import ExamInfoSection from "@/components/school-registration/examinfo";
+import SupportHelpSection from "@/components/SupportHelpSection";
 
-const getRandomEmail = () => {
-  const randomNumber = Math.floor(Math.random() * 10000);
-  return `test${randomNumber}@example.com`;
-};
-
-// Form validation schema
-const schoolFormSchema = z.object({
-  name: z.string().min(2, "School name must be at least 2 characters"),
-  address: z.string().min(10, "Address must be at least 10 characters"),
-  phone: z.string().min(10, "Phone number must be at least 10 digits"),
-  email: z.string().email("Please enter a valid email address"),
-  is_overseas: z.boolean(),
-  branch: z.string().min(2, "Branch name must be at least 2 characters"),
-  principle: z.string().min(2, "Principal name must be at least 2 characters"),
-});
-
-type SchoolFormData = z.infer<typeof schoolFormSchema>;
-
-export default function SchoolRegistrationPage() {
-  const [submitStatus, setSubmitStatus] = useState<
-    "idle" | "success" | "error"
-  >("idle");
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [showPopup, setShowPopup] = useState(false);
-  const [schoolId, setSchoolId] = useState<string>("");
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<SchoolFormData>({
-    resolver: zodResolver(schoolFormSchema),
-    defaultValues: {
-      is_overseas: false,
-    },
-  });
-
-  const onSubmit = async (data: SchoolFormData) => {
-    setIsLoading(true);
-    setError(null);
-    setSubmitStatus("idle");
-    try {
-      const response = await client.collection("schools").create(data);
-
-      const recipients = [
-        {
-          address: data.email,
-          name: data.name,
-        },
-      ];
-
-      await sendTemplateMail({
-        recipients,
-        globalMergeInfo: {
-          link: `${process.env.NEXT_PUBLIC_WEBSITE_URL}/st/reg?schoolId=${response.data.documentId}`,
-        },
-      });
-
-      if (response) {
-        // Extract school ID from the parsed response
-        setSchoolId(String(response.data.documentId));
-        setShowPopup(true);
-        setSubmitStatus("success");
-        reset();
-      }
-    } catch (error: any) {
-      setError(error.message);
-      console.error("Error submitting form:", error);
-      setSubmitStatus("error");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const closePopup = () => {
-    setShowPopup(false);
-    setSchoolId("");
-  };
-
+export default function StudentRegistrationPage() {
   return (
-    <>
+    <div className="min-h-screen">
       <Hero
         bgimage="/home/header2.jpg"
-        title="School Registration"
-        desc="Register your school to join our educational network"
+        title="Register Your School for NAC 2025 - Inspire the Next Generation of Astronomers!"
+        desc="Bring the National Astronomy Challenge experience to your students. Register your school and give them a chance to compete, learn, and shine on a national stage."
       />
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl mx-auto">
-          <div className="bg-white rounded-2xl shadow-xl p-8">
-            {/* Header */}
-            <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                School Registration
-              </h1>
-              <p className="text-gray-600">
-                Register your school to join our educational network
+
+      {/* Partners Section */}
+      <section className="py-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-2xl font-bold text-center mb-12">
+            PROUDLY PARTNERED WITH LEADING SCHOOLS
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-6 gap-8">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <div
+                key={index}
+                className="border rounded-lg p-6 flex items-center justify-center h-24"
+              >
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 border-2 border-black rounded-full flex items-center justify-center">
+                    <div className="w-3 h-3 bg-black rounded-full"></div>
+                  </div>
+                  <span className="font-semibold">yourlogo</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 3-Step Process Section */}
+      <section className="py-16 px-6 bg-gray-50">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-4xl font-bold mb-4">
+            A Simple 3-Step Process to Join NAC 2025
+          </h2>
+          <p className="text-gray-600 mb-12">
+            Learn how to register, pay securely, and start your NAC journey.
+          </p>
+
+          <div className="relative rounded-2xl overflow-hidden">
+            <ReactPlayer
+              // @ts-ignore
+              url="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+              width="100%"
+              height="500px"
+              light="https://picsum.photos/1000/500?random=3"
+              playing={false}
+              controls={true}
+              playIcon={
+                <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg">
+                  <div className="w-0 h-0 border-l-[20px] border-l-black border-y-[12px] border-y-transparent ml-1"></div>
+                </div>
+              }
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Spacetopia Section */}
+      <section className="py-12 md:py-16 bg-[#EDF6FC]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Get Ready with Spacetopia */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center mb-12 md:mb-16">
+            <div>
+              <p className="text-[#EE7E1A] font-semibold mb-2 text-sm md:text-base">
+                NAC 2025 STUDY MATERIAL
               </p>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium text-gray-900 mb-4 md:mb-6">
+                Get Ready with Spacetopia
+              </h2>
+
+              <div className="space-y-3 md:space-y-4 mb-6 md:mb-8">
+                {[
+                  "Curated videos, space facts, and interactive quizzes",
+                  "Grade-specific mock tests",
+                  "Space comics for fun learning",
+                  "Available instantly after registration",
+                ].map((text, idx) => (
+                  <div key={idx} className="flex items-start gap-3">
+                    <img
+                      src="/home/arrow-right.png"
+                      alt="icon"
+                      className="w-4 h-4 md:w-5 md:h-5 mt-1 flex-shrink-0"
+                    />
+                    <p className="text-gray-700 text-sm md:text-base">{text}</p>
+                  </div>
+                ))}
+              </div>
+
+              <Button className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-6 md:px-8 py-4 md:py-6 rounded-full text-sm md:text-base">
+                REGISTER NOW
+              </Button>
             </div>
 
-            {/* Success Message */}
-            {submitStatus === "success" && (
-              <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                <div className="flex">
-                  <div className="flex-shrink-0">
-                    <svg
-                      className="h-5 w-5 text-green-400"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                  <div className="ml-3">
-                    <p className="text-sm font-medium text-green-800">
-                      School registered successfully! We'll be in touch soon.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
+            <div className="order-first lg:order-last">
+              <img
+                src="/school-reg/sp1.jpg"
+                alt="Spacetopia learning"
+                className="w-full h-64 md:h-80 object-cover rounded-lg"
+              />
+            </div>
+          </div>
 
-            {/* Error Message */}
-            {submitStatus === "error" && error && (
-              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-                <div className="flex">
-                  <div className="flex-shrink-0">
-                    <svg
-                      className="h-5 w-5 text-red-400"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                  <div className="ml-3">
-                    <p className="text-sm font-medium text-red-800">{error}</p>
-                  </div>
-                </div>
-              </div>
-            )}
+          {/* Stay Connected Section */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div className="order-first">
+              <img
+                src="/school-reg/sp1.jpg"
+                alt="NAC community"
+                className="w-full h-64 md:h-80 object-cover rounded-lg"
+              />
+            </div>
 
-            {/* Registration Form */}
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              {/* School Name */}
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  School Name *
-                </label>
-                <Input
-                  id="name"
-                  type="text"
-                  placeholder="Enter school name"
-                  {...register("name")}
-                  className={
-                    errors.name
-                      ? "border-red-300 focus-visible:ring-red-500"
-                      : ""
-                  }
-                />
-                {errors.name && (
-                  <p className="mt-1 text-sm text-red-600">
-                    {errors.name.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Address */}
-              <div>
-                <label
-                  htmlFor="address"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  Address *
-                </label>
-                <Input
-                  id="address"
-                  type="text"
-                  placeholder="Enter complete address"
-                  {...register("address")}
-                  className={
-                    errors.address
-                      ? "border-red-300 focus-visible:ring-red-500"
-                      : ""
-                  }
-                />
-                {errors.address && (
-                  <p className="mt-1 text-sm text-red-600">
-                    {errors.address.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Phone and Email Row */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label
-                    htmlFor="phone"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    Phone Number *
-                  </label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    placeholder="Enter phone number"
-                    {...register("phone")}
-                    className={
-                      errors.phone
-                        ? "border-red-300 focus-visible:ring-red-500"
-                        : ""
-                    }
-                  />
-                  {errors.phone && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {errors.phone.message}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    Email Address *
-                  </label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="Enter email address"
-                    {...register("email")}
-                    className={
-                      errors.email
-                        ? "border-red-300 focus-visible:ring-red-500"
-                        : ""
-                    }
-                  />
-                  {errors.email && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {errors.email.message}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              {/* Branch and Principal Row */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label
-                    htmlFor="branch"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    Branch *
-                  </label>
-                  <Input
-                    id="branch"
-                    type="text"
-                    placeholder="Enter branch name"
-                    {...register("branch")}
-                    className={
-                      errors.branch
-                        ? "border-red-300 focus-visible:ring-red-500"
-                        : ""
-                    }
-                  />
-                  {errors.branch && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {errors.branch.message}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="principle"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    Principal Name *
-                  </label>
-                  <Input
-                    id="principle"
-                    type="text"
-                    placeholder="Enter principal name"
-                    {...register("principle")}
-                    className={
-                      errors.principle
-                        ? "border-red-300 focus-visible:ring-red-500"
-                        : ""
-                    }
-                  />
-                  {errors.principle && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {errors.principle.message}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              {/* Overseas Checkbox */}
-              <div className="flex items-center">
-                <input
-                  id="is_overseas"
-                  type="checkbox"
-                  {...register("is_overseas")}
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                />
-                <label
-                  htmlFor="is_overseas"
-                  className="ml-2 block text-sm text-gray-700"
-                >
-                  This is an overseas school
-                </label>
-              </div>
-
-              {/* Submit Button */}
-              <div className="pt-4">
-                <Button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full h-12 text-base font-medium"
-                >
-                  {isLoading ? (
-                    <div className="flex items-center justify-center">
-                      <svg
-                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        ></circle>
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        ></path>
-                      </svg>
-                      Submitting...
-                    </div>
-                  ) : (
-                    "Register School"
-                  )}
-                </Button>
-              </div>
-            </form>
-
-            {/* Additional Info */}
-            <div className="mt-8 pt-6 border-t border-gray-200">
-              <p className="text-sm text-gray-500 text-center">
-                By registering, you agree to our terms of service and privacy
-                policy.
-                <br />
-                We'll review your application and contact you within 2-3
-                business days.
+            <div>
+              <p className="text-[#EE7E1A] font-semibold mb-2 text-sm md:text-base">
+                ENGAGEMENT ACTIVITIES
               </p>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl    font-medium text-gray-900 mb-4 md:mb-6">
+                Stay Connected and <br /> Engaged All Year
+              </h2>
+
+              <div className="space-y-3 md:space-y-4 mb-4 md:mb-6">
+                {[
+                  "Monthly space quizzes & challenges",
+                  "Live interactions with scientists",
+                  "December 2025 special NAC participant activities",
+                ].map((text, idx) => (
+                  <div key={idx} className="flex items-start gap-3">
+                    <img
+                      src="/home/arrow-right.png"
+                      alt="arrow"
+                      className="w-4 h-4 md:w-5 md:h-5 mt-1 flex-shrink-0"
+                    />
+                    <p className="text-gray-700 text-sm md:text-base">{text}</p>
+                  </div>
+                ))}
+              </div>
+
+              <p className="text-base md:text-lg font-semibold text-gray-900 mb-4 md:mb-6">
+                JOIN THE NAC WHATSAPP COMMUNITY
+              </p>
+
+              <Button className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-6 md:px-8 py-4 md:py-6 rounded-full text-sm md:text-base">
+                REGISTER NOW
+              </Button>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Registration URL Popup */}
-        <RegistrationSuccessPopup
-          isOpen={showPopup}
-          onClose={closePopup}
-          schoolId={schoolId}
-        />
-      </div>
-    </>
+      <ExamInfoSection />
+
+      {/* Two Steps Section */}
+      <section className="py-16 px-6 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">
+              Two Simple Steps for Schools & Students
+            </h2>
+            <p className="text-gray-600">
+              We've made the registration process quick, clear, and supportive
+              for everyone.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12">
+            {/* For Schools */}
+            <div>
+              <h3 className="text-2xl font-bold mb-6">For Schools:</h3>
+              <div className="space-y-4">
+                {[
+                  "Fill out the school registration form.",
+                  "Student registration link is automatically generated and sent to you.",
+                  "NAC Team will call your school for a quick briefing and support.",
+                  "Share the student registration link with parents and students.",
+                ].map((step, index) => (
+                  <div key={index} className="flex items-center gap-4">
+                    <div className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-semibold">
+                      {index + 1}
+                    </div>
+                    <span>{step}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* For Students */}
+            <div>
+              <h3 className="text-2xl font-bold mb-6">
+                For Students (via School):
+              </h3>
+              <div className="space-y-4">
+                {[
+                  "Receive registration link from school.",
+                  "Visit NAC website to learn more & fill in the registration form.",
+                  "Complete payment (if applicable).",
+                  "Receive confirmation email instantly.",
+                ].map((step, index) => (
+                  <div key={index} className="flex items-center gap-4">
+                    <div className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-semibold">
+                      {index + 1}
+                    </div>
+                    <span>{step}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Support Section */}
+      <section className="py-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            {[
+              {
+                icon: "?",
+                title: "Have a Question",
+                description:
+                  "Check our most common queries about NAC registration and participation",
+                buttonText: "Click Here For FAQs",
+              },
+              {
+                icon: "⚠",
+                title: "Understand the Rules",
+                description: "Download the participation terms PDF",
+                buttonText: "Download PDF",
+              },
+              {
+                icon: "🏠",
+                title: "Need Help?",
+                description:
+                  "Email: hello@nationalastronomy.org\nOur team is here to assist schools and parents",
+                buttonText: "Contact Support",
+              },
+            ].map((item, index) => (
+              <div key={index} className="text-center">
+                <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
+                  {item.icon}
+                </div>
+                <h3 className="text-xl font-bold mb-4">{item.title}</h3>
+                <p className="text-gray-600 mb-6 whitespace-pre-line">
+                  {item.description}
+                </p>
+                <button className="bg-orange-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-orange-600 transition-colors w-full">
+                  {item.buttonText}
+                </button>
+              </div>
+            ))}
+          </div>
+
+          {/* Contact Section */}
+          <div className="bg-black text-white rounded-lg p-8 flex items-center justify-between">
+            <div>
+              <div className="text-orange-500 text-sm font-semibold mb-2">
+                CONTACT US ANYTIME
+              </div>
+              <h3 className="text-2xl font-bold">
+                Need Help with Registration?
+              </h3>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="text-right">
+                <div>Our NAC 2025 Support Team is here to guide you.</div>
+                <div className="font-bold">Email: nac@stemands.space</div>
+              </div>
+              <div className="w-16 h-16">
+                <svg viewBox="0 0 100 50" className="w-full h-full text-white">
+                  <path
+                    d="M20 25 Q50 5 80 25"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    fill="none"
+                    markerEnd="url(#arrowhead)"
+                  />
+                  <defs>
+                    <marker
+                      id="arrowhead"
+                      markerWidth="10"
+                      markerHeight="7"
+                      refX="9"
+                      refY="3.5"
+                      orient="auto"
+                    >
+                      <polygon points="0 0, 10 3.5, 0 7" fill="currentColor" />
+                    </marker>
+                  </defs>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Awards Section */}
+      <section className="py-16 px-6 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <div className="text-orange-500 text-sm font-semibold mb-2">
+              AWARDS & RECOGNITION
+            </div>
+            <h2 className="text-4xl font-bold">
+              Rewards that Inspire Excellence
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-8">
+            {[
+              "Top 3 students in each grade (direct participation category) win a Telescope",
+              "All winners receive medals, certificates, and national recognition",
+              "Top performers invited to Awards Ceremony & Solar Observatory Visit - Udaipur",
+              "Special recognition for youngest achievers in each grade",
+            ].map((description, index) => (
+              <div key={index} className="text-center">
+                <div className="mb-4">
+                  <Image
+                    src="https://picsum.photos/300/200?random=6"
+                    alt={`Award ${index + 1}`}
+                    width={300}
+                    height={200}
+                    className="rounded-lg mx-auto"
+                  />
+                </div>
+                <p className="text-sm text-gray-600">{description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <SupportHelpSection />
+    </div>
   );
 }

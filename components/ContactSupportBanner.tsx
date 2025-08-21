@@ -15,36 +15,14 @@ const ContactSupportBanner: React.FC = () => {
             </h3>
           </div>
 
-          {/* Middle Section - Curved Arrow */}
+          {/* Middle Section - Logo */}
           <div className="flex justify-center">
             <div className="relative">
-              {/* Curved arrow pointing to the right */}
-              <svg
-                width="120"
-                height="80"
-                viewBox="0 0 120 80"
-                className="text-white"
-              >
-                <path
-                  d="M10 40 Q60 10 100 40"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  fill="none"
-                  markerEnd="url(#arrowhead)"
-                />
-                <defs>
-                  <marker
-                    id="arrowhead"
-                    markerWidth="10"
-                    markerHeight="7"
-                    refX="9"
-                    refY="3.5"
-                    orient="auto"
-                  >
-                    <polygon points="0 0, 10 3.5, 0 7" fill="currentColor" />
-                  </marker>
-                </defs>
-              </svg>
+              <img
+                src="/logo.png"
+                alt="NAC Logo"
+                className="w-30 h-30 object-contain"
+              />
             </div>
           </div>
 
@@ -56,10 +34,10 @@ const ContactSupportBanner: React.FC = () => {
             <p className="text-white text-lg font-semibold">
               Email:{" "}
               <a
-                href="mailto:nac@stemands.space"
+                href="mailto:hello@nationalastronomy.org"
                 className="text-[#EE7E1A] hover:text-[#D67015] transition-colors underline"
               >
-                nac@stemands.space
+                hello@nationalastronomy.org
               </a>
             </p>
           </div>
