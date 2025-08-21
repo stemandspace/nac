@@ -1,15 +1,5 @@
 import { Button } from "@/components/ui/button";
-import ReactPlayer from "react-player";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Calendar,
-  Clock,
-  FileText,
-  Star,
-  ChevronDown,
-} from "lucide-react";
-import Image from "next/image";
+import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import AwardsCeremonyCarousel from "@/components/awards-ceremony-carousel";
 import HighlightReelCarousel from "@/components/highlight-reel-carousel";
