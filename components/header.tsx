@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
@@ -37,6 +38,15 @@ const navItems = [
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Helper to check if a nav item is active
+  const isActive = (href: string) => {
+    // For root
+    if (href === "/") return pathname === "/";
+    // For other paths, check if pathname starts with href
+    return pathname === href || pathname.startsWith(href + "/");
+  };
 
   return (
     <header className="fixed  top-0 left-0 w-full z-50">
@@ -91,7 +101,9 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
-                className="text-gray-700 font-semibold hover:text-[#ee7e1a]"
+                className={`font-semibold hover:text-[#ee7e1a] ${
+                  isActive(item.href) ? "text-[#ee7e1a]" : "text-gray-700"
+                }`}
               >
                 {item.label}
               </Link>
@@ -145,6 +157,11 @@ export default function Header() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMenuOpen(false)}
+                  className={`${
+                    isActive(item.href)
+                      ? "text-[#ee7e1a] font-semibold"
+                      : "text-gray-700"
+                  }`}
                 >
                   {item.label}
                 </Link>
