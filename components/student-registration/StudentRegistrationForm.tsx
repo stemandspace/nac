@@ -7,10 +7,18 @@ import { Select } from "@/components/ui/select";
 import { useStudent, StudentData, AddressData } from "@/lib/hooks/useStudent";
 import { client } from "@/api";
 import { useRazorpay } from "react-razorpay";
+import config from "./config";
+import AddonCard from "./AddonCard";
+import AddonDetails from "./AddonDetails";
+import TotalCalculation from "./TotalCalculation";
+
+const calculateDiscount = (originalPrice: number, discountedPrice: number) => {
+  return Math.round(((originalPrice - discountedPrice) / originalPrice) * 100);
+};
 
 const registrationFee = {
   price: 12,
-  priceInr: 550,
+  priceInr: 500,
 };
 
 interface SchoolData {
@@ -60,12 +68,6 @@ interface StudentRegistrationFormProps {
 export default function StudentRegistrationForm({
   school,
 }: StudentRegistrationFormProps) {
-  const {
-    createStudent,
-    isLoading: isSubmitting,
-    error: studentError,
-  } = useStudent();
-
   // Move useRazorpay hook to the top level
   const { Razorpay } = useRazorpay();
 
@@ -74,99 +76,19 @@ export default function StudentRegistrationForm({
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
   const [formData, setFormData] = useState<StudentData>({
-    name: "Robin Hood",
-    email: "deepakvish7354@gmail.com",
-    phone: "9876543210",
-    dob: "2000-01-01",
-    school_name: school?.name || "NAC Education",
-    grade: "10",
-    section: "A",
-    city: "New York",
+    name: "",
+    email: "",
+    phone: "",
+    dob: "",
+    school_name: school?.name || "",
+    grade: "",
+    section: "",
+    city: "",
     is_overseas: school?.is_overseas || false,
   });
 
   // Addon options state - three separate cards
-  const [addonOptions, setAddonOptions] = useState<AddonOption[]>([
-    {
-      id: "credit",
-      title: "Credit Purchase",
-      description: "Add credits to your account for future purchases",
-      price: 80, // Discounted price
-      priceInr: 6640, // Discounted price
-      originalPrice: 100,
-      originalPriceInr: 8300,
-      currency: "USD",
-      checked: false,
-      details: {
-        creditAmount: 100,
-        bonusCredits: 10,
-      },
-    },
-    {
-      id: "basic",
-      title: "Basic Membership",
-      description: "Essential features for students",
-      price: 20, // Discounted price
-      priceInr: 1660, // Discounted price
-      originalPrice: 25,
-      originalPriceInr: 2075,
-      currency: "USD",
-      checked: false,
-      details: {
-        selectedPlan: "basic",
-        plans: [
-          {
-            id: "basic",
-            name: "Basic Membership",
-            price: 20, // Discounted price
-            priceInr: 1660, // Discounted price
-            originalPrice: 25,
-            originalPriceInr: 2075,
-            duration: "1 Year",
-            benefits: [
-              "Access to study materials",
-              "Email support",
-              "Basic progress tracking",
-              "Community access",
-            ],
-          },
-        ],
-      },
-    },
-    {
-      id: "premium",
-      title: "Premium Membership",
-      description: "Advanced features and exclusive content",
-      price: 40, // Discounted price
-      priceInr: 3320, // Discounted price
-      originalPrice: 50,
-      originalPriceInr: 4150,
-      currency: "USD",
-      checked: false,
-      details: {
-        selectedPlan: "premium",
-        plans: [
-          {
-            id: "premium",
-            name: "Premium Membership",
-            price: 40, // Discounted price
-            priceInr: 3320, // Discounted price
-            originalPrice: 50,
-            originalPriceInr: 4150,
-            duration: "1 Year",
-            benefits: [
-              "Exclusive study materials",
-              "Priority support",
-              "Advanced analytics",
-              "Special discounts",
-              "Live tutoring sessions",
-              "Personalized learning path",
-            ],
-          },
-        ],
-      },
-    },
-  ]);
+  const [addonOptions, setAddonOptions] = useState<AddonOption[]>(config);
 
   const handleInputChange = (
     field: keyof StudentData,
@@ -391,12 +313,53 @@ export default function StudentRegistrationForm({
       ? registrationFee.price
       : registrationFee.priceInr;
 
+    if (!selectedAddon) {
+      if (formData.is_overseas) {
+        return baseFee;
+      } else {
+        // Add 18% GST for non-overseas users
+        const gst = Math.round(baseFee * 0.18);
+        return baseFee + gst;
+      }
+    }
+
+    const addonPrice = formData.is_overseas
+      ? selectedAddon.originalPrice
+      : selectedAddon.originalPriceInr;
+
+    if (formData.is_overseas) {
+      return baseFee + addonPrice;
+    } else {
+      // Add 18% GST for non-overseas users
+      const totalBeforeGst = baseFee + addonPrice;
+      const gst = Math.round(totalBeforeGst * 0.18);
+      return totalBeforeGst + gst;
+    }
+  };
+
+  const calculateGST = () => {
+    if (formData.is_overseas) return 0;
+
+    const selectedAddon = addonOptions.find((opt) => opt.checked);
+    const baseFee = registrationFee.priceInr;
+    const addonPrice = selectedAddon ? selectedAddon.originalPriceInr : 0;
+    const totalBeforeGst = baseFee + addonPrice;
+    return Math.round(totalBeforeGst * 0.18);
+  };
+
+  const calculateTotalBeforeGST = () => {
+    const selectedAddon = addonOptions.find((opt) => opt.checked);
+    const baseFee = formData.is_overseas
+      ? registrationFee.price
+      : registrationFee.priceInr;
+
     if (!selectedAddon) return baseFee;
 
-    return (
-      baseFee +
-      (formData.is_overseas ? selectedAddon.price : selectedAddon.priceInr)
-    );
+    const addonPrice = formData.is_overseas
+      ? selectedAddon.originalPrice
+      : selectedAddon.originalPriceInr;
+
+    return baseFee + addonPrice;
   };
 
   const getSelectedAddonDetails = () => {
@@ -439,28 +402,29 @@ export default function StudentRegistrationForm({
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-6 sm:py-12 px-3 sm:px-4 md:mt-[5rem]">
+    <div className="min-h-screen bg-gray-50 py-6 sm:py-12 px-3 sm:px-4 mt-[5rem] ">
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl p-4 sm:p-8">
           <div className="text-center mb-6 sm:mb-8">
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
               Student Registration
             </h1>
-            {school ? (
-              <p className="text-sm sm:text-base text-gray-600">
-                Registering for{" "}
-                <span className="font-semibold text-blue-600">
-                  {school.name}
-                </span>
-              </p>
-            ) : (
-              <p className="text-sm sm:text-base text-gray-600">
-                Complete your student registration form
-              </p>
-            )}
+            <p className="text-sm text-center max-w-2xl mx-auto">
+              This registration form is for students whose schools are not
+              participating in the National Astronomy Challenge (NAC). We
+              recommend that you first confirm with your child’s school if they
+              are participating. If the school is not enrolled, you may proceed
+              to register directly using this form.
+            </p>
             <p className="text-xs text-gray-500 mt-2">
-              Registration fee: {formData.is_overseas ? "$12" : "₹500"}{" "}
-              (mandatory for all registrations)
+              Registration fee: {formData.is_overseas ? "USD 12" : "INR 500"}
+              {!formData.is_overseas && " (Exclusive of GST)"}
+              {!formData.is_overseas && (
+                <span className="block mt-1">
+                  Total with 18% GST: ₹
+                  {Math.round(registrationFee.priceInr * 1.18)}
+                </span>
+              )}
             </p>
           </div>
 
@@ -487,7 +451,7 @@ export default function StudentRegistrationForm({
           )}
 
           {/* Loading State */}
-          {(isSubmitting || isProcessingPayment) && (
+          {isProcessingPayment && (
             <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
               <div className="flex items-center">
                 <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600 mr-2"></div>
@@ -511,6 +475,7 @@ export default function StudentRegistrationForm({
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Full Name *
                   </label>
+
                   <Input
                     type="text"
                     required
@@ -519,6 +484,9 @@ export default function StudentRegistrationForm({
                     placeholder="Enter full name"
                     className="w-full"
                   />
+                  <p className="text-xs text-gray-500 mt-1">
+                    Enter exactly as you want on the certificate
+                  </p>
                 </div>
 
                 <div>
@@ -533,11 +501,15 @@ export default function StudentRegistrationForm({
                     placeholder="Enter email address"
                     className="w-full"
                   />
+                  <p className="text-xs text-gray-500 mt-1">
+                    Use only personal email (Gmail/Yahoo/Hotmail). No school or
+                    office IDs.
+                  </p>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Phone Number *
+                    WhatsApp Number *
                   </label>
                   <Input
                     type="tel"
@@ -547,6 +519,9 @@ export default function StudentRegistrationForm({
                     placeholder="Enter phone number"
                     className="w-full"
                   />
+                  <p className="text-xs text-gray-500 mt-1">
+                    Provide a valid number for updates.
+                  </p>
                 </div>
 
                 <div>
@@ -590,18 +565,12 @@ export default function StudentRegistrationForm({
                     className="w-full"
                   >
                     <option value="">Select Grade</option>
-                    <option value="1">Grade 1</option>
-                    <option value="2">Grade 2</option>
-                    <option value="3">Grade 3</option>
                     <option value="4">Grade 4</option>
                     <option value="5">Grade 5</option>
                     <option value="6">Grade 6</option>
                     <option value="7">Grade 7</option>
                     <option value="8">Grade 8</option>
                     <option value="9">Grade 9</option>
-                    <option value="10">Grade 10</option>
-                    <option value="11">Grade 11</option>
-                    <option value="12">Grade 12</option>
                   </Select>
                 </div>
 
@@ -650,482 +619,68 @@ export default function StudentRegistrationForm({
                   htmlFor="is_overseas"
                   className="text-sm font-medium text-gray-700"
                 >
-                  Overseas Student
+                  I'm registering from outside India.
                 </label>
               </div>
             </div>
 
-            {/* Addon Options - Three Compact Cards */}
-            <div className="bg-gray-50 p-4 sm:p-5 rounded-lg">
-              <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-4">
-                Additional Options
-              </h2>
-              <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">
-                Select one of the following options to include with your
-                registration.{" "}
-                <strong>
-                  Note: A registration fee of{" "}
-                  {formData.is_overseas ? "$12" : "₹500"} applies to all
-                  registrations.
-                </strong>
-              </p>
+            {/* Addon Options - Structured Cards */}
+            <div className="bg-gradient-to-br from-gray-50 to-blue-50 p-6 rounded-xl border border-gray-200">
+              <div className="text-center mb-6">
+                <h2 className="text-2xl font-bold text-gray-900 mb-3">
+                  Choose Your Addons
+                </h2>
+                <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                  Select from the available add-ons to enhance your
+                  registration. You can choose membership plans or purchase
+                  credits for additional benefits.
+                </p>
+              </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                {/* Credit Card */}
-                <div
-                  className={`border border-gray-200 rounded-lg p-3 cursor-pointer transition-all hover:border-blue-300 ${
-                    addonOptions.find((opt) => opt.id === "credit")?.checked
-                      ? "bg-blue-50"
-                      : "bg-white"
-                  }`}
-                  onClick={() => handleAddonToggle("credit")}
-                >
-                  <div className="flex items-center space-x-3 relative">
-                    {/* Checkbox */}
-                    <div className="absolute top-0 right-0">
-                      <input
-                        type="checkbox"
-                        checked={
-                          addonOptions.find((opt) => opt.id === "credit")
-                            ?.checked || false
-                        }
-                        onChange={() => {}}
-                        className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                        readOnly
-                      />
-                    </div>
-
-                    {/* Icon */}
-                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                      <svg
-                        className="w-4 h-4 text-blue-600"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
-                        />
-                      </svg>
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-gray-900 text-sm mb-1">
-                        Credit <br className="sm:hidden" /> Purchase
-                      </h3>
-                      <p className="text-xs text-gray-600 mb-1">
-                        Add credits to your account
-                      </p>
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <div className="text-sm font-bold text-blue-600">
-                          {formData.is_overseas ? "$80" : "₹6,640"}
-                        </div>
-                        <div className="text-xs text-gray-500 line-through">
-                          {formData.is_overseas ? "$100" : "₹8,300"}
-                        </div>
-                        <span className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800 whitespace-nowrap">
-                          20% OFF
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Basic Membership Card */}
-                <div
-                  className={`border border-gray-200 rounded-lg p-3 cursor-pointer transition-all hover:border-green-300 ${
-                    addonOptions.find((opt) => opt.id === "basic")?.checked
-                      ? "bg-green-50"
-                      : "bg-white"
-                  }`}
-                  onClick={() => handleAddonToggle("basic")}
-                >
-                  <div className="flex items-center space-x-3 relative">
-                    {/* Checkbox */}
-                    <div className="absolute top-0 right-0">
-                      <input
-                        type="checkbox"
-                        checked={
-                          addonOptions.find((opt) => opt.id === "basic")
-                            ?.checked || false
-                        }
-                        onChange={() => {}}
-                        className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
-                        readOnly
-                      />
-                    </div>
-
-                    {/* Icon */}
-                    <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                      <svg
-                        className="w-4 h-4 text-green-600"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-gray-900 text-sm mb-1">
-                        Basic <br className="sm:hidden" /> Membership
-                      </h3>
-                      <p className="text-xs text-gray-600 mb-1">
-                        Essential features for students
-                      </p>
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <div className="text-sm font-bold text-green-600">
-                          {formData.is_overseas ? "$20" : "₹1,660"}
-                        </div>
-                        <div className="text-xs text-gray-500 line-through">
-                          {formData.is_overseas ? "$25" : "₹2,075"}
-                        </div>
-                        <span className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
-                          20% OFF
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Premium Membership Card */}
-                <div
-                  className={`border border-gray-200 rounded-lg p-3 cursor-pointer transition-all hover:border-purple-300 ${
-                    addonOptions.find((opt) => opt.id === "premium")?.checked
-                      ? "bg-purple-50"
-                      : "bg-white"
-                  }`}
-                  onClick={() => handleAddonToggle("premium")}
-                >
-                  <div className="flex items-center space-x-3 relative">
-                    {/* Checkbox */}
-                    <div className="absolute top-0 right-0">
-                      <input
-                        type="checkbox"
-                        checked={
-                          addonOptions.find((opt) => opt.id === "premium")
-                            ?.checked || false
-                        }
-                        onChange={() => {}}
-                        className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
-                        readOnly
-                      />
-                    </div>
-
-                    {/* Icon */}
-                    <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
-                      <svg
-                        className="w-4 h-4 text-purple-600"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-                        />
-                      </svg>
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h3 className="font-semibold text-gray-900 text-sm">
-                          Premium
-                          <br className="sm:hidden" /> Membership
-                        </h3>
-                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 whitespace-nowrap">
-                          Suggested
-                        </span>
-                      </div>
-                      <p className="text-xs text-gray-600 mb-1">
-                        Advanced features & exclusive content
-                      </p>
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <div className="text-sm font-bold text-purple-600">
-                          {formData.is_overseas ? "$40" : "₹3,320"}
-                        </div>
-                        <div className="text-xs text-gray-500 line-through">
-                          {formData.is_overseas ? "$50" : "₹4,150"}
-                        </div>
-                        <span className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800 whitespace-nowrap">
-                          20% OFF
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                {addonOptions.map((addon) => (
+                  <AddonCard
+                    key={addon.id}
+                    addon={addon}
+                    isOverseas={formData.is_overseas}
+                    onToggle={handleAddonToggle}
+                    calculateDiscount={calculateDiscount}
+                  />
+                ))}
               </div>
 
               {/* Selected Option Details Section */}
-              {getSelectedAddonDetails() && (
-                <div className="mt-4 p-3 sm:p-4 bg-white border border-gray-200 rounded-lg">
-                  <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3">
-                    {getSelectedAddonDetails()?.title} Details
-                  </h3>
-
-                  {getSelectedAddonDetails()?.id === "credit" && (
-                    <div className="bg-blue-50 p-3 rounded-lg">
-                      <h4 className="font-medium text-blue-900 mb-2">
-                        Credit Package Details
-                      </h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 text-center mb-3">
-                        <div className="bg-white p-2 rounded border">
-                          <div className="font-medium text-blue-900 text-xs">
-                            Base Credits
-                          </div>
-                          <div className="text-sm sm:text-base font-bold text-blue-600">
-                            100
-                          </div>
-                        </div>
-                        <div className="bg-white p-2 rounded border">
-                          <div className="font-medium text-blue-900 text-xs">
-                            Bonus Credits
-                          </div>
-                          <div className="text-sm sm:text-base font-bold text-green-600">
-                            +10
-                          </div>
-                        </div>
-                        <div className="bg-white p-2 rounded border">
-                          <div className="font-medium text-blue-900 text-xs">
-                            Total Credits
-                          </div>
-                          <div className="text-sm sm:text-base font-bold text-blue-600">
-                            110
-                          </div>
-                        </div>
-                      </div>
-                      <div className="bg-white p-2 rounded border text-center">
-                        <div className="flex items-center justify-center gap-2 flex-wrap">
-                          <div className="text-sm sm:text-base font-bold text-blue-600">
-                            {formData.is_overseas ? "$80" : "₹6,640"}
-                          </div>
-                          <div className="text-xs text-gray-500 line-through">
-                            {formData.is_overseas ? "$100" : "₹8,300"}
-                          </div>
-                          <span className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
-                            20% OFF
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {getSelectedAddonDetails()?.id === "basic" && (
-                    <div className="bg-green-50 p-3 rounded-lg">
-                      <h4 className="font-medium text-green-900 mb-2">
-                        Basic Membership Benefits
-                      </h4>
-                      <div className="grid grid-cols-1 gap-3">
-                        <div className="bg-white p-3 rounded border">
-                          <h5 className="font-medium text-green-900 mb-2">
-                            Plan Details
-                          </h5>
-                          <div className="flex items-center gap-2 mb-2 flex-wrap">
-                            <div className="text-lg sm:text-xl font-bold text-green-600">
-                              {formData.is_overseas ? "$20" : "₹1,660"}
-                            </div>
-                            <div className="text-sm text-gray-500 line-through">
-                              {formData.is_overseas ? "$25" : "₹2,075"}
-                            </div>
-                            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
-                              20% OFF
-                            </span>
-                          </div>
-                          <div className="text-sm text-gray-600 mb-2">
-                            1 Year
-                          </div>
-                          <ul className="space-y-1 text-xs text-gray-700">
-                            {getSelectedAddonDetails()?.details.plans?.[0]?.benefits.map(
-                              (benefit: string, index: number) => (
-                                <li
-                                  key={index}
-                                  className="flex items-center space-x-2"
-                                >
-                                  <svg
-                                    className="h-3 w-3 text-green-500 flex-shrink-0"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                  >
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                      clipRule="evenodd"
-                                    />
-                                  </svg>
-                                  <span>{benefit}</span>
-                                </li>
-                              )
-                            )}
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {getSelectedAddonDetails()?.id === "premium" && (
-                    <div className="bg-purple-50 p-3 rounded-lg">
-                      <h4 className="font-medium text-purple-900 mb-2">
-                        Premium Membership Benefits
-                      </h4>
-                      <div className="grid grid-cols-1 gap-3">
-                        <div className="bg-white p-3 rounded border">
-                          <h5 className="font-medium text-purple-900 mb-2">
-                            Plan Details
-                          </h5>
-                          <div className="flex items-center gap-2 mb-2 flex-wrap">
-                            <div className="text-lg sm:text-xl font-bold text-purple-600">
-                              {formData.is_overseas ? "$40" : "₹3,320"}
-                            </div>
-                            <div className="text-sm text-gray-500 line-through">
-                              {formData.is_overseas ? "$40" : "₹4,150"}
-                            </div>
-                            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
-                              20% OFF
-                            </span>
-                          </div>
-                          <div className="text-sm text-gray-600 mb-2">
-                            1 Year
-                          </div>
-                          <ul className="space-y-1 text-xs text-gray-700">
-                            {getSelectedAddonDetails()?.details.plans?.[0]?.benefits.map(
-                              (benefit: string, index: number) => (
-                                <li
-                                  key={index}
-                                  className="flex items-center space-x-2"
-                                >
-                                  <svg
-                                    className="h-3 w-3 text-purple-500 flex-shrink-0"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                  >
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                      clipRule="evenodd"
-                                    />
-                                  </svg>
-                                  <span>{benefit}</span>
-                                </li>
-                              )
-                            )}
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
+              <AddonDetails
+                selectedAddon={getSelectedAddonDetails()}
+                isOverseas={formData.is_overseas}
+                calculateDiscount={calculateDiscount}
+              />
 
               {/* Total Calculation */}
-              <div className="mt-4 p-3 sm:p-4 bg-blue-50 rounded-lg">
-                <div className="space-y-2">
-                  {/* Registration Fee */}
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium text-gray-700">
-                      Registration Fee:
-                    </span>
-                    <span className="text-sm font-semibold text-gray-900">
-                      {formData.is_overseas ? "$" : "₹"}
-                      {formData.is_overseas
-                        ? registrationFee.price
-                        : registrationFee.priceInr}
-                    </span>
-                  </div>
-
-                  {/* Addon Cost (if selected) */}
-                  {getSelectedAddonDetails() && (
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium text-gray-700">
-                        {getSelectedAddonDetails()?.title}:
-                      </span>
-                      <span className="text-sm font-semibold text-gray-900">
-                        {formData.is_overseas ? "$" : "₹"}
-                        {formData.is_overseas
-                          ? getSelectedAddonDetails()?.price
-                          : getSelectedAddonDetails()?.priceInr}
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Total */}
-                  <div className="border-t pt-2">
-                    <div className="flex justify-between items-center">
-                      <span className="text-base sm:text-lg font-medium text-gray-900">
-                        Total Amount:
-                      </span>
-                      <span className="text-xl sm:text-2xl font-bold text-blue-600">
-                        {formData.is_overseas ? "$" : "₹"}
-                        {calculateTotal()}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <TotalCalculation
+                isOverseas={formData.is_overseas}
+                registrationFee={registrationFee}
+                selectedAddon={getSelectedAddonDetails()}
+                calculateTotal={calculateTotal}
+                calculateGST={calculateGST}
+                calculateTotalBeforeGST={calculateTotalBeforeGST}
+              />
             </div>
 
             <div className="pt-4 sm:pt-6">
               <Button
                 type="submit"
-                disabled={isSubmitting || isProcessingPayment}
+                disabled={isProcessingPayment}
                 className="w-full h-12 text-base sm:text-lg font-semibold"
               >
-                {isSubmitting || isProcessingPayment
+                {isProcessingPayment
                   ? "Processing..."
                   : `Complete Registration (${
                       formData.is_overseas ? "$" : "₹"
-                    }${
-                      formData.is_overseas
-                        ? registrationFee.price
-                        : registrationFee.priceInr
-                    })`}
+                    }${calculateTotal()})`}
               </Button>
             </div>
           </form>
-
-          {school && (
-            <div className="mt-6 sm:mt-8 p-3 sm:p-4 bg-blue-50 border border-blue-200 rounded-lg">
-              <h3 className="text-sm font-medium text-blue-800 mb-2">
-                School Information
-              </h3>
-              <div className="text-xs sm:text-sm text-blue-700 space-y-1">
-                <p>
-                  <strong>Name:</strong> {school.name}
-                </p>
-                <p>
-                  <strong>Address:</strong> {school.address}
-                </p>
-                <p>
-                  <strong>Phone:</strong> {school.phone}
-                </p>
-                <p>
-                  <strong>Email:</strong> {school.email}
-                </p>
-                <p>
-                  <strong>Branch:</strong> {school.branch}
-                </p>
-                <p>
-                  <strong>Principal:</strong> {school.principle}
-                </p>
-                <p>
-                  <strong>Overseas:</strong> {school.is_overseas ? "Yes" : "No"}
-                </p>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </div>
