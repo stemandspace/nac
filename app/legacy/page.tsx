@@ -36,24 +36,31 @@ export default function LegacyPage() {
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S6_fb97855b4b.jpg?updatedAt=2025-08-22T06%3A32%3A48.212Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S_1_89fae0bd59.jpg?updatedAt=2025-08-22T06%3A32%3A48.091Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_G7_ba1bf7ee65.jpg?updatedAt=2025-08-22T05%3A52%3A07.964Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S555_8b30d60806.jpg?updatedAt=2025-08-22T12%3A19%3A07.679Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S333_cb556242cb.jpg?updatedAt=2025-08-22T12%3A19%3A34.631Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S_111_65098fa913.jpg?updatedAt=2025-08-22T12%3A19%3A07.627Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S666_75778b0b2b.jpg?updatedAt=2025-08-22T12%3A19%3A07.577Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S_111_3ad746d235.jpg?updatedAt=2025-08-22T12%3A19%3A02.677Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S555_4d8fe034b8.jpg?updatedAt=2025-08-22T12%3A19%3A02.541Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S333_fbf280eb67.jpg?updatedAt=2025-08-22T12%3A19%3A02.418Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S_111_65098fa913.jpg?updatedAt=2025-08-22T12%3A19%3A07.627Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S777_c4e49e14bd.jpg?updatedAt=2025-08-22T12%3A19%3A02.377Z",
     ],
     "2018-2019": [
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_G27_5225eb0883.jpeg?updatedAt=2025-08-22T05%3A52%3A07.855Z",
-
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_D2_f53cbbc750.JPG?updatedAt=2025-08-22T06%3A57%3A40.540Z",
-
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_D1_31e8bb6fa8.jpg?updatedAt=2025-08-22T06%3A57%3A39.476Z",
-
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_D5_1aa8333262.jpg?updatedAt=2025-08-22T06%3A57%3A39.441Z",
-
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_D3_1561a332a0.jpg?updatedAt=2025-08-22T06%3A57%3A39.418Z",
-
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_D4_8cdd01c82e.jpg?updatedAt=2025-08-22T06%3A57%3A39.416Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_D222_19a6a18b99.jpg?updatedAt=2025-08-22T12%3A19%3A02.371Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_D111_72bca0a656.jpg?updatedAt=2025-08-22T12%3A19%3A02.303Z",
     ],
     "2020-2021": [
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_T4_8b85d6f606.jpg?updatedAt=2025-08-22T07%3A11%3A32.681Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_T_1_27f7c97232.jpg?updatedAt=2025-08-22T07%3A11%3A31.658Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_T2_54662504d6.jpg?updatedAt=2025-08-22T07%3A11%3A31.439Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_T3_710f371ca6.jpg?updatedAt=2025-08-22T07%3A11%3A31.350Z",
     ],
     "2022-2023": [
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_N4_82128f2914.jpg?updatedAt=2025-08-22T08%3A13%3A40.828Z",
@@ -61,6 +68,10 @@ export default function LegacyPage() {
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_N1_4a96fe2ac6.jpeg?updatedAt=2025-08-22T08%3A13%3A40.515Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_N3_5a39fe4e58.jpeg?updatedAt=2025-08-22T08%3A13%3A40.334Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_N2_621d5f8937.jpeg?updatedAt=2025-08-22T08%3A13%3A40.298Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_N111_150c6a0c72.jpg?updatedAt=2025-08-22T12%3A18%3A45.436Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_N222_1c7807ee8c.jpeg?updatedAt=2025-08-22T12%3A18%3A45.065Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_N_333_cc8c8f8f1b.jpeg?updatedAt=2025-08-22T12%3A18%3A45.127Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_N444_598802e2e6.jpeg?updatedAt=2025-08-22T12%3A18%3A44.957Z",
     ],
     "2023-2024": [
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Pune_8_f71be31fea.jpeg?updatedAt=2025-08-22T07%3A28%3A32.057Z",
@@ -70,6 +81,7 @@ export default function LegacyPage() {
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Pune_2_1269c6ff7b.jpeg?updatedAt=2025-08-22T07%3A25%3A23.758Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Pune_3_b30879b627.jpeg?updatedAt=2025-08-22T07%3A25%3A23.672Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Pune_4_e92def024b.jpeg?updatedAt=2025-08-22T07%3A25%3A04.827Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Pune7_d460b5aa21.jpeg?updatedAt=2025-08-22T07%3A28%3A31.918Z",
     ],
     "2024-2025": [
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H7_d38bc93bc7.JPG?updatedAt=2025-08-22T07%3A51%3A04.956Z",
@@ -79,6 +91,10 @@ export default function LegacyPage() {
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H3_57643e1240.jpeg?updatedAt=2025-08-22T07%3A48%3A02.669Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H1_f347fd8e05.jpeg?updatedAt=2025-08-22T07%3A48%3A02.555Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H2_ccdea93ceb.jpeg?updatedAt=2025-08-22T07%3A48%3A02.529Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H333_b4ce6c2b27.jpeg?updatedAt=2025-08-22T12%3A40%3A38.378Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H444_e8a480c3a8.jpeg?updatedAt=2025-08-22T12%3A40%3A38.303Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H111_a13b0cebfc.jpeg?updatedAt=2025-08-22T12%3A40%3A38.060Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H222_00ea55baab.jpeg?updatedAt=2025-08-22T12%3A40%3A23.516Z",
     ],
   };
 
