@@ -26,7 +26,7 @@ export default function StudentRegistrationPage() {
   return (
     <div className="min-h-screen">
       <Hero
-        bgimage="/home/header2.jpg"
+        bgimage="/rewards/R10.jpg"
         title="Register Your School for NAC 2025 - Inspire the Next Generation of Astronomers!"
         desc="Bring the National Astronomy Challenge experience to your students. Register your school and give them a chance to compete, learn, and shine on a national stage."
       >

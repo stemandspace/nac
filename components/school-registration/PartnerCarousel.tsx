@@ -1,10 +1,26 @@
 "use client";
 
 import React from "react";
-import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
+import useEmblaCarousel from "embla-carousel-react";
 
 const Partners = [
+  "/logos/L1.webp",
+  "/logos/L2.webp",
+  "/logos/L3.webp",
+  "/logos/L4.webp",
+  "/logos/L5.webp",
+  "/logos/L6.webp",
+  "/logos/L7.webp",
+  "/logos/L8.webp",
+  "/logos/L9.webp",
+  "/logos/L11.webp",
+  "/logos/L12.webp",
+  "/logos/L13.webp",
+  "/logos/L15.webp",
+  "/logos/L16.webp",
+  "/logos/L18.webp",
+  "/logos/L20.webp",
   "/logos/Logo1.jpeg",
   "/logos/Logo2.jpeg",
   "/logos/Logo3.jpeg",

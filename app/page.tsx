@@ -1,15 +1,11 @@
-import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
-import AwardsCeremonyCarousel from "@/components/awards-ceremony-carousel";
-import HighlightReelCarousel from "@/components/highlight-reel-carousel";
-import SupportHelpSection from "@/components/SupportHelpSection";
-import SpacetopiaSubscriptionSection from "@/components/SpacetopiaSubscriptionSection";
-import ContactSupportBanner from "@/components/ContactSupportBanner";
-import WhatIsNacSection from "@/components/WhatIsNacSection";
-import route from "@/lib/route";
 import Image from "next/image";
+import route from "@/lib/route";
+import { Button } from "@/components/ui/button";
 import PrepareNac from "@/components/prepare-nac";
+import WhatIsNacSection from "@/components/WhatIsNacSection";
+import HighlightReelCarousel from "@/components/highlight-reel-carousel";
+import AwardsCeremonyCarousel from "@/components/awards-ceremony-carousel";
 
 const HeroImage1 = "/s1.jpg";
 const HeroImage2 = "/s2.jpg";
@@ -326,13 +322,13 @@ export default function HomePage() {
             {/* School Dropdown */}
 
             <Link
-              href={route.AWARDS}
+              href={route.SCHOOL_REGISTRATION}
               className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-8 py-3 rounded-full text-lg font-semibold transition text-center"
             >
               School Registration
             </Link>
             <Link
-              href={route.AWARDS}
+              href={route.STUDENT_REGISTRATION}
               className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-8 py-3 rounded-full text-lg font-semibold transition text-center"
             >
               Direct Registration
