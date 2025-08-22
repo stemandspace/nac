@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import Support from "@/components/school-registration/support";
 import ExamInfo from "@/components/school-registration/examinfo";
 import ContactSupportBanner from "@/components/ContactSupportBanner";
-import AwardSection from "@/components/school-registration/awardsection";
+import AwardsCarousel from "@/components/school-registration/AwardsCarousel";
 
 export default function DirectRegistrationPage() {
   return (
@@ -364,7 +364,8 @@ export default function DirectRegistrationPage() {
       </section>
 
       <ExamInfo />
-      <AwardSection />
+      <AwardsCarousel />
+
       <Support />
 
       <ContactSupportBanner />
