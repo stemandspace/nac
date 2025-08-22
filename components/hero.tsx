@@ -18,7 +18,7 @@ const Hero: React.FC<HeroProps> = ({ bgimage, title, desc, children }) => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="max-w-7xl mx-auto w-full py-8">
+      <div className="max-w-7xl mx-auto w-full lg:py-8 py-5">
         <div>
           <h1 className="text-xl md:text-3xl font-medium leading-tight text-white mb-2 max-w-xl">
             {title}
@@ -27,8 +27,8 @@ const Hero: React.FC<HeroProps> = ({ bgimage, title, desc, children }) => {
             {desc && (
               <p
                 className={clsx(
-                  "max-w-xl text-sm text-white mb-6 sm:mb-8 leading-relaxed",
-                  children ? "mb-0" : "mb-6 sm:mb-8"
+                  "max-w-xl text-sm text-white leading-relaxed",
+                  !children ? "mb-0" : "mb-6 sm:mb-8"
                 )}
               >
                 {desc}
