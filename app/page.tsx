@@ -9,6 +9,7 @@ import ContactSupportBanner from "@/components/ContactSupportBanner";
 import WhatIsNacSection from "@/components/WhatIsNacSection";
 import route from "@/lib/route";
 import Image from "next/image";
+import PrepareNac from "@/components/prepare-nac";
 
 const HeroImage1 = "/s1.jpg";
 const HeroImage2 = "/s2.jpg";
@@ -181,76 +182,8 @@ export default function HomePage() {
       {/* Awards Ceremony Section */}
       <AwardsCeremonyCarousel />
 
-      {/* Spacetopia Section */}
-      <section className="py-10 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left content */}
-            <div className="space-y-6">
-              {/* Logo */}
-              <img
-                src="/home/logo.svg"
-                alt="Spacetopia Logo"
-                className="h-24 w-auto"
-              />
-
-              {/* Heading */}
-              <h2 className="text-3xl md:text-4xl text-gray-900 leading-snug">
-                Prepare for NAC with Spacetopia
-              </h2>
-
-              {/* Description */}
-              <p className="text-gray-600 text-lg leading-relaxed">
-                The reimagined learning platform, formerly known as Cosmic Kids
-                Club.
-              </p>
-
-              {/* Bullet Points */}
-              <div className="space-y-3">
-                {[
-                  "Access interactive, grade-wise NAC preparation material.",
-                  "Go beyond NAC: explore live quizzes, read comics, watch 5-minute concept videos, and attempt challenges to climb the leaderboard.",
-                  "Enjoy continuous space learning that lasts even beyond the Olympiad.",
-                ].map((text, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    {/* Arrow image */}
-                    <img
-                      src="/home/arrow-right.png"
-                      alt="Arrow"
-                      className="w-5 h-5 mt-1"
-                    />
-                    <p className="text-gray-700 text-lg">{text}</p>
-                  </div>
-                ))}
-              </div>
-
-              {/* Button */}
-              <Link
-                href="/study-material"
-                className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-8 py-3 rounded-full text-lg font-semibold transition"
-              >
-                Know More
-              </Link>
-            </div>
-
-            {/* Right video/image */}
-            <div className="relative">
-              <div className="overflow-hidden rounded-2xl">
-                <img
-                  src="/home/vimg2.jpg" // replace with actual image or video thumbnail
-                  alt="NRSC Visit"
-                  className="w-full h-auto object-cover"
-                />
-                <button className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg">
-                    <div className="w-0 h-0 border-l-[14px] border-l-gray-900 border-t-[9px] border-t-transparent border-b-[9px] border-b-transparent ml-1"></div>
-                  </div>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Prepare NAC Section */}
+      <PrepareNac />
 
       {/* Awards & Recognition Section */}
       <section className="pt-4 pb-10 bg-white">
@@ -264,12 +197,6 @@ export default function HomePage() {
               Honoring Achievements with a Space Expedition & Awards Ceremony –
               2025
             </p>
-            <Link
-              href={route.AWARDS}
-              className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-8 py-3 rounded-full text-lg font-semibold transition"
-            >
-              Know More
-            </Link>
           </div>
 
           {/* Awards Image */}
@@ -286,6 +213,17 @@ export default function HomePage() {
               />
             </div>
           </div>
+          <p className="text-center mt-5 text-lg">
+            Udaipur Solar Observatory, Udaipur
+          </p>
+          <div className="flex items-center justify-center mt-5">
+            <Link
+              href={route.AWARDS}
+              className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-8 py-3 rounded-full text-lg font-semibold transition"
+            >
+              Know More
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -297,9 +235,12 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center mb-10">
-            <h2 className="text-4xl md:text-4xl font-medium text-white mb-5">
-              NAC 2025 Timeline
+            <h2 className="text-4xl md:text-4xl font-medium text-white mb-2">
+              NAC 2025
             </h2>
+            <p className="text-center text-xl text-white mb-3">
+              Important Timeline
+            </p>
           </div>
 
           {/* Timeline Items */}
@@ -381,23 +322,21 @@ export default function HomePage() {
           </div>
 
           {/* Call to Action Buttons */}
-          <div className="flex flex-wrap justify-center gap-6 relative">
+          <div className="grid grid-cols-2 max-w-xl justify-center gap-6 relative mx-auto">
             {/* School Dropdown */}
-            <Button className="bg-black hover:bg-gray-800 text-white px-8 py-6 rounded-4xl font-semibold uppercase tracking-wide flex items-center gap-2">
-              <Link href={route.SCHOOL_REGISTRATION} className="text-white">
-                Register as School
-              </Link>
-            </Button>
 
-            {/* Student Dropdown */}
-            <Button className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-6 rounded-4xl font-semibold uppercase tracking-wide flex items-center gap-2">
-              <Link
-                href={route.STUDENT_REGISTRATION}
-                className="text-white hover:text-blue-600"
-              >
-                Register As Student
-              </Link>
-            </Button>
+            <Link
+              href={route.AWARDS}
+              className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-8 py-3 rounded-full text-lg font-semibold transition text-center"
+            >
+              School Registration
+            </Link>
+            <Link
+              href={route.AWARDS}
+              className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-8 py-3 rounded-full text-lg font-semibold transition text-center"
+            >
+              Direct Registration
+            </Link>
           </div>
         </div>
       </section>

@@ -41,10 +41,10 @@ export default function StudentRegistrationPage() {
       <PartnerCarousel />
 
       {/* 3-Step Process Section */}
-      <section className="py-16 px-6 bg-gray-50">
+      <section className="py-10 px-6 bg-gray-50">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-4">
-            A Simple Process for Schoos to Join for NAC
+            A Simple Process for Schools to Join for NAC
           </h2>
           <p className="text-gray-600 mb-12">
             Watch this video to learn how schools can register, generate their
@@ -52,7 +52,7 @@ export default function StudentRegistrationPage() {
           </p>
 
           <div className="grid gap-8 items-center">
-            <div className="relative max-w-4xl mx-auto w-full">
+            <div className="relative max-w-2xl mx-auto w-full">
               <div className="overflow-hidden rounded-xl shadow-lg bg-gray-100">
                 <div className="w-full aspect-video">
                   <YouTube
@@ -73,13 +73,13 @@ export default function StudentRegistrationPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-medium text-gray-900 mb-6">
-              Two Simple Steps for Schools & Students
+            <h2 className="text-3xl md:text-4xl font-medium text-gray-900 mb-2">
+              Simple Steps for Schools & Students
             </h2>
-            <p className="text-gray-600 text-base max-w-2xl mx-auto leading-relaxed">
+            {/* <p className="text-gray-600 text-base max-w-2xl mx-auto leading-relaxed">
               We’ve made the registration process quick, clear, and supportive
               for everyone.
-            </p>
+            </p> */}
           </div>
 
           {/* Two Columns */}
@@ -191,7 +191,7 @@ export default function StudentRegistrationPage() {
 
               <Link href={route.STUDY_MATERIAL}>
                 <Button className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-6 md:px-8 py-4 md:py-6 rounded-full text-sm md:text-base">
-                  REGISTER NOW
+                  Know More
                 </Button>
               </Link>
             </div>

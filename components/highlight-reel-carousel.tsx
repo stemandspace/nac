@@ -96,13 +96,13 @@ export default function HighlightReelCarousel() {
     <section className="py-10 bg-[#F4F4F4]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <h2 className="text-4xl md:text-4xl text-gray-900 mb-6 font-medium">
-            Highlight Reel
+            NAC Legacy
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Explore our legacy of excellence through memorable moments and
-            achievements
+            Explore our legacy of excellence through memorable <br /> moments
+            and achievements.
           </p>
         </div>
 

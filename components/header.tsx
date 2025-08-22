@@ -135,16 +135,16 @@ export default function Header() {
             </button>
             <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 pointer-events-none group-hover:pointer-events-auto group-focus-within:pointer-events-auto transition-opacity duration-150 z-50">
               <Link
-                href={route.SCHOOL_REGISTRATION}
+                href={route.SCHOOL_REGISTRATION_FORM}
                 className="block px-4 py-2 text-gray-700 hover:bg-gray-100 font-semibold"
               >
                 School
               </Link>
               <Link
-                href={route.STUDENT_REGISTRATION}
+                href={route.STUDENT_REGISTRATION_FORM}
                 className="block px-4 py-2 text-gray-700 hover:bg-gray-100 font-semibold"
               >
-                Student
+                Direct Participant
               </Link>
             </div>
           </div>

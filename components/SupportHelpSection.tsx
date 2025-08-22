@@ -4,7 +4,7 @@ import React from "react";
 
 const SupportHelpSection: React.FC = () => {
   return (
-    <section className="py-16">
+    <section className="pt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-3 gap-8">
           {/* Have a Question Card */}
@@ -92,7 +92,7 @@ const SupportHelpSection: React.FC = () => {
               <h3 className="text-xl font-bold text-[#1A2B0A] text-center mb-4">
                 Need Help?
               </h3>
-              <p className="text-gray-700 text-center mb-2">
+              {/* <p className="text-gray-700 text-center mb-2">
                 Email:{" "}
                 <a
                   href="mailto:hello@nationalastronomy.org"
@@ -100,7 +100,7 @@ const SupportHelpSection: React.FC = () => {
                 >
                   hello@nationalastronomy.org
                 </a>
-              </p>
+              </p> */}
               <p className="text-gray-700 text-center mb-6">
                 Our team is here to assist schools and parents.
               </p>
@@ -109,7 +109,7 @@ const SupportHelpSection: React.FC = () => {
               href="mailto:hello@nationalastronomy.org"
               className="w-full bg-[#EE7E1A] hover:bg-[#D67015] text-white font-semibold py-3 px-6 rounded-full transition-all duration-200 shadow-md hover:scale-105 mt-auto flex justify-center items-center"
             >
-              <span className="text-white">Contact Support</span>
+              <span className="text-white"> hello@nationalastronomy.org</span>
             </a>
           </div>
         </div>

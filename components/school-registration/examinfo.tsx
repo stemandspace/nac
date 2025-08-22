@@ -15,7 +15,7 @@ export default function ExamInfoSection() {
           </div>
 
           <h2 className="text-4xl font-bold mb-8 leading-snug">
-            Know the NAC 2025 Exam <br /> Inside Out
+            Know the NAC 2025 Exam
           </h2>
 
           <div className="space-y-5 text-sm text-gray-800">

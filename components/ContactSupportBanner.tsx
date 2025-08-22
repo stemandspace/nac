@@ -2,14 +2,11 @@ import React from "react";
 
 const ContactSupportBanner: React.FC = () => {
   return (
-    <section className="py-16 bg-black">
+    <section className="py-10 bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-3 gap-8 items-center">
           {/* Left Section */}
           <div className="text-center lg:text-left">
-            <p className="text-[#EE7E1A] font-semibold text-sm uppercase tracking-wide mb-2">
-              CONTACT US ANYTIME
-            </p>
             <h3 className="text-2xl md:text-3xl font-bold text-white">
               Need Help with Registration?
             </h3>
@@ -21,7 +18,7 @@ const ContactSupportBanner: React.FC = () => {
               <img
                 src="/logo.png"
                 alt="NAC Logo"
-                className="w-30 h-30 object-contain"
+                className="w-40 h-40 object-contain"
               />
             </div>
           </div>
@@ -29,7 +26,7 @@ const ContactSupportBanner: React.FC = () => {
           {/* Right Section */}
           <div className="text-center lg:text-right">
             <p className="text-white text-base mb-2">
-              Our NAC 2025 Support Team is here to guide you.
+              NAC Support Team is here to guide you.
             </p>
             <p className="text-white text-lg font-semibold">
               Email:{" "}
@@ -40,6 +37,10 @@ const ContactSupportBanner: React.FC = () => {
                 hello@nationalastronomy.org
               </a>
             </p>
+
+            <div className="h-2" />
+
+            <span className="text-white">Monday - Friday, 9:30 AM - 6 PM</span>
           </div>
         </div>
       </div>
