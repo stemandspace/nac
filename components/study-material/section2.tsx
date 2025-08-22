@@ -1,27 +1,21 @@
 // components/MemberSection.tsx
 "use client";
-import Image from "next/image";
-import { Play } from "lucide-react";
+import route from "@/lib/route";
+import Youtube from "../youtube";
+import Link from "next/link";
 
 export default function MemberSection() {
   return (
-    <section className="py-10 px-6 bg-white">
+    <section className="py-16 px-6 bg-white">
       {/* Content Grid */}
       <div className="grid md:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
         {/* Left - Video/Image */}
-        <div className="relative rounded-2xl overflow-hidden shadow-lg">
-          <Image
-            src="/study/s1.jpg"
-            alt="STEM in Space"
-            width={800}
-            height={500}
-            className="w-full h-[350px] object-cover"
-          />
-          <button className="absolute inset-0 flex items-center justify-center">
-            <span className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition">
-              <Play size={32} className="text-black" />
-            </span>
-          </button>
+        <div className="grid gap-8 items-center">
+          <div className="relative max-w-2xl mx-auto w-full">
+            <div className="overflow-hidden rounded-xl shadow-lg bg-gray-100">
+              <Youtube videoId="DMz1ZycaKSg" />
+            </div>
+          </div>
         </div>
 
         {/* Right - Text Content */}
@@ -34,9 +28,19 @@ export default function MemberSection() {
             learning platform, packed with interactive content, quizzes, comics,
             and live sessions to keep your child inspired and engaged.
           </p>
-          <button className="bg-[#EE7E1A] hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-full transition">
-            Register Your School
-          </button>
+          <div className="flex gap-5 flex-wrap">
+            <Link href={route.STUDENT_REGISTRATION}>
+              <button className="bg-[#EE7E1A] hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-full transition">
+                Register Directly
+              </button>
+            </Link>
+
+            <Link href={route.SCHOOL_REGISTRATION}>
+              <button className="bg-[#EE7E1A] hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-full transition">
+                Register Your School
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </section>

@@ -1,5 +1,5 @@
 "use client";
-import { Play } from "lucide-react";
+import Youtube from "../youtube";
 
 export default function StudyMaterialSection() {
   return (
@@ -16,21 +16,12 @@ export default function StudyMaterialSection() {
           Your all-in-one learning hub with videos, quizzes, mock tests, and
           space comics – available instantly after registration.
         </p>
-
-        {/* Video Thumbnail */}
-        <div className="relative max-w-4xl mx-auto">
-          <img
-            src="/study/s1.jpg"
-            alt="STEM in Space Event"
-            className="w-full h-[320px] sm:h-[400px] md:h-[450px] object-cover rounded-2xl shadow-lg"
-          />
-
-          {/* Play Button Overlay */}
-          <button className="absolute inset-0 flex items-center justify-center">
-            <span className="bg-white rounded-full shadow-lg p-4 sm:p-5 md:p-6 hover:scale-110 transition">
-              <Play className="w-6 h-6 sm:w-8 sm:h-8 text-black" />
-            </span>
-          </button>
+        <div className="grid gap-8 items-center">
+          <div className="relative max-w-2xl mx-auto w-full">
+            <div className="overflow-hidden rounded-xl shadow-lg bg-gray-100">
+              <Youtube videoId="DMz1ZycaKSg" />
+            </div>
+          </div>
         </div>
       </div>
     </section>

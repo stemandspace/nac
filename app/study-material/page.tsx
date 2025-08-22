@@ -20,7 +20,7 @@ export default function StudyMaterialPage() {
       <Section3 />
 
       {/* Space Comics Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-[#003C5C] via-[#003451] to-[#001E31] relative overflow-hidden">
+      <section className="py-10 bg-gradient-to-br from-[#003C5C] via-[#003451] to-[#001E31] relative overflow-hidden">
         {/* Stars Background */}
         <div className="absolute inset-0">
           <div className="absolute top-10 left-10 w-1 h-1 bg-white rounded-full opacity-60"></div>
@@ -52,7 +52,7 @@ export default function StudyMaterialPage() {
                 <img
                   src="/study/space.png"
                   alt="Space Careers Comic"
-                  className="w-48 h-72 rounded-lg shadow-2xl"
+                  className="w-32 h-48 rounded-lg shadow-2xl"
                 />
               </div>
 
@@ -61,7 +61,7 @@ export default function StudyMaterialPage() {
                 <img
                   src="/study/space.png"
                   alt="Discovering Space Careers"
-                  className="w-56 h-84 rounded-lg shadow-2xl"
+                  className="w-40 h-60 rounded-lg shadow-2xl"
                 />
               </div>
 
@@ -70,7 +70,7 @@ export default function StudyMaterialPage() {
                 <img
                   src="/study/space.png"
                   alt="Space Adventures Comic"
-                  className="w-48 h-72 rounded-lg shadow-2xl"
+                  className="w-32 h-48 rounded-lg shadow-2xl"
                 />
               </div>
             </div>
@@ -113,9 +113,9 @@ export default function StudyMaterialPage() {
       </section>
 
       {/* Spacetopia Sessions Grid */}
-      <section className="py-16 bg-white">
+      <section className="pt-10 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="text-center mb-5">
             <h2 className="text-4xl font-medium text-gray-900 mb-4">
               Live & Interactive Spacetopia Sessions
             </h2>
@@ -222,9 +222,6 @@ export default function StudyMaterialPage() {
           </div>
         </div>
       </section>
-      <Support />
-      <SpacetopiaSubscriptionSection />
-      <ContactSupportBanner />
     </>
   );
 }
