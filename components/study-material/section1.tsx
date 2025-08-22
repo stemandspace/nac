@@ -7,7 +7,7 @@ export default function StudyMaterialSection() {
       <div className="max-w-5xl mx-auto text-center">
         {/* Heading */}
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-          Access NAC 2025 Study Material Easily via <br />
+          Access NAC 2025 Study Material via <br />
           <span className="block mt-2">
             Spacetopia (Formey known as Cosmic Kids Club)
           </span>

@@ -12,7 +12,7 @@ export default function StudyMaterialPage() {
     <>
       <Hero
         bgimage="/home/header2.jpg"
-        title="Get Ready to Excel with Comprehensive & Engaging Study Material for NAC 2025"
+        title="Get Ready to Excel with Comprehensive & Engaging Study Material for NAC"
         desc="Whether your child is participating via school or directly, our curated learning resources will prepare them for success in the National Astronomy Challenge."
       />
       <Section1 />

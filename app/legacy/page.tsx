@@ -14,30 +14,12 @@ import Support from "@/components/school-registration/support";
 import Hero from "@/components/hero";
 
 import AwardsCeremonyCarousel from "@/components/awards-ceremony-carousel";
+import route from "@/lib/route";
 export default function LegacyPage() {
   const [selectedYear, setSelectedYear] = useState("2018");
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const years = ["2018", "2019", "2020", "2021"];
-
-  const timelineData = {
-    "2018": {
-      image: "https://picsum.photos/800/500?random=1",
-      description: "Lorem ipsum dolor sit amet consectetur.",
-    },
-    "2019": {
-      image: "https://picsum.photos/800/500?random=2",
-      description: "Lorem ipsum dolor sit amet consectetur.",
-    },
-    "2020": {
-      image: "https://picsum.photos/800/500?random=3",
-      description: "Lorem ipsum dolor sit amet consectetur.",
-    },
-    "2021": {
-      image: "https://picsum.photos/800/500?random=4",
-      description: "Lorem ipsum dolor sit amet consectetur.",
-    },
-  };
 
   const galleryImages = [
     "/legacy/img1.jpg",
@@ -72,7 +54,6 @@ export default function LegacyPage() {
       <Hero
         bgimage="/legacy/bghero.jpg"
         title="National Astronomy Challenge: Celebrating the Legacy (2018-2024)"
-        desc="From our humble beginning in 2018, NAC has become a launchpad for over 500+ schools, 100,000+ students, and countless dreams. Award Ceremonies, Space Expeditions, and Global Participation - witness the journey through the years."
       >
         <div className="flex flex-col sm:flex-row gap-4 mt-4 font-medium"></div>
       </Hero>
@@ -83,15 +64,18 @@ export default function LegacyPage() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-4xl md:text-5xl text-gray-900 mb-6 font-medium">
-                Inspiring Young Astronomers Across the Globe
+                NAC: Inspiring Young Astronomers Worldwide
               </h2>
               <p className="text-gray-600 mb-4 font-medium">
-                From our humble beginning in 2018, NAC has become a launchpad
-                for over 500+ schools, 100,000+ students, and countless dreams.
+                A brainchild of astronomers and space enthusiasts at STEM &
+                Space – an ISRO-registered space tutor and the only company in
+                Asia awarded by Dr. Buzz Aldrin – NAC has been igniting young
+                minds since 2018.
               </p>
               <p className="text-gray-600 font-medium">
-                Award Ceremonies, Space Expeditions, and Global Participation -
-                witness the journey through the years.
+                With 500+ schools, 100,000+ students, and global participation,
+                it’s become a launchpad for curiosity through award ceremonies,
+                space expeditions, and more.
               </p>
             </div>
             <div className="relative">
@@ -126,12 +110,6 @@ export default function LegacyPage() {
                     alt={`Student testimonial ${index + 1}`}
                     className="w-full h-72 md:h-96 object-cover rounded-xl shadow-lg"
                   />
-                  {/* Optional play overlay */}
-                  {/* <div className="absolute inset-0 bg-black bg-opacity-30 rounded-xl flex items-center justify-center group-hover:bg-opacity-40 transition-all">
-              <div className="bg-white bg-opacity-90 p-3 rounded-full">
-                <Play className="w-6 h-6 text-gray-800" />
-              </div>
-            </div> */}
                 </div>
               ))}
             </div>
@@ -207,7 +185,7 @@ export default function LegacyPage() {
                   Are you a School?
                 </span>
               </div>
-              <Link href="/school-registration">
+              <Link href={route.SCHOOL_REGISTRATION_FORM}>
                 <Button className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-4 sm:px-6 py-4 rounded-full whitespace-nowrap text-sm sm:text-base font-medium">
                   Register Your School
                 </Button>
@@ -224,7 +202,7 @@ export default function LegacyPage() {
                   Are you a Student?
                 </span>
               </div>
-              <Link href="/direct-registration">
+              <Link href={route.STUDENT_REGISTRATION_FORM}>
                 <Button className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-4 sm:px-6 py-4 rounded-full whitespace-nowrap text-sm sm:text-base font-medium">
                   Register Directly
                 </Button>
@@ -233,7 +211,6 @@ export default function LegacyPage() {
           </div>
         </div>
       </section>
-      <Support />
     </div>
   );
 }

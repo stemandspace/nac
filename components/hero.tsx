@@ -1,9 +1,9 @@
 import React from "react";
-
+import clsx from "clsx";
 interface HeroProps {
   bgimage: string;
   title: string;
-  desc: string;
+  desc?: string;
   children?: React.ReactNode;
 }
 
@@ -24,9 +24,16 @@ const Hero: React.FC<HeroProps> = ({ bgimage, title, desc, children }) => {
             {title}
           </h1>
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 justify-between">
-            <p className="max-w-xl text-sm text-white mb-6 sm:mb-8 leading-relaxed">
-              {desc}
-            </p>
+            {desc && (
+              <p
+                className={clsx(
+                  "max-w-xl text-sm text-white mb-6 sm:mb-8 leading-relaxed",
+                  children ? "mb-0" : "mb-6 sm:mb-8"
+                )}
+              >
+                {desc}
+              </p>
+            )}
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
               {children}
             </div>
