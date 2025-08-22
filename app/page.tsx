@@ -6,6 +6,7 @@ import PrepareNac from "@/components/prepare-nac";
 import WhatIsNacSection from "@/components/WhatIsNacSection";
 import HighlightReelCarousel from "@/components/highlight-reel-carousel";
 import AwardsCeremonyCarousel from "@/components/awards-ceremony-carousel";
+import Hero from "@/components/hero";
 
 const HeroImage1 = "/s1.jpg";
 const HeroImage2 = "/s2.jpg";
@@ -13,61 +14,24 @@ const HeroImage2 = "/s2.jpg";
 export default function HomePage() {
   return (
     <main className="relative">
-      <div className="grid grid-cols-1 lg:grid-cols-2">
-        {/* Left Hero */}
-        <div
-          className="relative min-h-[70vh] lg:min-h-screen bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${HeroImage1})`,
-          }}
-        >
-          <div className="absolute inset-0 bg-black/60 bg-opacity-30"></div>
-          <div className="relative flex flex-col justify-end pb-6 h-full px-4 sm:px-6 md:px-8 lg:px-12 text-white space-y-2">
-            <h1 className="text-xl md:text-3xl font-medium leading-tight">
-              NAC 2025 is Here! Be Part of India’s Biggest Astronomy Challenge
-            </h1>
-            <p className="text-sm text-gray-100 max-w-xl">
-              For Schools: Empower your students of Grades 4–9 to take part in
-              India’s biggest astronomy challenge.
-            </p>
-            <div className="flex flex-wrap gap-3 sm:gap-4 pt-2">
-              <Link
-                href={route.SCHOOL_REGISTRATION}
-                className="bg-white text-gray-900 hover:bg-gray-100 px-4 sm:px-10 py-2 sm:py-3 rounded-full text-sm sm:text-base font-semibold transition-colors duration-200"
-              >
-                Register Your School
-              </Link>
-            </div>
-          </div>
+      <Hero
+        bgimage={
+          "https://s3.us-east-1.amazonaws.com/myckc/myckc/H8_18ecbaac3f.jpg?updatedAt=2025-08-22T07%3A51%3A00.708Z"
+        }
+        title="NAC 2025 is Here! Be Part of India’s Biggest Astronomy Challenge."
+        desc="<b className='text-orange-500'>For Schools:</b> Enable students (Grades 4–9) to join India’s biggest astronomy challenge. <br/> <b className='text-orange-500'>For Parents:</b> If the school isn’t participating, register your child directly and let them shine."
+      >
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+          <Button className="bg-[#EE7E1A] text-white px-5 py-2 rounded-full text-sm font-semibold shadow-md hover:bg-[#d96f16]">
+            <Link href={route.SCHOOL_REGISTRATION} className="text-white">
+              Register Directly{" "}
+            </Link>
+          </Button>
+          <Button className="bg-[#EE7E1A] text-white px-5 py-2 rounded-full text-sm font-semibold shadow-md hover:bg-[#d96f16]">
+            Register your School
+          </Button>
         </div>
-
-        {/* Right Hero */}
-        <div
-          className="relative min-h-[70vh] lg:min-h-screen bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${HeroImage2})`,
-          }}
-        >
-          <div className="absolute inset-0 bg-black/60 bg-opacity-30"></div>
-          <div className="relative flex flex-col justify-end pb-6 h-full px-4 sm:px-6 md:px-8 lg:px-12 text-white space-y-2">
-            <h1 className="text-xl md:text-3xl font-medium leading-tight">
-              NAC 2025 is Here! Be Part of India’s Biggest Astronomy Challenge
-            </h1>
-            <p className="text-sm text-gray-100 max-w-xl">
-              For Parents: Register your child directly if the school isn’t
-              participating and let them reach for the stars.
-            </p>
-            <div className="flex flex-wrap gap-3 sm:gap-4 pt-2">
-              <Link
-                href={route.STUDENT_REGISTRATION}
-                className="border-2 border-white text-white bg-white/20 hover:bg-white hover:text-gray-900 px-4 sm:px-10 py-2 sm:py-3 rounded-full text-sm sm:text-base font-semibold transition-colors duration-200"
-              >
-                Register Your Child
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
+      </Hero>
 
       {/* What is NAC Section */}
       <WhatIsNacSection />

@@ -29,13 +29,7 @@ export default function StudentRegistrationPage() {
         bgimage="/rewards/R10.jpg"
         title="Register Your School for NAC 2025 - Inspire the Next Generation of Astronomers!"
         desc="Bring the National Astronomy Challenge experience to your students. Register your school and give them a chance to compete, learn, and shine on a national stage."
-      >
-        <Button className="bg-black hover:bg-gray-800 text-white px-8 py-6 rounded-4xl font-semibold uppercase tracking-wide flex items-center gap-2">
-          <Link href={route.SCHOOL_REGISTRATION_FORM} className="text-white">
-            Register your school
-          </Link>
-        </Button>
-      </Hero>
+      />
 
       {/* Partners Section */}
       <PartnerCarousel />
@@ -180,8 +174,8 @@ export default function StudentRegistrationPage() {
                 ].map((text, idx) => (
                   <div key={idx} className="flex items-start gap-3">
                     <img
-                      src="/home/arrow-right.png"
-                      alt="icon"
+                      src="https://s3.us-east-1.amazonaws.com/myckc/myckc/Whats_App_Image_2025_08_22_at_16_50_49_654627616b.jpeg?updatedAt=2025-08-22T11%3A21%3A14.295Z"
+                      alt="Spacetopia learning"
                       className="w-4 h-4 md:w-5 md:h-5 mt-1 flex-shrink-0"
                     />
                     <p className="text-gray-700 text-sm md:text-base">{text}</p>
@@ -239,7 +233,6 @@ export default function StudentRegistrationPage() {
                   </div>
                 ))}
               </div>
-
               <Link href={route.SCHOOL_REGISTRATION_FORM}>
                 <Button className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-6 md:px-8 py-4 md:py-6 rounded-full text-sm md:text-base">
                   REGISTER NOW

@@ -110,9 +110,7 @@ export default function LegacyPage() {
       <Hero
         bgimage="/legacy/bghero.jpg"
         title="National Astronomy Challenge: Celebrating the Legacy (2018-2024)"
-      >
-        <div className="flex flex-col sm:flex-row gap-4 mt-4 font-medium"></div>
-      </Hero>
+      />
 
       {/* Inspiring Section */}
       <section className="py-16 bg-white font-medium">

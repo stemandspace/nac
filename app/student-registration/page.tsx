@@ -309,7 +309,7 @@ export default function DirectRegistrationPage() {
 
             <div className="order-first lg:order-last">
               <img
-                src="/school-reg/sp1.jpg"
+                src="https://s3.us-east-1.amazonaws.com/myckc/myckc/Whats_App_Image_2025_08_22_at_16_50_49_654627616b.jpeg?updatedAt=2025-08-22T11%3A21%3A14.295Z"
                 alt="Spacetopia learning"
                 className="w-full h-64 md:h-80 object-cover rounded-lg"
               />
@@ -351,10 +351,6 @@ export default function DirectRegistrationPage() {
                 ))}
               </div>
 
-              <p className="text-base md:text-lg font-semibold text-gray-900 mb-4 md:mb-6">
-                JOIN THE NAC WHATSAPP COMMUNITY
-              </p>
-
               <Button className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-6 md:px-8 py-4 md:py-6 rounded-full text-sm md:text-base">
                 REGISTER NOW
               </Button>
@@ -362,12 +358,9 @@ export default function DirectRegistrationPage() {
           </div>
         </div>
       </section>
-
       <ExamInfo />
       <AwardsCarousel />
-
       <Support />
-
       <ContactSupportBanner />
     </div>
   );
