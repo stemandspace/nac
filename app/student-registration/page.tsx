@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import YouTube from "react-youtube";
 import Hero from "@/components/hero";
 import { Button } from "@/components/ui/button";
 import Support from "@/components/school-registration/support";
@@ -7,6 +10,19 @@ import ContactSupportBanner from "@/components/ContactSupportBanner";
 import AwardsCarousel from "@/components/school-registration/AwardsCarousel";
 
 export default function DirectRegistrationPage() {
+  // Extract video ID from the YouTube URL
+  const videoId = "DMz1ZycaKSg";
+
+  // YouTube player options - responsive dimensions
+  const opts = {
+    height: "100%",
+    width: "100%",
+    playerVars: {
+      autoplay: 0,
+      modestbranding: 1,
+      rel: 0,
+    },
+  };
   return (
     <div className="min-h-screen">
       <Hero
@@ -99,15 +115,15 @@ export default function DirectRegistrationPage() {
                 NAC 2025 is Open to All Curious Minds!
               </h2>
               <span className="text-base md:text-lg font-medium text-gray-900 pb-4 md:pb-6 block">
-                Direct Registration: INR 300 | Overseas: USD 10
+                Direct Registration: INR 500 | Overseas: USD 12 (Taxes extra)
               </span>
 
               <div className="space-y-3 md:space-y-4 mb-8 md:mb-10 pt-4 md:pt-6">
                 {[
-                  "Students from Grade 1 to Grade 10 (India & Overseas)",
-                  "No prior astronomy knowledge required",
-                  "Direct participation for students without school affiliation",
-                  "Overseas students welcome - exam fully online",
+                  "Eligible Students: Grade 4 to Grade 9",
+                  "No prior astronomy knowledge needed – just interest and passion",
+                  "Open to all – students from any school, education board, or homeschoolers",
+                  "Requirements: A laptop with working mic and camera for the proctored Olympiad",
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-3">
                     <Image
@@ -131,6 +147,33 @@ export default function DirectRegistrationPage() {
         </div>
       </section>
 
+      <section className="py-10 px-6 bg-gray-50">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-4xl font-bold mb-4">
+            School not participating? Don’t worry – your child can still join!
+          </h2>
+          <p className="text-gray-600 mb-12">
+            Watch this video to learn how schools can register, generate their
+            dedicated link, and share with their students to register.
+          </p>
+
+          <div className="grid gap-8 items-center">
+            <div className="relative max-w-2xl mx-auto w-full">
+              <div className="overflow-hidden rounded-xl shadow-lg bg-gray-100">
+                <div className="w-full aspect-video">
+                  <YouTube
+                    videoId={videoId}
+                    opts={opts}
+                    className="w-full h-full rounded-xl"
+                    title="What is NAC - National Astronomy Challenge"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Important Info Section */}
       <section className="py-12 md:py-16 bg-[#EFF6E4]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -140,31 +183,19 @@ export default function DirectRegistrationPage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             {[
               {
                 title: "Eligibility:",
                 description:
-                  "Open to students from Grade 2 to Grade 10 (India & Overseas).",
+                  "If you apply directly and later your school decides to participate, your registration will be merged with the school’s.",
                 icon: "/icons/eligibility.png",
               },
               {
                 title: "Unique Registration:",
                 description:
-                  "Each student must register with their correct name (as it will appear on the certificate).",
+                  "Whether you participate directly or through your school, you will appear for only one exam, and your school will still be considered for evaluation.",
                 icon: "/icons/registration.png",
-              },
-              {
-                title: "Attempt Limit:",
-                description:
-                  "Students can take the Olympiad only once per academic year.",
-                icon: "/icons/attempt.png",
-              },
-              {
-                title: "Integrity & Fair Play:",
-                description:
-                  "Webcam and microphone will be monitored; malpractice may lead to disqualification.",
-                icon: "/icons/integrity.png",
               },
             ].map((item, index) => (
               <div
@@ -181,9 +212,6 @@ export default function DirectRegistrationPage() {
                   />
                 </div>
 
-                <h3 className="font-semibold text-gray-900 mb-2 text-sm md:text-base">
-                  {item.title}
-                </h3>
                 <p className="text-xs md:text-sm text-gray-600">
                   {item.description}
                 </p>
@@ -213,31 +241,32 @@ export default function DirectRegistrationPage() {
                 img: "direct-reg/flash.png",
                 step: "STEP 1",
                 title: "Instant Confirmation",
-                description: "Email & WhatsApp message after payment",
+                description: "Email sent to your registered ID",
               },
               {
                 img: "direct-reg/login.png",
                 step: "STEP 2",
-                title: "Login Details",
-                description: "Access to Spacetopia learning platform",
+                title: "Spacetopia access",
+                description:
+                  "Login details shared instantly after registration.",
               },
               {
                 img: "/direct-reg/document-text.png",
                 step: "STEP 3",
-                title: "Preparation Material",
-                description: "Mock tests, quizzes, space comics",
+                title: "Learning access",
+                description: "NAC study material, quizzes, and comics.",
               },
               {
                 img: "direct-reg/edit-2.png",
                 step: "STEP 4",
-                title: "Final Exam Access",
-                description: "Secure login on exam day",
+                title: "Exam login",
+                description: "Secure access on exam day.",
               },
               {
                 img: "direct-reg/cup.png",
                 step: "STEP 5",
-                title: "Results & Rewards",
-                description: "National ranking & prize distribution",
+                title: "Results & rewards",
+                description: "National ranking and prize announcement.",
               },
             ].map((item, index) => (
               <div
