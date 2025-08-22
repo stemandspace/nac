@@ -6,6 +6,7 @@ import Section3 from "@/components/study-material/section3";
 import Support from "@/components/school-registration/support";
 import SpacetopiaSubscriptionSection from "@/components/SpacetopiaSubscriptionSection";
 import ContactSupportBanner from "@/components/ContactSupportBanner";
+import Link from "next/link";
 
 export default function StudyMaterialPage() {
   return (
@@ -99,15 +100,15 @@ export default function StudyMaterialPage() {
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-8 py-6 rounded-full text-lg font-medium">
-              Buy Space Comics
-            </Button>
-            <Button
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-blue-900 px-8 py-6 rounded-full text-lg bg-transparent font-medium"
+            <Link
+              href="https://events.spacetopia.in/comic"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Register for Career Seminar
-            </Button>
+              <Button className="bg-[#EE7E1A] hover:bg-orange-600 text-white px-8 py-6 rounded-full text-lg font-medium">
+                Know More
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
