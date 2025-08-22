@@ -14,6 +14,7 @@ import Support from "@/components/school-registration/support";
 import Hero from "@/components/hero";
 
 import AwardsCeremonyCarousel from "@/components/awards-ceremony-carousel";
+import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import route from "@/lib/route";
 export default function LegacyPage() {
   const [selectedYear, setSelectedYear] = useState("2018");
@@ -33,10 +34,16 @@ export default function LegacyPage() {
   ];
 
   const testimonialVideos = [
-    "/legacy/testimonial.jpg",
-    "/legacy/testimonial.jpg",
-    "/legacy/testimonial.jpg",
-    "/legacy/testimonial.jpg",
+    "https://youtu.be/FbqOS-DKAdQ",
+    "https://youtu.be/McjgvMo4JQY",
+    "https://youtu.be/4j97ueQk50k",
+    "https://youtu.be/RPs1cQzPAd8",
+    "https://youtu.be/2QgnkQdsS2c",
+    "https://youtu.be/EayTzG2JJR8",
+    "https://youtu.be/0wyQWtJXgPQ",
+    "https://youtu.be/HrM72fs-8Xc",
+    "https://youtu.be/n6CRckfs5uU",
+    "https://youtu.be/iLaGZ00wuAA",
   ];
 
   const nextSlide = () => {
@@ -92,43 +99,7 @@ export default function LegacyPage() {
       <AwardsCeremonyCarousel />
 
       {/* Student Testimonials */}
-      <section className="py-16 bg-white font-medium">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-medium text-center text-gray-900 mb-12">
-            Students love National Astronomy Challenge
-          </h2>
-          <div className="relative">
-            {/* Full-width responsive grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
-              {testimonialVideos.map((video, index) => (
-                <div
-                  key={index}
-                  className="relative group cursor-pointer w-full"
-                >
-                  <img
-                    src={video || "/legacy/bghero.jpg"}
-                    alt={`Student testimonial ${index + 1}`}
-                    className="w-full h-72 md:h-96 object-cover rounded-xl shadow-lg"
-                  />
-                </div>
-              ))}
-            </div>
-            {/* Navigation buttons */}
-            <button
-              onClick={prevSlide}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white shadow-lg p-2 rounded-full hover:bg-gray-50"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={nextSlide}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white shadow-lg p-2 rounded-full hover:bg-gray-50"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-      </section>
+      <TestimonialsCarousel videoUrls={testimonialVideos} />
 
       {/* Gallery Section */}
       <section className="py-16 bg-[#5BB0E01C] font-medium">
