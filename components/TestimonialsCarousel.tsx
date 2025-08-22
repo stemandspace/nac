@@ -5,9 +5,16 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Youtube from "@/components/youtube";
 
-interface TestimonialsCarouselProps {
-  videoUrls: string[];
+interface VideoItem {
+  url: string;
   title?: string;
+}
+
+interface TestimonialsCarouselProps {
+  videoUrls?: string[];
+  videos?: VideoItem[];
+  title?: string;
+  showTitles?: boolean;
 }
 
 function extractYouTubeId(url: string): string | null {
@@ -33,7 +40,9 @@ function extractYouTubeId(url: string): string | null {
 
 export default function TestimonialsCarousel({
   videoUrls,
+  videos,
   title = "Students love National Astronomy Challenge",
+  showTitles = true,
 }: TestimonialsCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
@@ -49,12 +58,19 @@ export default function TestimonialsCarousel({
     },
   });
 
+  const items = React.useMemo(() => {
+    if (videos && videos.length > 0) return videos;
+    if (videoUrls && videoUrls.length > 0)
+      return videoUrls.map((u, i) => ({ url: u, title: undefined }));
+    return [] as VideoItem[];
+  }, [videos, videoUrls]);
+
   const videoIds = React.useMemo(
     () =>
-      videoUrls
-        .map((u) => extractYouTubeId(u))
-        .filter((id): id is string => Boolean(id)),
-    [videoUrls]
+      items
+        .map((it) => ({ id: extractYouTubeId(it.url), title: it.title }))
+        .filter((v): v is { id: string; title?: string } => Boolean(v.id)),
+    [items]
   );
 
   const scrollPrev = React.useCallback(
@@ -71,23 +87,27 @@ export default function TestimonialsCarousel({
   if (videoIds.length === 0) return null;
 
   return (
-    <section className="py-16 bg-white font-medium">
+    <section className=" bg-white font-medium">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-medium text-center text-gray-900 mb-12">
-          {title}
-        </h2>
         <div className="relative">
           {/* Carousel Container (full width on mobile) */}
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex gap-6">
-              {videoIds.map((videoId, index) => (
+              {videoIds.map((video, index) => (
                 <div
                   key={index}
                   className="flex-[0_0_100%] sm:flex-[0_0_80%] lg:flex-[0_0_45%] xl:flex-[0_0_32%]"
                 >
                   <div className="rounded-xl overflow-hidden shadow-lg bg-gray-100">
-                    <Youtube videoId={videoId} />
+                    <Youtube videoId={video.id} />
                   </div>
+                  {showTitles && (
+                    <div className="mt-3">
+                      <h3 className="text-sm font-medium text-gray-900">
+                        {video.title || ""}
+                      </h3>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
