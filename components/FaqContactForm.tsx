@@ -166,6 +166,11 @@ export default function FaqContactForm() {
                   >
                     Optional. Include country code if outside India.
                   </p>
+
+                  <p className="text-xs text-gray-500 mt-3">
+                    By submitting, you agree to be contacted regarding your
+                    enquiry.
+                  </p>
                 </div>
                 <div className="md:col-span-1">
                   <label
@@ -187,9 +192,6 @@ export default function FaqContactForm() {
             </fieldset>
 
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              <p className="text-xs text-gray-500">
-                By submitting, you agree to be contacted regarding your enquiry.
-              </p>
               <Button
                 type="submit"
                 className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-medium w-full sm:w-auto"
