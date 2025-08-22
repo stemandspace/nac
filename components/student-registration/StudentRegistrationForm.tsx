@@ -16,11 +16,6 @@ const calculateDiscount = (originalPrice: number, discountedPrice: number) => {
   return Math.round(((originalPrice - discountedPrice) / originalPrice) * 100);
 };
 
-const registrationFee = {
-  price: 12,
-  priceInr: 500,
-};
-
 interface SchoolData {
   id: number;
   name: string;
@@ -63,10 +58,15 @@ interface AddonOption {
 
 interface StudentRegistrationFormProps {
   school: SchoolData | null;
+  registrationFee: {
+    price: number;
+    priceInr: number;
+  };
 }
 
 export default function StudentRegistrationForm({
   school,
+  registrationFee,
 }: StudentRegistrationFormProps) {
   // Move useRazorpay hook to the top level
   const { Razorpay } = useRazorpay();

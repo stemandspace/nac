@@ -7,6 +7,16 @@ interface PageProps {
   searchParams: { schoolId?: string };
 }
 
+const registrationFee = {
+  price: 12,
+  priceInr: 500,
+};
+
+const schoolRegistrationFee = {
+  price: 10,
+  priceInr: 300,
+};
+
 export default async function StudentRegistrationPage({
   searchParams,
 }: PageProps) {
@@ -23,7 +33,10 @@ export default async function StudentRegistrationPage({
 
   return (
     <>
-      <StudentRegistrationForm school={school?.data as any} />
+      <StudentRegistrationForm
+        school={school?.data as any}
+        registrationFee={school ? schoolRegistrationFee : registrationFee}
+      />
       <NacStudyMaterialSection />
     </>
   );
