@@ -15,23 +15,72 @@ import Hero from "@/components/hero";
 
 import AwardsCeremonyCarousel from "@/components/awards-ceremony-carousel";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
+import GallerySection from "@/components/GallerySection";
 import route from "@/lib/route";
 export default function LegacyPage() {
-  const [selectedYear, setSelectedYear] = useState("2018");
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const years = ["2018", "2019", "2020", "2021"];
-
-  const galleryImages = [
-    "/legacy/img1.jpg",
-    "/legacy/img4.jpg",
-    "/legacy/img6.jpg",
-    "/legacy/img2.jpg",
-    "/legacy/img7.jpg",
-    "/legacy/img3.jpg",
-    "/legacy/img5.jpg",
-    "/legacy/img8.jpg",
+  const years = [
+    "2017-2018",
+    "2018-2019",
+    "2020-2021",
+    "2022-2023",
+    "2023-2024",
+    "2024-2025",
   ];
+
+  const galleryImages = {
+    "2017-2018": [
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S3_75e48b4fff.jpg?updatedAt=2025-08-22T06%3A32%3A48.464Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S2_bc33a8145d.jpg?updatedAt=2025-08-22T06%3A32%3A48.326Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S6_fb97855b4b.jpg?updatedAt=2025-08-22T06%3A32%3A48.212Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S_1_89fae0bd59.jpg?updatedAt=2025-08-22T06%3A32%3A48.091Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_G7_ba1bf7ee65.jpg?updatedAt=2025-08-22T05%3A52%3A07.964Z",
+    ],
+    "2018-2019": [
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_G27_5225eb0883.jpeg?updatedAt=2025-08-22T05%3A52%3A07.855Z",
+
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_D2_f53cbbc750.JPG?updatedAt=2025-08-22T06%3A57%3A40.540Z",
+
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_D1_31e8bb6fa8.jpg?updatedAt=2025-08-22T06%3A57%3A39.476Z",
+
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_D5_1aa8333262.jpg?updatedAt=2025-08-22T06%3A57%3A39.441Z",
+
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_D3_1561a332a0.jpg?updatedAt=2025-08-22T06%3A57%3A39.418Z",
+
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_D4_8cdd01c82e.jpg?updatedAt=2025-08-22T06%3A57%3A39.416Z",
+    ],
+    "2020-2021": [
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_T4_8b85d6f606.jpg?updatedAt=2025-08-22T07%3A11%3A32.681Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_T_1_27f7c97232.jpg?updatedAt=2025-08-22T07%3A11%3A31.658Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_T2_54662504d6.jpg?updatedAt=2025-08-22T07%3A11%3A31.439Z",
+    ],
+    "2022-2023": [
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_N4_82128f2914.jpg?updatedAt=2025-08-22T08%3A13%3A40.828Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_N5_06e9e21cb9.jpeg?updatedAt=2025-08-22T08%3A13%3A40.585Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_N1_4a96fe2ac6.jpeg?updatedAt=2025-08-22T08%3A13%3A40.515Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_N3_5a39fe4e58.jpeg?updatedAt=2025-08-22T08%3A13%3A40.334Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_N2_621d5f8937.jpeg?updatedAt=2025-08-22T08%3A13%3A40.298Z",
+    ],
+    "2023-2024": [
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Pune_8_f71be31fea.jpeg?updatedAt=2025-08-22T07%3A28%3A32.057Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Pune_10_71f64522b4.jpeg?updatedAt=2025-08-22T07%3A28%3A31.893Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Pune_6_c2a8548f85.jpeg?updatedAt=2025-08-22T07%3A28%3A31.892Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Pune9_7ced89bff8.jpeg?updatedAt=2025-08-22T07%3A28%3A31.562Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Pune_2_1269c6ff7b.jpeg?updatedAt=2025-08-22T07%3A25%3A23.758Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Pune_3_b30879b627.jpeg?updatedAt=2025-08-22T07%3A25%3A23.672Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Pune_4_e92def024b.jpeg?updatedAt=2025-08-22T07%3A25%3A04.827Z",
+    ],
+    "2024-2025": [
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H7_d38bc93bc7.JPG?updatedAt=2025-08-22T07%3A51%3A04.956Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H8_18ecbaac3f.jpg?updatedAt=2025-08-22T07%3A51%3A00.708Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H5_c0f7204e9b.jpeg?updatedAt=2025-08-22T07%3A48%3A03.054Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H4_0cc0ba711c.jpeg?updatedAt=2025-08-22T07%3A48%3A02.818Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H3_57643e1240.jpeg?updatedAt=2025-08-22T07%3A48%3A02.669Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H1_f347fd8e05.jpeg?updatedAt=2025-08-22T07%3A48%3A02.555Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H2_ccdea93ceb.jpeg?updatedAt=2025-08-22T07%3A48%3A02.529Z",
+    ],
+  };
 
   const testimonialVideos = [
     "https://youtu.be/FbqOS-DKAdQ",
@@ -102,42 +151,7 @@ export default function LegacyPage() {
       <TestimonialsCarousel videoUrls={testimonialVideos} />
 
       {/* Gallery Section */}
-      <section className="py-16 bg-[#5BB0E01C] font-medium">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-medium text-gray-900">
-              Gallery of Impact
-            </h2>
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-600 font-medium">
-                Select year:
-              </span>
-              <select
-                value={selectedYear}
-                onChange={(e) => setSelectedYear(e.target.value)}
-                className="border border-gray-300 rounded px-3 py-1 text-sm font-medium"
-              >
-                {years.map((year) => (
-                  <option key={year} value={year} className="font-medium">
-                    {year}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {galleryImages.map((image, index) => (
-              <div key={index} className="relative group cursor-pointer">
-                <img
-                  src={image || "/placeholder.svg"}
-                  alt={`Gallery image ${index + 1}`}
-                  className="w-full h-48 object-cover rounded-lg shadow-md group-hover:shadow-lg transition-shadow"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <GallerySection images={galleryImages} years={years} />
 
       {/* Registration CTA */}
       <section className="py-16 bg-gray-50 font-medium">
