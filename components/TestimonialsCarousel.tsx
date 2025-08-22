@@ -87,8 +87,11 @@ export default function TestimonialsCarousel({
   if (videoIds.length === 0) return null;
 
   return (
-    <section className=" bg-white font-medium">
+    <section className=" bg-white font-medium py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-3xl font-medium text-gray-900 mb-8 text-center">
+          {"Students love National Astronomy Challenge"}
+        </h2>
         <div className="relative">
           {/* Carousel Container (full width on mobile) */}
           <div className="overflow-hidden" ref={emblaRef}>
