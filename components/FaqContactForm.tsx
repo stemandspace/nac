@@ -57,7 +57,7 @@ export default function FaqContactForm() {
   };
 
   return (
-    <section className="py-16 bg-blue-50">
+    <section className="py-10 bg-blue-50 mt-5">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-semibold tracking-tight text-gray-900 mb-3">

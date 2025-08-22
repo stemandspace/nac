@@ -109,15 +109,14 @@ export default function FAQsPage() {
         bgimage="https://s3.us-east-1.amazonaws.com/myckc/myckc/JKM_06437_d309c2b01f.JPG?updatedAt=2025-08-22T07%3A45%3A50.669Z"
         title="Frequently Asked Questions"
       />
-
-      {/* Contact Form Section */}
-      <FaqContactForm />
-
       {/* Video Gallery Section using Testimonials-style carousel with categories */}
       <VideoGallery
         categories={videoCategories}
         title="Awards, Testimonials and Highlights"
       />
+
+      {/* Contact Form Section */}
+      <FaqContactForm />
     </div>
   );
 }
