@@ -369,10 +369,21 @@ export default function StudentRegistrationForm({
   if (success) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 text-center">
-          <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
+        <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-8 text-center">
+          {/* Logos */}
+          {/* <div className="flex items-center justify-center space-x-6 mb-6">
+            <img src="/logo.png" alt="NAC Logo" className="h-16 w-auto" />
+            <img
+              src="/home/spacetopia.png"
+              alt="Spacetopia Logo"
+              className="w-auto"
+            />
+          </div> */}
+
+          {/* Success Icon */}
+          <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-6">
             <svg
-              className="h-6 w-6 text-green-600"
+              className="h-8 w-8 text-green-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -385,17 +396,69 @@ export default function StudentRegistrationForm({
               />
             </svg>
           </div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">
-            Registration Successful!
+
+          {/* Title */}
+          <h3 className="text-2xl font-bold text-gray-900 mb-4">
+            Thank You for Registering!
           </h3>
-          <p className="text-sm text-gray-600 mb-4">
-            {getSelectedAddonDetails()
-              ? "Your student registration and payment have been completed successfully."
-              : "Your student registration has been completed successfully. Registration fee has been charged."}
-          </p>
-          <Button onClick={() => setSuccess(false)} className="w-full">
-            Register Another Student
-          </Button>
+
+          {/* Content */}
+          <div className="text-left text-gray-700 mb-6 space-y-3">
+            <p className="text-base">
+              Your registration for the National Astronomy Challenge (NAC) has
+              been successfully completed. 🎉
+            </p>
+            <p className="text-base">
+              A confirmation email has been sent to your registered email
+              address.
+            </p>
+            <p className="text-base font-medium">This email includes:</p>
+            <ul className="list-none space-y-2 ml-4">
+              <li className="flex items-center">
+                <span className="text-green-600 mr-2">✅</span>
+                Your NAC registration confirmation
+              </li>
+              {/* <li className="flex items-center">
+                <span className="text-green-600 mr-2">✅</span>
+                Your Spacetopia username and password (if applicable)
+              </li>
+              <li className="flex items-center">
+                <span className="text-green-600 mr-2">✅</span>
+                Your credits/membership details (if purchased)
+              </li> */}
+            </ul>
+            <p className="text-sm text-gray-600 mt-4">
+              📌 If you are unable to locate the email, please check your
+              Spam/Promotions folder.
+            </p>
+            <p className="text-base">
+              For any assistance, feel free to reach us at:
+            </p>
+            <p className="text-base font-medium text-blue-600">
+              📧 help@nationalastronomy.org
+            </p>
+            <p className="text-base font-medium">
+              We look forward to your participation in NAC!
+            </p>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Button
+              onClick={() => window.open("https://spacetopia.in", "_blank")}
+              className="flex-1 bg-blue-600 hover:bg-blue-700"
+            >
+              Visit SPACETOPIA
+            </Button>
+            <Button
+              onClick={() =>
+                window.open("https://nationalastronomy.org", "_blank")
+              }
+              className="flex-1 bg-green-600 hover:bg-green-700"
+            >
+              Visit NAC Website
+            </Button>
+          </div>
         </div>
       </div>
     );
@@ -619,7 +682,7 @@ export default function StudentRegistrationForm({
                   htmlFor="is_overseas"
                   className="text-sm font-medium text-gray-700"
                 >
-                  I'm registering from outside India.
+                  I'm registering from outside India (Overseas).
                 </label>
               </div>
             </div>

@@ -61,10 +61,6 @@ export default function SchoolRegistrationPage() {
           address: "school@stemandspace.com",
           name: "School Registration",
         },
-        {
-          address: "gautam@stemandspace.com",
-          name: "School Registration",
-        },
       ];
 
       await sendTemplateMail({
@@ -337,7 +333,7 @@ export default function SchoolRegistrationPage() {
                   htmlFor="is_overseas"
                   className="ml-2 block text-sm text-gray-700"
                 >
-                  This is an overseas school
+                  Out of India School(Overseas)
                 </label>
               </div>
 
