@@ -13,8 +13,8 @@ interface CarouselImage {
 }
 
 const carouselImages: string[] = [
-  "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Udaipur_1_ccfd1afb1f.jpeg?updatedAt=2025-08-22T08%3A26%3A40.130Z",
   "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_udaipur_3_69a4faff5d.jpg?updatedAt=2025-08-22T08%3A26%3A40.124Z",
+  "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Udaipur_1_ccfd1afb1f.jpeg?updatedAt=2025-08-22T08%3A26%3A40.130Z",
   "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Udaipur2_e4a5c20607.jpg?updatedAt=2025-08-22T08%3A26%3A40.065Z",
   "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Udaipur_4_5f9ac9b4be.jpg?updatedAt=2025-08-22T08%3A26%3A39.170Z",
 ];
