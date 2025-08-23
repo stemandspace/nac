@@ -7,6 +7,7 @@ import Support from "@/components/school-registration/support";
 import SpacetopiaSubscriptionSection from "@/components/SpacetopiaSubscriptionSection";
 import ContactSupportBanner from "@/components/ContactSupportBanner";
 import Link from "next/link";
+import { fixImageUrl } from "@/lib/image";
 
 export default function StudyMaterialPage() {
   return (
@@ -127,96 +128,74 @@ export default function StudyMaterialPage() {
             </p>
           </div>
 
-          {/* Grade 1-4 */}
+          {/* Grade 4-5 */}
           <div className="mb-12">
             <h3 className="text-2xl font-medium text-gray-900 mb-6">
-              Grade 1-4
+              Grade 4-5
             </h3>
             <div className="grid md:grid-cols-3 gap-6">
-              {[1, 2, 3].map((item) => (
+              {[
+                "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Grade_4_5_d36a2d27a8.jpg?updatedAt=2025-08-22T13%3A35%3A28.701Z",
+                "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Grade_4_5_1_caa6623ffb.jpg?updatedAt=2025-08-22T13%3A35%3A28.644Z",
+                "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Grade_4_5_3_c1c724eeac.jpeg?updatedAt=2025-08-22T13%3A35%3A09.024Z",
+              ].map((imageUrl, index) => (
                 <div
-                  key={item}
-                  className="relative group cursor-pointer rounded-4xl overflow-hidden"
+                  key={index}
+                  className="relative group cursor-pointer rounded-4xl overflow-hidden aspect-square"
                 >
                   <img
-                    src="/study/sessions.jpg"
-                    alt="Spacetopia Session"
-                    className="w-full h-64 object-cover"
+                    src={fixImageUrl(imageUrl)}
+                    alt={`Spacetopia Session ${index + 1}`}
+                    className="w-full h-full object-cover"
                   />
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                  {/* Text */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                    <h4 className="text-lg font-medium mb-2">
-                      Lorem ipsum dolor sit amet consectetur.
-                    </h4>
-                    <p className="text-sm font-medium flex items-center gap-2 opacity-90">
-                      8.12.2025 <span>•</span> 25 min <span>•</span> 5 credit
-                      require
-                    </p>
-                  </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Grade 5-7 */}
+          {/* Grade 6-7 */}
           <div className="mb-12">
             <h3 className="text-2xl font-medium text-gray-900 mb-6">
-              Grade 5-7
+              Grade 6-7
             </h3>
             <div className="grid md:grid-cols-3 gap-6">
-              {[1, 2, 3].map((item) => (
+              {[
+                "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Grade_6_7_d58aebd28e.jpg?updatedAt=2025-08-22T13%3A35%3A28.704Z",
+                "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Grade_6_7_8e25b54fe4.png?updatedAt=2025-08-22T13%3A35%3A12.247Z",
+                "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Grade_6_7_1_03e031ce7c.png?updatedAt=2025-08-22T13%3A35%3A11.486Z",
+              ].map((imageUrl, index) => (
                 <div
-                  key={item}
-                  className="relative group cursor-pointer rounded-4xl overflow-hidden"
+                  key={index}
+                  className="relative group cursor-pointer rounded-4xl overflow-hidden aspect-square"
                 >
                   <img
-                    src="/study/sessions.jpg"
-                    alt="Spacetopia Session"
-                    className="w-full h-64 object-cover"
+                    src={fixImageUrl(imageUrl)}
+                    alt={`Spacetopia Session ${index + 1}`}
+                    className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                    <h4 className="text-lg font-medium mb-2">
-                      Lorem ipsum dolor sit amet consectetur.
-                    </h4>
-                    <p className="text-sm font-medium flex items-center gap-2 opacity-90">
-                      10.12.2025 <span>•</span> 30 min <span>•</span> 8 credit
-                      require
-                    </p>
-                  </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Grade 8-10 */}
+          {/* Grade 8-9 */}
           <div>
             <h3 className="text-2xl font-medium text-gray-900 mb-6">
-              Grade 8-10
+              Grade 8-9
             </h3>
             <div className="grid md:grid-cols-3 gap-6">
-              {[1, 2, 3].map((item) => (
+              {[
+                "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Grade_8_9_45146a0d6a.jpg?updatedAt=2025-08-22T13%3A35%3A28.684Z",
+              ].map((imageUrl, index) => (
                 <div
-                  key={item}
-                  className="relative group cursor-pointer rounded-4xl overflow-hidden"
+                  key={index}
+                  className="relative group cursor-pointer rounded-4xl overflow-hidden aspect-square"
                 >
                   <img
-                    src="/study/sessions.jpg"
-                    alt="Spacetopia Session"
-                    className="w-full h-64 object-cover"
+                    src={fixImageUrl(imageUrl)}
+                    alt={`Spacetopia Session ${index + 1}`}
+                    className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                    <h4 className="text-lg font-medium mb-2">
-                      Lorem ipsum dolor sit amet consectetur.
-                    </h4>
-                    <p className="text-sm font-medium flex items-center gap-2 opacity-90">
-                      12.12.2025 <span>•</span> 40 min <span>•</span> 10 credit
-                      require
-                    </p>
-                  </div>
                 </div>
               ))}
             </div>
