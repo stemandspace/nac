@@ -216,11 +216,7 @@ export default function AwardsCeremonyCarousel() {
               >
                 <ChevronLeft className="w-6 h-6" />
               </button>
-              <div className="flex flex-col items-end">
-                <span className="text-white text-base md:text-lg font-semibold drop-shadow">
-                  {currentImage.title}
-                </span>
-              </div>
+
               <button
                 onClick={() => {
                   nextSlide();
