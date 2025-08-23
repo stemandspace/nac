@@ -162,7 +162,6 @@ export default function StudyMaterialPage() {
               {[
                 "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Grade_6_7_d58aebd28e.jpg?updatedAt=2025-08-22T13%3A35%3A28.704Z",
                 "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Grade_6_7_8e25b54fe4.png?updatedAt=2025-08-22T13%3A35%3A12.247Z",
-                "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Grade_6_7_1_03e031ce7c.png?updatedAt=2025-08-22T13%3A35%3A11.486Z",
               ].map((imageUrl, index) => (
                 <div
                   key={index}
