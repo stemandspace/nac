@@ -114,6 +114,8 @@ export default function LegacyPage() {
     "https://youtu.be/HrM72fs-8Xc",
     "https://youtu.be/n6CRckfs5uU",
     "https://youtu.be/iLaGZ00wuAA",
+    "https://youtu.be/2idvkf7Usgo",
+    "https://youtu.be/IbjOdBgZdlA",
   ];
 
   const nextSlide = () => {
