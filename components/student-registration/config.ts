@@ -1,6 +1,6 @@
 const config = [
     {
-        id: "credit",
+        id: "credits",
         title: "Credit Purchase",
         description: "(Up to 50 credits can be purchased. If you need more, we recommend Protostar or Supernova plans.)",
         price: 7, // Discounted price
