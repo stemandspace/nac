@@ -65,7 +65,7 @@ export default function StudyMaterialSection() {
           {/* Right Image */}
           <div>
             <Image
-              src="/study/s3.jpg"
+              src="https://s3.us-east-1.amazonaws.com/myckc/myckc/Whats_App_Image_2025_08_22_at_16_50_49_654627616b.jpeg?updatedAt=2025-08-22T11%3A21%3A14.295Z"
               alt="NAC Study Material"
               width={600}
               height={400}

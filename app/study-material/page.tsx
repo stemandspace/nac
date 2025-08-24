@@ -114,7 +114,7 @@ export default function StudyMaterialPage() {
         </div>
       </section>
 
-      {/* Spacetopia Sessions Grid */}
+      {/*   Spacetopia Sessions Grid */}
       <section className="pt-10 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-5">
