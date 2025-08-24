@@ -3,9 +3,6 @@ import Hero from "@/components/hero";
 import Section1 from "@/components/study-material/section1";
 import Section2 from "@/components/study-material/section2";
 import Section3 from "@/components/study-material/section3";
-import Support from "@/components/school-registration/support";
-import SpacetopiaSubscriptionSection from "@/components/SpacetopiaSubscriptionSection";
-import ContactSupportBanner from "@/components/ContactSupportBanner";
 import Link from "next/link";
 import { fixImageUrl } from "@/lib/image";
 

@@ -106,6 +106,7 @@ export default function FAQsPage() {
   return (
     <div className="min-h-screen bg-white">
       <Hero
+        desc="Find answers to common questions about NAC registration, study material, assessments, and participation. If you need more help, contact our support team below."
         bgimage="https://s3.us-east-1.amazonaws.com/myckc/myckc/JKM_06437_d309c2b01f.JPG?updatedAt=2025-08-22T07%3A45%3A50.669Z"
         title="Frequently Asked Questions"
       />

@@ -46,54 +46,28 @@ export default function DirectRegistrationPage() {
       {/* How It Works Section */}
       <section className="py-12 md:py-16 px-4 md:px-6 bg-white">
         <div className="max-w-7xl mx-auto space-y-16 md:space-y-20">
-          {/* First Part - 3 Step Process */}
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
-            {/* Left Side - Text */}
-            <div>
-              <div className="text-[#EE7E1A] text-sm font-semibold mb-2">
-                HOW IT WORKS
-              </div>
-              <h2 className="text-3xl md:text-4xl font-medium text-gray-900 mb-4 md:mb-6">
-                A Simple 3-Step Process to Join NAC 2025
-              </h2>
-              <p className="text-gray-600 mb-6 md:mb-8">
-                Learn how to register, pay securely, and start your NAC journey.
-              </p>
+          <div className="max-w-6xl mx-auto text-center">
+            <h2 className="text-4xl font-bold mb-4">
+              School not participating? Don’t worry – your child can still join!
+            </h2>
+            <p className="text-gray-600 mb-12">
+              Watch this video to learn how schools can register, generate their
+              dedicated link, and share with their students to register.
+            </p>
 
-              <div className="space-y-3 md:space-y-4 mb-8 md:mb-10">
-                {[
-                  "STEP 1: Visit the NAC registration form.",
-                  "STEP 2: Fill in details and secure payment.",
-                  "STEP 3: Access preparation resources & engagement activities.",
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-3">
-                    <Image
-                      src="/home/arrow-right.png"
-                      alt="bullet"
-                      width={20}
-                      height={20}
+            <div className="grid gap-8 items-center">
+              <div className="relative max-w-2xl mx-auto w-full">
+                <div className="overflow-hidden rounded-xl shadow-lg bg-gray-100">
+                  <div className="w-full aspect-video">
+                    <YouTube
+                      videoId={videoId}
+                      opts={opts}
+                      className="w-full h-full rounded-xl"
+                      title="What is NAC - National Astronomy Challenge"
                     />
-                    <span className="text-gray-700 text-sm md:text-base">
-                      {item}
-                    </span>
                   </div>
-                ))}
+                </div>
               </div>
-
-              <button className="bg-[#EE7E1A] text-white px-6 md:px-8 py-3 rounded-full md:rounded-4xl font-semibold hover:bg-orange-600 transition-colors text-sm md:text-base">
-                REGISTER NOW
-              </button>
-            </div>
-
-            {/* Right Side - Media */}
-            <div className="relative order-first lg:order-last">
-              <Image
-                src="/home/vimg2.jpg"
-                alt="How it works"
-                width={600}
-                height={400}
-                className="w-full h-auto rounded-2xl md:rounded-4xl object-cover"
-              />
             </div>
           </div>
 
@@ -108,9 +82,6 @@ export default function DirectRegistrationPage() {
             </div>
 
             <div>
-              <div className="text-[#EE7E1A] text-sm font-semibold mb-2">
-                WHO CAN PARTICIPATE?
-              </div>
               <h2 className="text-3xl md:text-4xl font-medium text-gray-900 mb-4 md:mb-6">
                 NAC 2025 is Open to All Curious Minds!
               </h2>
@@ -142,33 +113,6 @@ export default function DirectRegistrationPage() {
               <button className="bg-[#EE7E1A] text-white px-6 md:px-8 py-3 rounded-full md:rounded-4xl font-semibold hover:bg-orange-600 transition-colors text-sm md:text-base">
                 REGISTER NOW
               </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-10 px-6 bg-gray-50">
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-4">
-            School not participating? Don’t worry – your child can still join!
-          </h2>
-          <p className="text-gray-600 mb-12">
-            Watch this video to learn how schools can register, generate their
-            dedicated link, and share with their students to register.
-          </p>
-
-          <div className="grid gap-8 items-center">
-            <div className="relative max-w-2xl mx-auto w-full">
-              <div className="overflow-hidden rounded-xl shadow-lg bg-gray-100">
-                <div className="w-full aspect-video">
-                  <YouTube
-                    videoId={videoId}
-                    opts={opts}
-                    className="w-full h-full rounded-xl"
-                    title="What is NAC - National Astronomy Challenge"
-                  />
-                </div>
-              </div>
             </div>
           </div>
         </div>

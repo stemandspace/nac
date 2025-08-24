@@ -13,7 +13,7 @@ export default function MemberSection() {
         <div className="grid gap-8 items-center">
           <div className="relative max-w-2xl mx-auto w-full">
             <div className="overflow-hidden rounded-xl shadow-lg bg-gray-100">
-              <Youtube videoId="DMz1ZycaKSg" />
+              <Youtube videoId="YF6kxt0IW98" />
             </div>
           </div>
         </div>
@@ -21,7 +21,8 @@ export default function MemberSection() {
         {/* Right - Text Content */}
         <div className="text-left">
           <h3 className="text-2xl md:text-3xl font-bold mb-4">
-            CKC is Now Spacetopia – Bigger, Better, and More Powerful
+            Cosmic Kids Club is Now Spacetopia – Bigger, Better, and More
+            Powerful
           </h3>
           <p className="text-gray-600 mb-6">
             Formerly known as Cosmic Kids Club, Spacetopia is a next-level space
