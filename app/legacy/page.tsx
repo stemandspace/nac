@@ -29,16 +29,16 @@ export default function LegacyPage() {
     "2024-2025",
   ];
 
-  const galleryImages = {
+  const galleryData = {
     "2017-2018": [
-      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S3_75e48b4fff.jpg?updatedAt=2025-08-22T06%3A32%3A48.464Z",
-      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S2_bc33a8145d.jpg?updatedAt=2025-08-22T06%3A32%3A48.326Z",
-      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S6_fb97855b4b.jpg?updatedAt=2025-08-22T06%3A32%3A48.212Z",
-      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S_1_89fae0bd59.jpg?updatedAt=2025-08-22T06%3A32%3A48.091Z",
-      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_G7_ba1bf7ee65.jpg?updatedAt=2025-08-22T05%3A52%3A07.964Z",
-      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S555_8b30d60806.jpg?updatedAt=2025-08-22T12%3A19%3A07.679Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S333_cb556242cb.jpg?updatedAt=2025-08-22T12%3A19%3A34.631Z",
-      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S_111_65098fa913.jpg?updatedAt=2025-08-22T12%3A19%3A07.627Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S555_8b30d60806.jpg?updatedAt=2025-08-22T12%3A19%3A07.679Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S666_75778b0b2b.jpg?updatedAt=2025-08-22T12%3A19%3A07.577Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S222_3163fde6f1.jpg?updatedAt=2025-08-22T12%3A19%3A02.408Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S777_c4e49e14bd.jpg?updatedAt=2025-08-22T12%3A19%3A02.377Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S444_6aa8124d06.jpg?updatedAt=2025-08-22T12%3A19%3A02.331Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S555_4d8fe034b8.jpg?updatedAt=2025-08-22T12%3A19%3A02.541Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_S333_fbf280eb67.jpg?updatedAt=2025-08-22T12%3A19%3A02.418Z",
     ],
     "2018-2019": [
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_G27_5225eb0883.jpeg?updatedAt=2025-08-22T05%3A52%3A07.855Z",
@@ -59,14 +59,14 @@ export default function LegacyPage() {
     "2022-2023": [
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_N4_82128f2914.jpg?updatedAt=2025-08-22T08%3A13%3A40.828Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_N5_06e9e21cb9.jpeg?updatedAt=2025-08-22T08%3A13%3A40.585Z",
-      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_N1_4a96fe2ac6.jpeg?updatedAt=2025-08-22T08%3A13%3A40.515Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_N3_5a39fe4e58.jpeg?updatedAt=2025-08-22T08%3A13%3A40.334Z",
-      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_N2_621d5f8937.jpeg?updatedAt=2025-08-22T08%3A13%3A40.298Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_N111_150c6a0c72.jpg?updatedAt=2025-08-22T12%3A18%3A45.436Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_N222_1c7807ee8c.jpeg?updatedAt=2025-08-22T12%3A18%3A45.065Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_N_9a5700d0e7.jpeg?updatedAt=2025-08-22T16%3A07%3A10.341Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_N444_598802e2e6.jpeg?updatedAt=2025-08-22T12%3A18%3A44.957Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Nanital_111_bb6087d2bd.jpeg?updatedAt=2025-08-22T15%3A52%3A38.826Z",
     ],
     "2023-2024": [
-      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Pune_8_f71be31fea.jpeg?updatedAt=2025-08-22T07%3A28%3A32.057Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Pune_10_71f64522b4.jpeg?updatedAt=2025-08-22T07%3A28%3A31.893Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Pune_6_c2a8548f85.jpeg?updatedAt=2025-08-22T07%3A28%3A31.892Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Pune9_7ced89bff8.jpeg?updatedAt=2025-08-22T07%3A28%3A31.562Z",
@@ -74,16 +74,17 @@ export default function LegacyPage() {
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Pune_3_b30879b627.jpeg?updatedAt=2025-08-22T07%3A25%3A23.672Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Pune_4_e92def024b.jpeg?updatedAt=2025-08-22T07%3A25%3A04.827Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Pune7_d460b5aa21.jpeg?updatedAt=2025-08-22T07%3A28%3A31.918Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Whats_App_Image_2025_08_22_at_21_41_48_730f3fe4cf.jpeg?updatedAt=2025-08-22T16%3A12%3A29.319Z",
     ],
     "2024-2025": [
-      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H7_d38bc93bc7.JPG?updatedAt=2025-08-22T07%3A51%3A04.956Z",
-      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H8_18ecbaac3f.jpg?updatedAt=2025-08-22T07%3A51%3A00.708Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H5_c0f7204e9b.jpeg?updatedAt=2025-08-22T07%3A48%3A03.054Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H4_0cc0ba711c.jpeg?updatedAt=2025-08-22T07%3A48%3A02.818Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H3_57643e1240.jpeg?updatedAt=2025-08-22T07%3A48%3A02.669Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H1_f347fd8e05.jpeg?updatedAt=2025-08-22T07%3A48%3A02.555Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H2_ccdea93ceb.jpeg?updatedAt=2025-08-22T07%3A48%3A02.529Z",
       "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H333_b4ce6c2b27.jpeg?updatedAt=2025-08-22T12%3A40%3A38.378Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H444_e8a480c3a8.jpeg?updatedAt=2025-08-22T12%3A40%3A38.303Z",
+      "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_H111_a13b0cebfc.jpeg?updatedAt=2025-08-22T12%3A40%3A38.060Z",
     ],
   };
 
@@ -93,7 +94,7 @@ export default function LegacyPage() {
     "https://youtu.be/4j97ueQk50k",
     "https://youtu.be/RPs1cQzPAd8",
     "https://youtu.be/2QgnkQdsS2c",
-    "https://youtu.be/EayTzG2JJR8",
+    // "https://youtu.be/EayTzG2JJR8",
     "https://youtu.be/0wyQWtJXgPQ",
     "https://youtu.be/HrM72fs-8Xc",
     "https://youtu.be/n6CRckfs5uU",
@@ -156,7 +157,7 @@ export default function LegacyPage() {
       <TestimonialsCarousel videoUrls={testimonialVideos} />
 
       {/* Gallery Section */}
-      <GallerySection images={galleryImages} years={years} />
+      <GallerySection images={galleryData} years={years} />
 
       {/* Registration CTA */}
       <section className="py-16 bg-gray-50 font-medium">

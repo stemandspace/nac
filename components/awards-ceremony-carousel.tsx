@@ -37,7 +37,7 @@ const awardImages: AwardImage[] = [
   },
   {
     id: 4,
-    src: "/year/2021.jpeg",
+    src: "https://s3.us-east-1.amazonaws.com/myckc/myckc/T1111_9cd6fc0789.jpg?updatedAt=2025-08-23T10%3A30%3A19.406Z",
     alt: "Awards Ceremony 2021",
     title: "2021-22: Thiruvananthapuram",
     description: "ISRO, Thumba Station . Thiruvatpuram",

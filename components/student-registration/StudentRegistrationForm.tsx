@@ -470,7 +470,7 @@ export default function StudentRegistrationForm({
         <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl p-4 sm:p-8">
           <div className="text-center mb-6 sm:mb-8">
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
-              Student Registration
+              Direct Registration
             </h1>
             <p className="text-sm text-center max-w-2xl mx-auto">
               This registration form is for students whose schools are not
