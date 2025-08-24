@@ -66,7 +66,7 @@ export default function SchoolRegistrationPage() {
       await sendTemplateMail({
         recipients,
         globalMergeInfo: {
-          link: `${process.env.NEXT_PUBLIC_WEBSITE_URL}/st/reg?schoolId=${response.data.documentId}`,
+          link: `${process.env.NEXT_PUBLIC_WEBSITE_URL}/student-registration/form?schoolId=${response.data.documentId}`,
         },
       });
 
