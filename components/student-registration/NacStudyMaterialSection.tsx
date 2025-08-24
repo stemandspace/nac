@@ -4,7 +4,7 @@ import YouTube from "react-youtube";
 
 const NacStudyMaterialSection = () => {
   // Video IDs for the two videos
-  const spacetopiaVideoId = "DMz1ZycaKSg"; // Replace with actual Spacetopia video ID
+  const spacetopiaVideoId = "YF6kxt0IW98"; // Replace with actual Spacetopia video ID
   const accessVideoId = "DMz1ZycaKSg"; // Replace with actual access video ID
 
   // YouTube player options

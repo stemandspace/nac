@@ -3,9 +3,9 @@ const config = [
         id: "credit",
         title: "Credit Purchase",
         description: "(Up to 50 credits can be purchased. If you need more, we recommend Protostar or Supernova plans.)",
-        price: 4, // Discounted price
+        price: 7, // Discounted price
         priceInr: 350, // Discounted price
-        originalPrice: 4,
+        originalPrice: 7,
         originalPriceInr: 350,
         currency: "USD",
         checked: false,
@@ -18,9 +18,9 @@ const config = [
         id: "basic",
         title: "Protostar Membership",
         description: "Essential features for students",
-        price: 20, // Discounted price
+        price: 49, // Discounted price
         priceInr: 2499, // Discounted price
-        originalPrice: 15,
+        originalPrice: 25,
         originalPriceInr: 1249,
         currency: "USD",
         checked: false,
@@ -30,10 +30,10 @@ const config = [
                 {
                     id: "basic",
                     name: "Basic Membership",
-                    price: 20, // Discounted price
-                    priceInr: 1660, // Discounted price
+                    price: 49, // Discounted price
+                    priceInr: 2499, // Discounted price
                     originalPrice: 25,
-                    originalPriceInr: 2075,
+                    originalPriceInr: 1249,
                     duration: "1 Year",
                     benefits: [
                         "225 Welcome Credits",
@@ -48,9 +48,9 @@ const config = [
         id: "premium",
         title: "Supernova Membership",
         description: "Advanced features and exclusive content",
-        price: 50, // Discounted price
+        price: 59, // Discounted price
         priceInr: 2999, // Discounted price
-        originalPrice: 40,
+        originalPrice: 30,
         originalPriceInr: 1499,
         currency: "USD",
         checked: false,
@@ -60,10 +60,10 @@ const config = [
                 {
                     id: "premium",
                     name: "Premium Membership",
-                    price: 40, // Discounted price
-                    priceInr: 3320, // Discounted price
-                    originalPrice: 50,
-                    originalPriceInr: 4150,
+                    price: 59, // Discounted price
+                    priceInr: 2999, // Discounted price
+                    originalPrice: 30,
+                    originalPriceInr: 1499,
                     duration: "1 Year",
                     benefits: [
                         "300 Welcome Credits",
