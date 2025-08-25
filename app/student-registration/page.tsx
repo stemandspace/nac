@@ -75,7 +75,7 @@ export default function DirectRegistrationPage() {
           <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="relative order-first">
               <img
-                src="/direct-reg/img2.png"
+                src="/direct-reg/img2.jpg"
                 alt="NAC participants"
                 className="w-full h-64 md:h-80 object-cover rounded-2xl md:rounded-4xl"
               />
