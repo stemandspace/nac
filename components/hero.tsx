@@ -35,13 +35,13 @@ const Hero: React.FC<HeroProps> = ({ bgimage, title, desc, children }) => {
               )}
             />
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-              <Button className="bg-white  text-black px-8 py-6 rounded-4xl font-semibold uppercase tracking-wide flex items-center gap-2">
+              <Button className="bg-white  text-black px-8 py-6 rounded-4xl font-semibold uppercase tracking-wide flex items-center gap-2 hover:bg-orange-500 hover:text-white">
                 <Link href={route.STUDENT_REGISTRATION_FORM}>
                   Register Directly
                 </Link>
               </Button>
 
-              <Button className="bg-transparent  text-white border border-white px-8 py-6 rounded-4xl font-semibold uppercase tracking-wide flex items-center gap-2">
+              <Button className="bg-transparent  text-white border border-white px-8 py-6 rounded-4xl font-semibold uppercase tracking-wide flex items-center gap-2 hover:bg-orange-500 hover:text-white">
                 <Link href={route.SCHOOL_REGISTRATION_FORM}>
                   Register your school
                 </Link>
