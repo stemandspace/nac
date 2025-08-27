@@ -4,7 +4,7 @@ import YouTube from "react-youtube";
 
 const WhatIsNacSection = () => {
   // Extract video ID from the YouTube URL
-  const videoId = "DMz1ZycaKSg";
+  const videoId = "d5NvF8AT-bQ";
 
   // YouTube player options - responsive dimensions
   const opts = {
