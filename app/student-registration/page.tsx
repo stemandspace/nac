@@ -11,7 +11,7 @@ import AwardsCarousel from "@/components/school-registration/AwardsCarousel";
 
 export default function DirectRegistrationPage() {
   // Extract video ID from the YouTube URL
-  const videoId = "DMz1ZycaKSg";
+  const videoId = "dQBeGMaeOY4";
 
   // YouTube player options - responsive dimensions
   const opts = {
