@@ -64,14 +64,6 @@ const TotalCalculation: React.FC<TotalCalculationProps> = ({
               <span className="text-xs font-medium text-gray-700">
                 {selectedAddon.title}
               </span>
-              <span className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
-                {Math.round(
-                  ((selectedAddon.originalPrice - selectedAddon.price) /
-                    selectedAddon.originalPrice) *
-                    100
-                )}
-                % OFF
-              </span>
             </div>
             <span className="text-xs font-semibold text-gray-900">
               {isOverseas ? "$" : "₹"}

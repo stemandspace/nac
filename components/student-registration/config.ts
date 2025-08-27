@@ -29,7 +29,7 @@ const config = [
             plans: [
                 {
                     id: "basic",
-                    name: "Basic Membership",
+                    name: "Protostar Membership",
                     price: 49, // Discounted price
                     priceInr: 2499, // Discounted price
                     originalPrice: 25,
@@ -59,7 +59,7 @@ const config = [
             plans: [
                 {
                     id: "premium",
-                    name: "Premium Membership",
+                    name: "Supernova Membership",
                     price: 59, // Discounted price
                     priceInr: 2999, // Discounted price
                     originalPrice: 30,

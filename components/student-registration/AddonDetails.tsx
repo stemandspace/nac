@@ -140,7 +140,7 @@ const AddonDetails: React.FC<AddonDetailsProps> = ({
     return (
       <div className={`${colors.bg} p-2 rounded border ${colors.border}`}>
         <h4 className={`font-semibold ${colors.text} mb-2 text-base`}>
-          {type === "basic" ? "Basic" : "Premium"} Membership
+          {type === "basic" ? "Protostar" : "Supernova"} Membership
         </h4>
         <div className="bg-white p-2 rounded border text-xs">
           <div className="flex items-center gap-2 mb-2 flex-wrap">
@@ -156,8 +156,8 @@ const AddonDetails: React.FC<AddonDetailsProps> = ({
               className={`inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium ${colors.badge}`}
             >
               {calculateDiscount(
-                isOverseas ? plan.originalPrice : plan.originalPriceInr,
-                isOverseas ? plan.price : plan.priceInr
+                isOverseas ? plan.price : plan.priceInr,
+                isOverseas ? plan.originalPrice : plan.originalPriceInr
               )}
               % OFF
             </span>
