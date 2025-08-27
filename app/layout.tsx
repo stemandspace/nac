@@ -19,6 +19,11 @@ export const metadata: Metadata = {
   title: "NAC - National Astronomy Challenge",
   description: "Be Part of India's Biggest Astronomy Challenge",
   generator: "v0.app",
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({
