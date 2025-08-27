@@ -104,13 +104,6 @@ export default function TestimonialsCarousel({
                   <div className="rounded-xl overflow-hidden shadow-lg bg-gray-100">
                     <Youtube videoId={video.id} />
                   </div>
-                  {showTitles && (
-                    <div className="mt-3">
-                      <h3 className="text-sm font-medium text-gray-900">
-                        {video.title || ""}
-                      </h3>
-                    </div>
-                  )}
                 </div>
               ))}
             </div>

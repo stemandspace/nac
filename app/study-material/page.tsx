@@ -159,6 +159,7 @@ export default function StudyMaterialPage() {
               {[
                 "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Grade_6_7_d58aebd28e.jpg?updatedAt=2025-08-22T13%3A35%3A28.704Z",
                 "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Grade_6_7_8e25b54fe4.png?updatedAt=2025-08-22T13%3A35%3A12.247Z",
+                "/pics/1.png",
               ].map((imageUrl, index) => (
                 <div
                   key={index}
@@ -182,6 +183,8 @@ export default function StudyMaterialPage() {
             <div className="grid md:grid-cols-3 gap-6">
               {[
                 "https://s3.us-east-1.amazonaws.com/myckc/myckc/thumbnail_Grade_8_9_45146a0d6a.jpg?updatedAt=2025-08-22T13%3A35%3A28.684Z",
+                "/pics/1.png",
+                "/pics/2.png",
               ].map((imageUrl, index) => (
                 <div
                   key={index}
