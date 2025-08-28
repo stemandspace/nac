@@ -333,8 +333,6 @@ export default function DirectRegistrationPage() {
       </section>
       <ExamInfo />
       <AwardsCarousel />
-      <Support />
-      <ContactSupportBanner />
     </div>
   );
 }
