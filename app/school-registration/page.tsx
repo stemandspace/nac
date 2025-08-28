@@ -174,8 +174,8 @@ export default function StudentRegistrationPage() {
                 ].map((text, idx) => (
                   <div key={idx} className="flex items-start gap-3">
                     <img
-                      src="https://s3.us-east-1.amazonaws.com/myckc/myckc/Whats_App_Image_2025_08_22_at_16_50_49_654627616b.jpeg?updatedAt=2025-08-22T11%3A21%3A14.295Z"
-                      alt="Spacetopia learning"
+                      src="/home/arrow-right.png"
+                      alt="arrow"
                       className="w-4 h-4 md:w-5 md:h-5 mt-1 flex-shrink-0"
                     />
                     <p className="text-gray-700 text-sm md:text-base">{text}</p>
@@ -192,7 +192,7 @@ export default function StudentRegistrationPage() {
 
             <div className="order-first lg:order-last">
               <img
-                src="/school-reg/sp1.jpg"
+                src="https://s3.us-east-1.amazonaws.com/myckc/myckc/Whats_App_Image_2025_08_28_at_11_41_40_ea010909b4.jpeg?updatedAt=2025-08-28T06%3A12%3A06.987Z"
                 alt="Spacetopia learning"
                 className="w-full h-64 md:h-80 object-cover rounded-lg"
               />
@@ -203,7 +203,7 @@ export default function StudentRegistrationPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="order-first">
               <img
-                src="/school-reg/sp1.jpg"
+                src="https://s3.us-east-1.amazonaws.com/myckc/myckc/Whats_App_Image_2025_08_28_at_11_32_43_05a6ccaad1.jpeg?updatedAt=2025-08-28T06%3A10%3A07.242Z"
                 alt="NAC community"
                 className="w-full h-64 md:h-80 object-cover rounded-lg"
               />

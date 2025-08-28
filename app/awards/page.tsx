@@ -143,7 +143,7 @@ export default function RewardsPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                <tr>
+                {/* <tr>
                   <td className="px-6 py-4 text-sm font-medium text-gray-900">
                     Galaxy Gold Award
                   </td>
@@ -175,7 +175,7 @@ export default function RewardsPage() {
                   <td className="px-6 py-4 text-sm font-medium text-gray-700">
                     Science Expedition of nominated teacher
                   </td>
-                </tr>
+                </tr> */}
                 <tr>
                   <td className="px-6 py-4 text-sm font-medium text-gray-900">
                     Meteor Shower Awards
