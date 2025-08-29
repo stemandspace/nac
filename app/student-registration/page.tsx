@@ -293,7 +293,7 @@ export default function DirectRegistrationPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="order-first">
               <img
-                src="/school-reg/sp1.jpg"
+                src="https://s3.us-east-1.amazonaws.com/myckc/myckc/Whats_App_Image_2025_08_28_at_11_32_42_b753bd7f89.jpeg?updatedAt=2025-08-28T06%3A55%3A03.921Z"
                 alt="NAC community"
                 className="w-full h-64 md:h-80 object-cover rounded-lg"
               />
