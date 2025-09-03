@@ -90,6 +90,10 @@ export default function StudentRegistrationForm({
   // Addon options state - three separate cards
   const [addonOptions, setAddonOptions] = useState<AddonOption[]>(config);
 
+  // New: State for the two required checkboxes
+  const [hasLaptop, setHasLaptop] = useState(false);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
+
   const handleInputChange = (
     field: keyof StudentData,
     value: string | boolean
@@ -214,6 +218,8 @@ export default function StudentRegistrationForm({
               setAddonOptions((prev) =>
                 prev.map((opt) => ({ ...opt, checked: false }))
               );
+              setHasLaptop(false);
+              setAgreedToTerms(false);
             } else {
               throw new Error(
                 verificationResult.error || "Payment verification failed"
@@ -286,6 +292,19 @@ export default function StudentRegistrationForm({
     }
     if (!formData.city.trim()) {
       setError("City is required");
+      return;
+    }
+    // New: Validate the two checkboxes
+    if (!hasLaptop) {
+      setError(
+        "You must acknowledge that you have a laptop with a working microphone and camera, or will arrange one."
+      );
+      return;
+    }
+    if (!agreedToTerms) {
+      setError(
+        "You must agree to the Terms of Participation in NAC before submitting."
+      );
       return;
     }
 
@@ -470,17 +489,17 @@ export default function StudentRegistrationForm({
         <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl p-4 sm:p-8">
           <div className="text-center mb-6 sm:mb-8">
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
-              Direct Registration
+              {school ? "School Based Registration" : "Direct Registration"}
             </h1>
             <p className="text-sm text-center max-w-2xl mx-auto">
-              This registration form is for students whose schools are not
-              participating in the National Astronomy Challenge (NAC). We
-              recommend that you first confirm with your child’s school if they
-              are participating. If the school is not enrolled, you may proceed
-              to register directly using this form.
+              This registration form is for students whose school is
+              participating in the National Astronomy Challenge (NAC).
             </p>
             <p className="text-xs text-gray-500 mt-2">
-              Registration fee: {formData.is_overseas ? "USD 12" : "INR 500"}
+              Registration fee:{" "}
+              {formData.is_overseas
+                ? registrationFee.price
+                : registrationFee.priceInr}
               {!formData.is_overseas && " (Exclusive of GST)"}
               {!formData.is_overseas && (
                 <span className="block mt-1">
@@ -683,6 +702,44 @@ export default function StudentRegistrationForm({
                   className="text-sm font-medium text-gray-700"
                 >
                   I'm registering from outside India (Overseas).
+                </label>
+              </div>
+            </div>
+
+            {/* New: Required checkboxes before submission */}
+            <div className="bg-white p-4 rounded-lg border border-gray-200 mt-4">
+              <div className="flex items-start space-x-3 mb-2">
+                <input
+                  type="checkbox"
+                  id="hasLaptop"
+                  checked={hasLaptop}
+                  onChange={(e) => setHasLaptop(e.target.checked)}
+                  className="h-4 w-4 mt-1 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  required
+                />
+                <label
+                  htmlFor="hasLaptop"
+                  className="text-sm font-medium text-gray-700"
+                >
+                  I acknowledge that I have a laptop with a working microphone
+                  and camera. If not available, I will arrange one myself.
+                </label>
+              </div>
+              <div className="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  id="agreedToTerms"
+                  checked={agreedToTerms}
+                  onChange={(e) => setAgreedToTerms(e.target.checked)}
+                  className="h-4 w-4 mt-1 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  required
+                />
+                <label
+                  htmlFor="agreedToTerms"
+                  className="text-sm font-medium text-gray-700"
+                >
+                  I agree to the Terms of Participation in NAC and confirm that
+                  I have read and understood the terms published on the website.
                 </label>
               </div>
             </div>
