@@ -492,8 +492,14 @@ export default function StudentRegistrationForm({
               {school ? "School Based Registration" : "Direct Registration"}
             </h1>
             <p className="text-sm text-center max-w-2xl mx-auto">
-              This registration form is for students whose school is
-              participating in the National Astronomy Challenge (NAC).
+              {school
+                ? ` This registration form is for students whose school is
+              participating in the National Astronomy Challenge (NAC).`
+                : `This registration form is for students whose schools are not
+              participating in the National Astronomy Challenge (NAC). We
+              recommend that you first confirm with your child’s school if they
+              are participating. If the school is not enrolled, you may proceed
+              to register directly using this form.`}
             </p>
             <p className="text-xs text-gray-500 mt-2">
               Registration fee:{" "}
