@@ -1,5 +1,5 @@
-import { notFound } from "next/navigation";
 import { client } from "@/api";
+import { notFound } from "next/navigation";
 import StudentRegistrationForm from "@/components/student-registration/StudentRegistrationForm";
 import NacStudyMaterialSection from "@/components/student-registration/NacStudyMaterialSection";
 
