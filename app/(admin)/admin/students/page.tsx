@@ -27,6 +27,7 @@ import {
   ChevronRight,
   Users,
   RefreshCw,
+  Download,
 } from "lucide-react";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { useStudents, Student } from "@/lib/hooks/useStudents";
@@ -66,6 +67,11 @@ export default function StudentsPage() {
   // Refresh data
   const handleRefresh = () => {
     mutate();
+  };
+
+  // Download student entries
+  const handleDownloadStudents = () => {
+    window.open("https://api-nac.spacetopia.in/api/export/students", "_blank");
   };
 
   const handleViewStudent = (student: Student) => {
@@ -126,11 +132,24 @@ export default function StudentsPage() {
         <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
           <Card>
             <CardHeader>
-              <CardTitle>Student List</CardTitle>
-              <CardDescription>
-                Total students: {pagination.total} | Page {pagination.page} of{" "}
-                {pagination.pageCount}
-              </CardDescription>
+              <div className="flex justify-between items-start">
+                <div>
+                  <CardTitle>Student List</CardTitle>
+                  <CardDescription>
+                    Total students: {pagination.total} | Page {pagination.page}{" "}
+                    of {pagination.pageCount}
+                  </CardDescription>
+                </div>
+                <Button
+                  onClick={handleDownloadStudents}
+                  variant="outline"
+                  size="sm"
+                  className="gap-2"
+                >
+                  <Download className="h-4 w-4" />
+                  Download Students
+                </Button>
+              </div>
             </CardHeader>
             <CardContent>
               {/* Search and Refresh */}
