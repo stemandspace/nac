@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import ProtectedRoute from "@/components/ProtectedRoute";
-import { LogOut, User, Shield, Settings, Users } from "lucide-react";
+import { LogOut, User, Shield, Settings, Users, Building2 } from "lucide-react";
 
 export default function AdminDashboard() {
   const { logout } = useAuth();
@@ -25,6 +25,10 @@ export default function AdminDashboard() {
 
   const handleStudentManagement = () => {
     router.push("/admin/students");
+  };
+
+  const handleSchoolManagement = () => {
+    router.push("/admin/schools");
   };
 
   return (
@@ -88,7 +92,7 @@ export default function AdminDashboard() {
             </Card>
 
             {/* Quick Actions */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Card className="hover:shadow-md transition-shadow cursor-pointer">
                 <CardHeader className="pb-3">
                   <CardTitle className="text-lg flex items-center gap-2">
@@ -116,6 +120,23 @@ export default function AdminDashboard() {
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
                     View and manage student registrations and details
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card
+                className="hover:shadow-md transition-shadow cursor-pointer"
+                onClick={handleSchoolManagement}
+              >
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    <Building2 className="h-5 w-5" />
+                    School Management
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground">
+                    View and manage school registrations and details
                   </p>
                 </CardContent>
               </Card>
