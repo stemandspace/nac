@@ -1,12 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import route from "@/lib/route";
+import Hero from "@/components/hero";
 import { Button } from "@/components/ui/button";
 import PrepareNac from "@/components/prepare-nac";
 import WhatIsNacSection from "@/components/WhatIsNacSection";
 import HighlightReelCarousel from "@/components/highlight-reel-carousel";
 import AwardsCeremonyCarousel from "@/components/awards-ceremony-carousel";
-import Hero from "@/components/hero";
 
 const HeroImage1 = "/s1.jpg";
 const HeroImage2 = "/s2.jpg";

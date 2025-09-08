@@ -1,4 +1,4 @@
-import "./globals.css";
+import "@/app/globals.css";
 import type React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -20,9 +20,9 @@ export const metadata: Metadata = {
   description: "Be Part of India's Biggest Astronomy Challenge",
   generator: "v0.app",
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/favicon.ico',
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
   },
 };
 
