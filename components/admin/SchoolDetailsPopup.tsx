@@ -22,6 +22,8 @@ import {
   XCircle,
   User,
   Globe,
+  Download,
+  Users,
 } from "lucide-react";
 import { School } from "@/lib/hooks/useSchools";
 
@@ -63,6 +65,14 @@ export default function SchoolDetailsPopup({
         <CheckCircle className="h-3 w-3" />
         Domestic
       </Badge>
+    );
+  };
+
+  // Download school-specific student data
+  const handleDownloadSchoolStudents = () => {
+    window.open(
+      `https://api-nac.spacetopia.in/api/export/students?school=${school.id}`,
+      "_blank"
     );
   };
 
@@ -175,17 +185,13 @@ export default function SchoolDetailsPopup({
                   <label className="text-sm font-medium text-gray-500">
                     Registration Date
                   </label>
-                  <p className="text-sm">
-                    {formatDateTime(school.createdAt)}
-                  </p>
+                  <p className="text-sm">{formatDateTime(school.createdAt)}</p>
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-500">
                     Last Updated
                   </label>
-                  <p className="text-sm">
-                    {formatDateTime(school.updatedAt)}
-                  </p>
+                  <p className="text-sm">{formatDateTime(school.updatedAt)}</p>
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-500">
@@ -223,7 +229,16 @@ export default function SchoolDetailsPopup({
           </Card>
         </div>
 
-        <div className="flex justify-end pt-4 border-t">
+        <div className="flex justify-between pt-4 border-t">
+          <Button
+            onClick={handleDownloadSchoolStudents}
+            variant="outline"
+            className="gap-2"
+          >
+            <Download className="h-4 w-4" />
+            <Users className="h-4 w-4" />
+            Download School Students
+          </Button>
           <Button onClick={onClose} variant="outline">
             Close
           </Button>
