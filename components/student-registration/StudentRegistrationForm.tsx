@@ -754,12 +754,13 @@ export default function StudentRegistrationForm({
             <div className="bg-gradient-to-br from-gray-50 to-blue-50 p-6 rounded-xl border border-gray-200">
               <div className="text-center mb-6">
                 <h2 className="text-2xl font-bold text-gray-900 mb-3">
-                  Choose Your Addons
+                  Optional Add-ons (Recommended)
                 </h2>
                 <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                  Select from the available add-ons to enhance your
-                  registration. You can choose membership plans or purchase
-                  credits for additional benefits.
+                  These add-ons are completely optional but highly recommended
+                  to enhance your NAC experience. You can choose membership
+                  plans or purchase credits for additional benefits that will
+                  make your journey even better.
                 </p>
               </div>
 
