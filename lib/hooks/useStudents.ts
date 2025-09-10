@@ -48,13 +48,60 @@ interface UseStudentsParams {
   pageSize?: number;
 }
 
-// Fetcher function for SWR
 const fetcher = async (url: string): Promise<StudentsResponse> => {
-  const response = await client.collection('students').find({
-    params: url.split('?')[1] || '',
-  });
+  // Parse the query string into an object for filters, pagination, etc.
+  const queryString = url.split('?')[1] || '';
+  const params = Object.fromEntries(new URLSearchParams(queryString));
 
-  return response as StudentsResponse;
+  // Prepare the options for the find method
+  // Extract filters and pagination from params
+  const options: Record<string, any> = {};
+
+  // Handle pagination - Strapi v5 requires pagination to be nested
+  options.pagination = {};
+  if (params['pagination[page]']) {
+    options.pagination.page = Number(params['pagination[page]']);
+  }
+  if (params['pagination[pageSize]']) {
+    options.pagination.pageSize = Number(params['pagination[pageSize]']);
+  }
+
+  // Handle sort - Strapi v5 expects sort as an array
+  if (params['sort']) {
+    // Parse sort string like "createdAt:desc" into array format
+    const sortString = params['sort'];
+    if (sortString.includes(':')) {
+      const [field, direction] = sortString.split(':');
+      options.sort = [{ [field]: direction }];
+    } else {
+      options.sort = [sortString];
+    }
+  }
+
+  // Handle filters
+  // Collect all filter params (those starting with 'filters')
+  const filterKeys = Object.keys(params).filter((k) => k.startsWith('filters'));
+  if (filterKeys.length > 0) {
+    // Reconstruct the nested filter object from the flat query params
+    const filters: Record<string, any> = {};
+    for (const key of filterKeys) {
+      // Remove 'filters[' and trailing ']'
+      const path = key.replace(/^filters\[/, '').replace(/\]$/g, '').replace(/\]\[/g, '.');
+      // Set value at path in filters object
+      const segments = path.split('.');
+      let curr = filters;
+      for (let i = 0; i < segments.length - 1; i++) {
+        if (!(segments[i] in curr)) curr[segments[i]] = {};
+        curr = curr[segments[i]];
+      }
+      curr[segments[segments.length - 1]] = params[key];
+    }
+    options.filters = filters;
+  }
+
+  const response = await client.collection('students').find(options);
+
+  return response as unknown as StudentsResponse;
 };
 
 // Generate cache key for SWR
