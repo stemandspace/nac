@@ -55,6 +55,7 @@ const useSendMail = (): UseSendMailReturn => {
                 const payload = createMailPayload(student, EXISTING_ACCOUNT_MESSAGE);
                 const result = await triggerStudentConfirmationMail(payload);
                 await updateStudentMailStatus(student.documentId, true);
+                alert('Email re-sent successfully for existing account');
                 return { success: true, data: result };
             }
 
@@ -66,6 +67,7 @@ const useSendMail = (): UseSendMailReturn => {
                 const payload = createMailPayload(student, EXISTING_ACCOUNT_MESSAGE);
                 const result = await triggerStudentConfirmationMail(payload);
                 await updateStudentMailStatus(student.documentId, true);
+                alert('Email sent successfully for existing account');
                 return { success: true, data: result };
             }
 
@@ -81,7 +83,7 @@ const useSendMail = (): UseSendMailReturn => {
             const payload = createMailPayload(student, newPassword);
             const result = await triggerStudentConfirmationMail(payload);
             await updateStudentMailStatus(student.documentId, true);
-
+            alert('Email sent successfully for new account');
             return { success: true, data: result };
         } catch (error) {
             console.error(error);
