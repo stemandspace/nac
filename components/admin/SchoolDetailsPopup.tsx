@@ -171,6 +171,24 @@ export default function SchoolDetailsPopup({
             </CardContent>
           </Card>
 
+          {/* School Registration Link */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg flex items-center gap-2">
+                <User className="h-5 w-5" />
+                Registration Link
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-1  gap-4">
+                <div className="space-y-2">
+                  {/* @ts-ignore */}
+                  <p className="text-sm">{`https://www.nationalastronomy.org/student-registration/form?schoolId=${school?.documentId}`}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Registration Information */}
           <Card>
             <CardHeader>

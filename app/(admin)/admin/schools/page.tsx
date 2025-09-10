@@ -6,28 +6,28 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Table,
+  TableRow,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
-  TableRow,
 } from "@/components/ui/table";
 import {
   Card,
+  CardTitle,
+  CardHeader,
   CardContent,
   CardDescription,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
-  Search,
   Eye,
-  ChevronLeft,
-  ChevronRight,
+  Search,
+  Download,
   Building2,
   RefreshCw,
-  Download,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { useSchools, School } from "@/lib/hooks/useSchools";
