@@ -3,6 +3,7 @@ import { client } from '@/api';
 
 interface Student {
   id: number;
+  documentId: string;
   name: string;
   email: string;
   phone: string;

@@ -20,8 +20,10 @@ import {
   CreditCard,
   CheckCircle,
   XCircle,
+  Loader2,
 } from "lucide-react";
 import { Student } from "@/lib/hooks/useStudents";
+import useSendMail from "@/lib/hooks/useSendMail";
 
 interface StudentDetailsPopupProps {
   student: Student;
@@ -32,6 +34,8 @@ export default function StudentDetailsPopup({
   student,
   onClose,
 }: StudentDetailsPopupProps) {
+  const { sendStudentConfirmationMail, isLoading, error } = useSendMail();
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
       year: "numeric",
@@ -331,11 +335,26 @@ export default function StudentDetailsPopup({
           )}
         </div>
 
-        <div className="flex justify-end pt-4 border-t">
+        <div className="flex justify-end pt-4 border-t gap-2">
+          <Button
+            className="cursor-pointer"
+            disabled={isLoading}
+            onClick={() => sendStudentConfirmationMail(student)}
+          >
+            {isLoading ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <Mail className="h-4 w-4" />
+            )}
+            {student.mail_sent ? "Resend Mail" : "Send Mail"}
+          </Button>
+
           <Button onClick={onClose} variant="outline">
             Close
           </Button>
         </div>
+
+        <div>{error && <p className="text-red-500">{error}</p>}</div>
       </DialogContent>
     </Dialog>
   );
