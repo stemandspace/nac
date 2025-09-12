@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import AccessStudyMaterialButton from "@/components/AccessStudyMaterialButton";
 
 export default function StudyMaterialSection() {
   return (
@@ -59,6 +60,7 @@ export default function StudyMaterialSection() {
                 Includes unlimited content access, all NAC study material, plus
                 exclusive live sessions and year-round engagement.
               </p>
+              <AccessStudyMaterialButton />
             </div>
           </div>
 
