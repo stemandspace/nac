@@ -171,74 +171,31 @@ export default function StudentRegistrationForm({
           contact: studentData.phone,
         },
         handler: async (response: any) => {
-          try {
-            // Verify payment on backend
-            const verificationResponse = await fetch(
-              "http://localhost:1337/api/v1/verify-payment-and-publish",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  razorpay_payment_id: response.razorpay_payment_id,
-                  razorpay_order_id: response.razorpay_order_id,
-                  razorpay_signature: response.razorpay_signature,
-                  student_id: result.student.id,
-                  selectedAddon,
-                }),
-              }
-            );
-
-            if (!verificationResponse.ok) {
-              const errorData = await verificationResponse
-                .json()
-                .catch(() => ({}));
-              throw new Error(
-                errorData.error?.message || "Payment verification failed"
-              );
-            }
-
-            const verificationResult = await verificationResponse.json();
-
-            if (verificationResult.success) {
-              setSuccess(true);
-              // Reset form
-              setFormData({
-                name: "",
-                email: "",
-                phone: "",
-                dob: "",
-                school_name: school?.name || "",
-                grade: "",
-                section: "",
-                city: "",
-                is_overseas: school?.is_overseas || false,
-              });
-              setAddonOptions((prev) =>
-                prev.map((opt) => ({ ...opt, checked: false }))
-              );
-              setHasLaptop(false);
-              setAgreedToTerms(false);
-            } else {
-              throw new Error(
-                verificationResult.error || "Payment verification failed"
-              );
-            }
-          } catch (error) {
-            console.error("Payment verification error:", error);
-            const errorMessage =
-              error instanceof Error
-                ? error.message
-                : "Payment verification failed. Please contact support.";
-            setError(errorMessage);
-          } finally {
-            setIsProcessingPayment(false);
-          }
+          setSuccess(true);
+          // Reset form
+          setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            dob: "",
+            school_name: school?.name || "",
+            grade: "",
+            section: "",
+            city: "",
+            is_overseas: school?.is_overseas || false,
+          });
+          setAddonOptions((prev) =>
+            prev.map((opt) => ({ ...opt, checked: false }))
+          );
+          setHasLaptop(false);
+          setAgreedToTerms(false);
+          setIsProcessingPayment(false);
+          alert("Payment successful");
         },
         modal: {
           ondismiss: () => {
             setIsProcessingPayment(false);
+            alert("Payment cancelled");
           },
         },
       };
@@ -429,7 +386,8 @@ export default function StudentRegistrationForm({
             </p>
             <p className="text-base">
               A confirmation email has been sent to your registered email
-              address.
+              address. Sometimes emails may be delayed, but you will receive it
+              within 24 hours.
             </p>
             <p className="text-base font-medium">This email includes:</p>
             <ul className="list-none space-y-2 ml-4">
