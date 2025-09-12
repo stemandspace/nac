@@ -1,7 +1,10 @@
-import { strapi } from '@strapi/client';
+import axios from 'axios';
 
-const client = strapi({ baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api` });
+const client = axios.create({
+    baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api`,
+    headers: {
+        'Content-Type': 'application/json',
+    },
+});
 
-export {
-    client
-}
+export { client };

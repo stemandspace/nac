@@ -43,6 +43,8 @@ export default function Header() {
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  // Track hover state for dropdown
+  let hoverTimeout: NodeJS.Timeout | null = null;
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
@@ -66,6 +68,15 @@ export default function Header() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [dropdownOpen]);
+
+  // Dropdown hover handlers
+  const handleDropdownMouseEnter = () => {
+    if (hoverTimeout) clearTimeout(hoverTimeout);
+    setDropdownOpen(true);
+  };
+  const handleDropdownMouseLeave = () => {
+    hoverTimeout = setTimeout(() => setDropdownOpen(false), 150);
+  };
 
   // Helper to check if a nav item is active
   const isActive = (href: string) => {
@@ -138,13 +149,18 @@ export default function Header() {
           </nav>
 
           {/* Register Button Dropdown */}
-          <div className="flex-shrink-0 hidden md:block relative" ref={dropdownRef}>
+          <div
+            className="flex-shrink-0 hidden md:block relative"
+            ref={dropdownRef}
+            onMouseEnter={handleDropdownMouseEnter}
+            onMouseLeave={handleDropdownMouseLeave}
+          >
             <button
               className={`bg-[#EE7E1A] hover:bg-orange-500 text-white px-6 py-2 rounded-full flex items-center gap-2 font-semibold focus:outline-none transition duration-150 ${dropdownOpen ? 'ring-2 ring-[#EE7E1A]' : ''}`}
               type="button"
               aria-haspopup="true"
               aria-expanded={dropdownOpen}
-              onClick={() => setDropdownOpen((open) => !open)}
+              tabIndex={0}
             >
               Register as
               <svg
