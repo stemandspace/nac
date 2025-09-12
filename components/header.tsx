@@ -1,8 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useEffect } from "react";
 import Image from "next/image";
 
 import route from "@/lib/route";
@@ -39,8 +40,32 @@ const navItems = [
 ];
 
 export default function Header() {
+
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !(dropdownRef.current as any).contains(event.target)
+      ) {
+        setDropdownOpen(false);
+      }
+    }
+    if (dropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownOpen]);
 
   // Helper to check if a nav item is active
   const isActive = (href: string) => {
@@ -112,15 +137,18 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Register Button */}
-          <div className="flex-shrink-0 hidden md:block relative group">
+          {/* Register Button Dropdown */}
+          <div className="flex-shrink-0 hidden md:block relative" ref={dropdownRef}>
             <button
-              className="bg-[#EE7E1A] hover:bg-orange-500 text-white px-6 py-2 rounded-full flex items-center gap-2 font-semibold focus:outline-none"
+              className={`bg-[#EE7E1A] hover:bg-orange-500 text-white px-6 py-2 rounded-full flex items-center gap-2 font-semibold focus:outline-none transition duration-150 ${dropdownOpen ? 'ring-2 ring-[#EE7E1A]' : ''}`}
               type="button"
+              aria-haspopup="true"
+              aria-expanded={dropdownOpen}
+              onClick={() => setDropdownOpen((open) => !open)}
             >
               Register as
               <svg
-                className="w-4 h-4 ml-1"
+                className={`w-4 h-4 ml-1 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : 'rotate-0'}`}
                 fill="none"
                 stroke="currentColor"
                 strokeWidth={2}
@@ -133,20 +161,28 @@ export default function Header() {
                 />
               </svg>
             </button>
-            <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 pointer-events-none group-hover:pointer-events-auto group-focus-within:pointer-events-auto transition-opacity duration-150 z-50">
-              <Link
-                href={route.SCHOOL_REGISTRATION_FORM}
-                className="block px-4 py-2 text-gray-700 hover:bg-gray-100 font-semibold"
+            {dropdownOpen && (
+              <div
+                className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50"
               >
-                School
-              </Link>
-              <Link
-                href={route.STUDENT_REGISTRATION_FORM}
-                className="block px-4 py-2 text-gray-700 hover:bg-gray-100 font-semibold"
-              >
-                Direct Participant
-              </Link>
-            </div>
+                <Link
+                  href={route.SCHOOL_REGISTRATION_FORM}
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 font-semibold"
+                  tabIndex={0}
+                  onClick={() => setDropdownOpen(false)}
+                >
+                  School
+                </Link>
+                <Link
+                  href={route.STUDENT_REGISTRATION_FORM}
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 font-semibold"
+                  tabIndex={0}
+                  onClick={() => setDropdownOpen(false)}
+                >
+                  Direct Participant
+                </Link>
+              </div>
+            )}
           </div>
         </div>
 
