@@ -34,7 +34,7 @@ const Hero: React.FC<HeroProps> = ({
         priority={true}
         className="object-cover -z-10"
         sizes="100vw"
-        quality={85}
+        quality={30}
       />
 
       {/* Gradient Overlay */}
