@@ -712,13 +712,16 @@ export default function StudentRegistrationForm({
             <div className="bg-gradient-to-br from-gray-50 to-blue-50 p-6 rounded-xl border border-gray-200">
               <div className="text-center mb-6">
                 <h2 className="text-2xl font-bold text-gray-900 mb-3">
-                  Optional Add-ons (Recommended)
+                  Want NAC study material for your grade?
                 </h2>
                 <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                  These add-ons are completely optional but highly recommended
-                  to enhance your NAC experience. You can choose membership
-                  plans or purchase credits for additional benefits that will
-                  make your journey even better.
+                  The material is available on Spacetopia (formerly Cosmic Kids
+                  Club) — a space-themed edutainment platform created by
+                  astronomers and space enthusiasts. With NAC registration, you
+                  get a free Nebula account with 15 welcome credits. Each
+                  grade-specific material costs 41 credits (₹10 per credit). You
+                  can buy more credits anytime OR choose a Protostar or
+                  Supernova annual plan at 50% off.
                 </p>
               </div>
 
