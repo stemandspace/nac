@@ -1,10 +1,7 @@
-import axios from 'axios';
+import { strapi } from '@strapi/client';
 
-const client = axios.create({
+const client = strapi({
     baseURL: `https://api-nac.spacetopia.in/api`,
-    headers: {
-        'Content-Type': 'application/json',
-    },
 });
 
 export { client };
