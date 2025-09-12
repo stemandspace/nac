@@ -13,10 +13,18 @@ import {
 import { Badge } from "@/components/ui/badge";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { LogOut, User, Shield, Settings, Users, Building2 } from "lucide-react";
+import { useStudents } from "@/lib/hooks/useStudents";
+import { useSchools } from "@/lib/hooks/useSchools";
 
 export default function AdminDashboard() {
   const { logout } = useAuth();
   const router = useRouter();
+
+  // Fetch total counts for students and schools
+  const { pagination: studentsPagination, isLoading: studentsLoading } =
+    useStudents({ pageSize: 1 });
+  const { pagination: schoolsPagination, isLoading: schoolsLoading } =
+    useSchools({ pageSize: 1 });
 
   const handleLogout = () => {
     logout();
@@ -155,6 +163,46 @@ export default function AdminDashboard() {
                 </CardContent>
               </Card>
             </div>
+
+            {/* Registration Statistics */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Registration Statistics</CardTitle>
+                <CardDescription>
+                  Total number of students and schools registered
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="text-center p-4 bg-blue-50 rounded-lg">
+                    <div className="text-3xl font-bold text-blue-600">
+                      {studentsLoading ? (
+                        <div className="animate-pulse">...</div>
+                      ) : (
+                        studentsPagination.total.toLocaleString()
+                      )}
+                    </div>
+                    <div className="text-sm text-blue-600 flex items-center justify-center gap-1">
+                      <Users className="h-4 w-4" />
+                      Students Registered
+                    </div>
+                  </div>
+                  <div className="text-center p-4 bg-green-50 rounded-lg">
+                    <div className="text-3xl font-bold text-green-600">
+                      {schoolsLoading ? (
+                        <div className="animate-pulse">...</div>
+                      ) : (
+                        schoolsPagination.total.toLocaleString()
+                      )}
+                    </div>
+                    <div className="text-sm text-green-600 flex items-center justify-center gap-1">
+                      <Building2 className="h-4 w-4" />
+                      Schools Registered
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
 
             {/* Status Card */}
             <Card>
