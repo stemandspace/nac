@@ -116,6 +116,16 @@ export default function StudentsPage() {
     );
   };
 
+  // Function to check if email should be highlighted
+  const shouldHighlightEmail = (email: string) => {
+    const emailLower = email.toLowerCase();
+    return (
+      emailLower === "deepakvish7354@gmail.com" ||
+      emailLower === "hackhoster4@gmail.com" ||
+      emailLower.includes("@spacetopia.in")
+    );
+  };
+
   return (
     <ProtectedRoute>
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
@@ -229,7 +239,14 @@ export default function StudentsPage() {
                       </TableHeader>
                       <TableBody>
                         {students.map((student) => (
-                          <TableRow key={student.id}>
+                          <TableRow
+                            key={student.id}
+                            className={
+                              shouldHighlightEmail(student.email)
+                                ? "bg-gradient-to-r from-blue-50 to-purple-50 border-l-4 border-blue-400"
+                                : ""
+                            }
+                          >
                             <TableCell className="font-medium text-xs">
                               {student.name}
                             </TableCell>
