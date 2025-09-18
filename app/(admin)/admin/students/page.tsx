@@ -52,7 +52,7 @@ export default function StudentsPage() {
   const { students, pagination, isLoading, error, mutate } = useStudents({
     page: currentPage,
     search: debouncedSearchTerm,
-    pageSize: 10,
+    pageSize: 50,
   });
 
   // Debounce search term
