@@ -28,6 +28,11 @@ import {
   Users,
   RefreshCw,
   Download,
+  CheckCircle,
+  XCircle,
+  Mail,
+  MessageCircle,
+  Phone,
 } from "lucide-react";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { useStudents, Student } from "@/lib/hooks/useStudents";
@@ -95,11 +100,19 @@ export default function StudentsPage() {
     }
   };
 
-  const getMailStatusBadge = (mailSent: boolean) => {
+  const getMailStatusIcon = (mailSent: boolean) => {
     return mailSent ? (
-      <Badge className="bg-green-100 text-green-800">Sent</Badge>
+      <CheckCircle className="h-4 w-4 text-green-600" />
     ) : (
-      <Badge className="bg-gray-100 text-gray-800">Not Sent</Badge>
+      <XCircle className="h-4 w-4 text-gray-400" />
+    );
+  };
+
+  const getWhatsAppStatusIcon = (waSent: boolean) => {
+    return waSent ? (
+      <CheckCircle className="h-4 w-4 text-green-600" />
+    ) : (
+      <XCircle className="h-4 w-4 text-gray-400" />
     );
   };
 
@@ -199,28 +212,49 @@ export default function StudentsPage() {
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead>Name</TableHead>
-                          <TableHead>Grade</TableHead>
-                          <TableHead>School</TableHead>
-                          <TableHead>Email</TableHead>
-                          <TableHead>Mail Sent</TableHead>
-                          <TableHead>Payment Status</TableHead>
-                          <TableHead>Actions</TableHead>
+                          <TableHead className="text-xs">Name</TableHead>
+                          <TableHead className="text-xs">Grade</TableHead>
+                          <TableHead className="text-xs">School</TableHead>
+                          <TableHead className="text-xs">Email</TableHead>
+                          <TableHead className="text-xs">Mobile</TableHead>
+                          <TableHead className="text-xs text-center">
+                            Mail
+                          </TableHead>
+                          <TableHead className="text-xs text-center">
+                            WhatsApp
+                          </TableHead>
+                          <TableHead className="text-xs">Payment</TableHead>
+                          <TableHead className="text-xs">Actions</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
                         {students.map((student) => (
                           <TableRow key={student.id}>
-                            <TableCell className="font-medium">
+                            <TableCell className="font-medium text-xs">
                               {student.name}
                             </TableCell>
-                            <TableCell>{student.grade}</TableCell>
-                            <TableCell>{student.school_name}</TableCell>
-                            <TableCell>{student.email}</TableCell>
-                            <TableCell>
-                              {getMailStatusBadge(student.mail_sent)}
+                            <TableCell className="text-xs">
+                              {student.grade}
                             </TableCell>
-                            <TableCell>
+                            <TableCell className="text-xs">
+                              {student.school_name}
+                            </TableCell>
+                            <TableCell className="text-xs">
+                              {student.email}
+                            </TableCell>
+                            <TableCell className="text-xs">
+                              <div className="flex items-center gap-1">
+                                <Phone className="h-3 w-3 text-gray-400" />
+                                {student.phone}
+                              </div>
+                            </TableCell>
+                            <TableCell className="text-center">
+                              {getMailStatusIcon(student.mail_sent)}
+                            </TableCell>
+                            <TableCell className="text-center">
+                              {getWhatsAppStatusIcon(student.wa_sent)}
+                            </TableCell>
+                            <TableCell className="text-xs">
                               {getPaymentStatusBadge(student.payment_status)}
                             </TableCell>
                             <TableCell>
@@ -228,8 +262,9 @@ export default function StudentsPage() {
                                 variant="outline"
                                 size="sm"
                                 onClick={() => handleViewStudent(student)}
+                                className="text-xs h-7"
                               >
-                                <Eye className="h-4 w-4 mr-1" />
+                                <Eye className="h-3 w-3 mr-1" />
                                 View
                               </Button>
                             </TableCell>

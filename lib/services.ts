@@ -128,4 +128,94 @@ const triggerStudentConfirmationMail = async ({
     }
 }
 
-export { triggerStudentConfirmationMail, isEmailRegisteredInCosmicKids, createCosmicKidsAccount, updateStudentMailStatus };
+const sendWhatsAppMessage = async ({
+    mobileNumber,
+    templateId,
+    parameters
+}: {
+    mobileNumber: string,
+    templateId: string,
+    parameters: Array<{ type: string, text: string }>
+}) => {
+    const ULGEBRA_WEBHOOK_URL = 'https://api.ulgebra.com/v1/workflows?extensionName=whatsappforspreadsheet';
+    const ULGEBRA_WEBHOOK_AUTHTOKEN = 'd2hhdHNhcHBmb3JzcHJlYWRzaGVldC5IVXR3cGthWUNYVWJNRjFpcDJBeW5yVXBqOVQyLl9TQUFTXzczZTJiOTExMDA4My00NTE0LWExMzYtY2ViMGJkYTJmNDU4';
+
+    // Ensure mobile number has proper format
+
+    const payload = {
+        messaging_product: "whatsapp",
+        recipient_type: "individual",
+        whatsAppSenderID: "133634283159197",
+        to: mobileNumber,
+        type: "template",
+        source: {
+            type: "uaapp-workflow",
+            email: "school@stemandspace.com",
+            name: "School",
+            id: "HUtwpkaYCXUbMF1ip2AynrUpj9T2",
+            pic: "https://lh3.googleusercontent.com/a/ACg8ocLMYMfcimGoZJXpaTECZQbIEvD4xvOY_ej4BowWDD8u=s96-c",
+            uaApp: "whatsappforspreadsheet",
+            uaAppSaaSOrgID: "HUtwpkaYCXUbMF1ip2AynrUpj9T2",
+            uaAppSaaSUserId: "HUtwpkaYCXUbMF1ip2AynrUpj9T2"
+        },
+        template: {
+            name: templateId,
+            language: {
+                code: "en"
+            },
+            components: [
+                {
+                    type: "body",
+                    parameters: parameters
+                }
+            ]
+        },
+        from: "919560554900",
+        module: "excel",
+        recordId: "FILL_HERE",
+        channel: "WhatsApp",
+        default_country_code: "91",
+        ulgebra_webhook_authtoken: ULGEBRA_WEBHOOK_AUTHTOKEN
+    };
+
+    try {
+        console.log('Sending WhatsApp message with payload:', JSON.stringify(payload, null, 2));
+
+        const response = await axios.post(ULGEBRA_WEBHOOK_URL, payload, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
+
+        console.log('WhatsApp message sent successfully:', response.data);
+        return response.data;
+    } catch (error: any) {
+        console.error('Error sending WhatsApp message:', error);
+        console.error('Error response:', error.response?.data);
+        console.error('Error status:', error.response?.status);
+
+        // Provide more detailed error message
+        const errorMessage = error.response?.data?.message ||
+            error.response?.data?.error ||
+            error.message ||
+            'Failed to send WhatsApp message';
+
+        throw new Error(`WhatsApp Error: ${errorMessage}`);
+    }
+};
+
+const updateStudentWhatsAppStatus = async (studentDocumentId: string, whatsappSent: boolean) => {
+    try {
+        const student = await client.collection('students').update(studentDocumentId, {
+            "wa_sent": whatsappSent
+        });
+        console.log("student whatsapp status updated", student);
+        return student;
+    } catch (error) {
+        console.error(error);
+        throw new Error('Failed to update student WhatsApp status');
+    }
+};
+
+export { triggerStudentConfirmationMail, isEmailRegisteredInCosmicKids, createCosmicKidsAccount, updateStudentMailStatus, sendWhatsAppMessage, updateStudentWhatsAppStatus };

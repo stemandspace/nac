@@ -21,9 +21,11 @@ import {
   CheckCircle,
   XCircle,
   Loader2,
+  MessageCircle,
 } from "lucide-react";
 import { Student } from "@/lib/hooks/useStudents";
 import useSendMail from "@/lib/hooks/useSendMail";
+import useSendWhatsApp from "@/lib/hooks/useSendWhatsApp";
 
 interface StudentDetailsPopupProps {
   student: Student;
@@ -35,6 +37,11 @@ export default function StudentDetailsPopup({
   onClose,
 }: StudentDetailsPopupProps) {
   const { sendStudentConfirmationMail, isLoading, error } = useSendMail();
+  const {
+    sendStudentWhatsAppMessage,
+    isLoading: isWhatsAppLoading,
+    error: whatsappError,
+  } = useSendWhatsApp();
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
@@ -77,6 +84,20 @@ export default function StudentDetailsPopup({
 
   const getMailStatusBadge = (mailSent: boolean) => {
     return mailSent ? (
+      <Badge className="bg-green-100 text-green-800 flex items-center gap-1">
+        <CheckCircle className="h-3 w-3" />
+        Sent
+      </Badge>
+    ) : (
+      <Badge className="bg-gray-100 text-gray-800 flex items-center gap-1">
+        <XCircle className="h-3 w-3" />
+        Not Sent
+      </Badge>
+    );
+  };
+
+  const getWhatsAppStatusBadge = (waSent: boolean) => {
+    return waSent ? (
       <Badge className="bg-green-100 text-green-800 flex items-center gap-1">
         <CheckCircle className="h-3 w-3" />
         Sent
@@ -221,6 +242,12 @@ export default function StudentDetailsPopup({
                   </label>
                   <div>{getMailStatusBadge(student.mail_sent)}</div>
                 </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-500">
+                    WhatsApp Sent
+                  </label>
+                  <div>{getWhatsAppStatusBadge(student.wa_sent)}</div>
+                </div>
                 {student.order_amount && (
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-500">
@@ -349,12 +376,28 @@ export default function StudentDetailsPopup({
             {student.mail_sent ? "Resend Mail" : "Send Mail"}
           </Button>
 
+          <Button
+            className="cursor-pointer bg-green-600 hover:bg-green-700"
+            disabled={isWhatsAppLoading}
+            onClick={() => sendStudentWhatsAppMessage(student)}
+          >
+            {isWhatsAppLoading ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <MessageCircle className="h-4 w-4" />
+            )}
+            {student.wa_sent ? "Resend WhatsApp" : "Send WhatsApp"}
+          </Button>
+
           <Button onClick={onClose} variant="outline">
             Close
           </Button>
         </div>
 
-        <div>{error && <p className="text-red-500">{error}</p>}</div>
+        <div>
+          {error && <p className="text-red-500">{error}</p>}
+          {whatsappError && <p className="text-red-500">{whatsappError}</p>}
+        </div>
       </DialogContent>
     </Dialog>
   );
