@@ -37,6 +37,7 @@ import {
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { useStudents, Student } from "@/lib/hooks/useStudents";
 import StudentDetailsPopup from "@/components/admin/StudentDetailsPopup";
+import AdvancedDetailsPopup from "@/components/admin/AdvancedDetailsPopup";
 
 export default function StudentsPage() {
   const { logout } = useAuth();
@@ -44,6 +45,7 @@ export default function StudentsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [showPopup, setShowPopup] = useState(false);
+  const [showAdvancedPopup, setShowAdvancedPopup] = useState(false);
 
   // Debounced search term
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState(searchTerm);
@@ -86,6 +88,16 @@ export default function StudentsPage() {
 
   const handleClosePopup = () => {
     setShowPopup(false);
+    setSelectedStudent(null);
+  };
+
+  const handleAdvancedDetail = (student: Student) => {
+    setSelectedStudent(student);
+    setShowAdvancedPopup(true);
+  };
+
+  const handleCloseAdvancedPopup = () => {
+    setShowAdvancedPopup(false);
     setSelectedStudent(null);
   };
 
@@ -227,6 +239,7 @@ export default function StudentsPage() {
                           <TableHead className="text-xs">School</TableHead>
                           <TableHead className="text-xs">Email</TableHead>
                           <TableHead className="text-xs">Mobile</TableHead>
+                          <TableHead className="text-xs">Addon</TableHead>
                           <TableHead className="text-xs text-center">
                             Mail
                           </TableHead>
@@ -265,6 +278,15 @@ export default function StudentsPage() {
                                 {student.phone}
                               </div>
                             </TableCell>
+                            <TableCell className="text-xs">
+                              {student.selected_addon?.id ? (
+                                <Badge className="bg-blue-100 text-blue-800 uppercase hover:bg-blue-500 hover:text-white">
+                                  {student.selected_addon.id}
+                                </Badge>
+                              ) : (
+                                <span className="text-gray-400">None</span>
+                              )}
+                            </TableCell>
                             <TableCell className="text-center">
                               {getMailStatusIcon(student.mail_sent)}
                             </TableCell>
@@ -275,15 +297,26 @@ export default function StudentsPage() {
                               {getPaymentStatusBadge(student.payment_status)}
                             </TableCell>
                             <TableCell>
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => handleViewStudent(student)}
-                                className="text-xs h-7"
-                              >
-                                <Eye className="h-3 w-3 mr-1" />
-                                View
-                              </Button>
+                              <div className="flex gap-2">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => handleViewStudent(student)}
+                                  className="text-xs h-7"
+                                >
+                                  <Eye className="h-3 w-3 mr-1" />
+                                  View
+                                </Button>
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => handleAdvancedDetail(student)}
+                                  className="text-xs h-7"
+                                >
+                                  <Eye className="h-3 w-3 mr-1" />
+                                  Advanced
+                                </Button>
+                              </div>
                             </TableCell>
                           </TableRow>
                         ))}
@@ -339,6 +372,14 @@ export default function StudentsPage() {
           <StudentDetailsPopup
             student={selectedStudent}
             onClose={handleClosePopup}
+          />
+        )}
+
+        {/* Advanced Detail Popup */}
+        {showAdvancedPopup && selectedStudent && (
+          <AdvancedDetailsPopup
+            student={selectedStudent}
+            onClose={handleCloseAdvancedPopup}
           />
         )}
       </div>

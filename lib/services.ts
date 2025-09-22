@@ -39,6 +39,39 @@ const isEmailRegisteredInCosmicKids = async (email: string) => {
     }
 }
 
+const getCosmicKidsAccountDetails = async (email: string) => {
+    if (!email) {
+        throw new Error('Email is required');
+    }
+    try {
+        const url = `${COSMIC_KIDS_API_BASE}/users?filters[email][$eq]=${encodeURIComponent(email)}&populate=*`;
+        const response = await axios.get(url);
+        if (response.data && Array.isArray(response.data) && response.data.length > 0) {
+            const user = response.data[0];
+            return {
+                registered: true,
+                userId: user.id,
+                username: user.username,
+                email: user.email,
+                confirmed: user.confirmed,
+                blocked: user.blocked,
+                createdAt: user.createdAt,
+                updatedAt: user.updatedAt,
+                provider: user.provider,
+                role: user.role?.name || 'User',
+                credits: user.credits || 0,
+                membership: user.type,
+                membership_date: user.premium,
+                lastLogin: user.lastLogin || null
+            };
+        }
+        return { registered: false };
+    } catch (error) {
+        console.error(error);
+        throw new Error('Failed to fetch Cosmic Kids account details');
+    }
+}
+
 
 const createCosmicKidsAccount = async ({ username, email, password }: { username: string, email: string, password: string }) => {
     if (!username || !email || !password) {
@@ -218,4 +251,4 @@ const updateStudentWhatsAppStatus = async (studentDocumentId: string, whatsappSe
     }
 };
 
-export { triggerStudentConfirmationMail, isEmailRegisteredInCosmicKids, createCosmicKidsAccount, updateStudentMailStatus, sendWhatsAppMessage, updateStudentWhatsAppStatus };
+export { triggerStudentConfirmationMail, isEmailRegisteredInCosmicKids, getCosmicKidsAccountDetails, createCosmicKidsAccount, updateStudentMailStatus, sendWhatsAppMessage, updateStudentWhatsAppStatus };
