@@ -103,10 +103,24 @@ export default function StudentRegistrationForm({
       setError(null);
     }
 
-    setFormData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
+    // Real-time phone number validation
+    if (field === "phone" && typeof value === "string") {
+      // Remove any non-digit characters for validation
+      const cleanPhone = value.replace(/\D/g, "");
+      // Only allow up to 12 digits
+      if (cleanPhone.length > 12) {
+        return; // Don't update if more than 12 digits
+      }
+      setFormData((prev) => ({
+        ...prev,
+        [field]: cleanPhone,
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [field]: value,
+      }));
+    }
   };
 
   const handleAddonToggle = (addonId: string) => {
@@ -233,6 +247,14 @@ export default function StudentRegistrationForm({
     }
     if (!formData.phone.trim()) {
       setError("Phone number is required");
+      return;
+    }
+    // Validate phone number format (12 digits with country code)
+    const phoneRegex = /^\d{12}$/;
+    if (!phoneRegex.test(formData.phone.replace(/\s+/g, ""))) {
+      setError(
+        "Phone number must be 12 digits long with country code (e.g., 919876543210)"
+      );
       return;
     }
     if (!formData.dob) {
@@ -542,6 +564,7 @@ export default function StudentRegistrationForm({
                   <Input
                     type="email"
                     required
+                    maxLength={100}
                     value={formData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
                     placeholder="Enter email address"
@@ -560,13 +583,17 @@ export default function StudentRegistrationForm({
                   <Input
                     type="tel"
                     required
+                    maxLength={12}
+                    minLength={12}
+                    pattern="^\d{12}$"
                     value={formData.phone}
                     onChange={(e) => handleInputChange("phone", e.target.value)}
-                    placeholder="Enter phone number"
+                    placeholder="Enter 12-digit number with country code (e.g., 919876543210)"
                     className="w-full"
                   />
                   <p className="text-xs text-gray-500 mt-1">
-                    Provide a valid number for updates.
+                    Enter 12 digits with country code (e.g., 919876543210 for
+                    India).
                   </p>
                 </div>
 
