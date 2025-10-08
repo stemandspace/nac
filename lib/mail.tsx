@@ -23,8 +23,7 @@ export async function sendTemplateMail({
   globalMergeInfo = {},
 }: SendMailOptions): Promise<{ success: boolean; data?: any; error?: any }> {
   const url = "https://api.zeptomail.in/v1.1/email/template/batch";
-  const apiKey =
-    "Zoho-enczapikey PHtE6r0PQe++iWMt80VStKSxQMWhZ94nru40f1FC491HAvMHFk1Vq9gslTGzrB0sVaJGF/GTzoxgtuud4ujRd2u7YW9IDWqyqK3sx/VYSPOZsbq6x00csF4dck3aXIXsdddq0CTUvtzeNA==";
+  const apiKey = `Zoho-enczapikey ${process.env.NEXT_PUBLIC_ZEPTO_MAIL_API_KEY}`;
 
   // Prepare the "to" array as per ZeptoMail API
   const to = recipients.map((recipient) => ({
@@ -89,9 +88,7 @@ export async function sendContactUsMail({
   }>;
 }): Promise<{ success: boolean; data?: any; error?: any }> {
   const url = "https://api.zeptomail.in/v1.1/email/template/batch";
-  const apiKey =
-    "Zoho-enczapikey PHtE6r0PQe++iWMt80VStKSxQMWhZ94nru40f1FC491HAvMHFk1Vq9gslTGzrB0sVaJGF/GTzoxgtuud4ujRd2u7YW9IDWqyqK3sx/VYSPOZsbq6x00csF4dck3aXIXsdddq0CTUvtzeNA==";
-
+  const apiKey = `Zoho-enczapikey ${process.env.NEXT_PUBLIC_ZEPTO_MAIL_API_KEY}`;
   const mailTemplateKey =
     "2518b.5ca07f11c3f3c129.k1.9fb58f50-7f2c-11f0-a23d-62df313bf14d.198d0c1a4c5";
 
