@@ -63,12 +63,16 @@ const SupportHelpSection: React.FC = () => {
                 Understand the Rules
               </h3>
               <p className="text-gray-700 text-center mb-6">
-                Download the participation terms PDF.
+                Download the participation terms.
               </p>
             </div>
-            <button className="w-full bg-[#EE7E1A] hover:bg-[#D67015] text-white font-semibold py-3 px-6 rounded-full transition-all duration-200 shadow-md hover:scale-105 mt-auto">
+            <a
+              href="/terms-and-condition.pdf"
+              download="terms-and-conditions.pdf"
+              className="w-full bg-[#EE7E1A] hover:bg-[#D67015] text-white font-semibold py-3 px-6 rounded-full transition-all duration-200 shadow-md hover:scale-105 mt-auto flex justify-center items-center"
+            >
               Download PDF
-            </button>
+            </a>
           </div>
 
           {/* Need Help Card */}
