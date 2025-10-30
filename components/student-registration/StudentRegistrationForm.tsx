@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
@@ -70,6 +71,7 @@ export default function StudentRegistrationForm({
 }: StudentRegistrationFormProps) {
   // Move useRazorpay hook to the top level
   const { Razorpay } = useRazorpay();
+  const router = useRouter();
 
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
@@ -185,26 +187,9 @@ export default function StudentRegistrationForm({
           contact: studentData.phone,
         },
         handler: async (response: any) => {
-          setSuccess(true);
-          // Reset form
-          setFormData({
-            name: "",
-            email: "",
-            phone: "",
-            dob: "",
-            school_name: school?.name || "",
-            grade: "",
-            section: "",
-            city: "",
-            is_overseas: school?.is_overseas || false,
-          });
-          setAddonOptions((prev) =>
-            prev.map((opt) => ({ ...opt, checked: false }))
-          );
-          setHasLaptop(false);
-          setAgreedToTerms(false);
+          // Optional: minimal cleanup before redirect
           setIsProcessingPayment(false);
-          alert("Payment successful");
+          router.push("/student-registration/form/confirmed");
         },
         modal: {
           ondismiss: () => {
