@@ -12,7 +12,15 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import ProtectedRoute from "@/components/ProtectedRoute";
-import { LogOut, User, Shield, Settings, Users, Building2 } from "lucide-react";
+import {
+  LogOut,
+  User,
+  Shield,
+  Settings,
+  Users,
+  Building2,
+  Upload,
+} from "lucide-react";
 import { useStudents } from "@/lib/hooks/useStudents";
 import { useSchools } from "@/lib/hooks/useSchools";
 
@@ -37,6 +45,10 @@ export default function AdminDashboard() {
 
   const handleSchoolManagement = () => {
     router.push("/admin/schools");
+  };
+
+  const handleSheetUpload = () => {
+    router.push("/admin/upload");
   };
 
   return (
@@ -149,16 +161,19 @@ export default function AdminDashboard() {
                 </CardContent>
               </Card>
 
-              <Card className="hover:shadow-md transition-shadow cursor-pointer">
+              <Card
+                className="hover:shadow-md transition-shadow cursor-pointer"
+                onClick={handleSheetUpload}
+              >
                 <CardHeader className="pb-3">
                   <CardTitle className="text-lg flex items-center gap-2">
-                    <Shield className="h-5 w-5" />
-                    Security
+                    <Upload className="h-5 w-5" />
+                    Sheet Upload
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
-                    Monitor security logs and access controls
+                    Upload CSV or Excel files to add users in bulk
                   </p>
                 </CardContent>
               </Card>
