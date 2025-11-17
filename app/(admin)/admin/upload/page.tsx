@@ -23,6 +23,7 @@ import {
   Shield,
   LogOut,
   Users,
+  Download,
 } from "lucide-react";
 import * as XLSX from "xlsx";
 
@@ -30,16 +31,29 @@ interface UserData {
   name: string;
   email: string;
   phone: string;
-  [key: string]: string;
+  school: string;
+  grade: string;
+  section: string;
+  payment_id: string;
+  is_overseas: string;
+  dob?: string;
+  city?: string;
+  [key: string]: string | undefined;
 }
 
 interface UploadResult {
   success: boolean;
-  totalRows: number;
-  successful: number;
-  failed: number;
-  errors: string[];
-  users: UserData[];
+  message?: string;
+  results: {
+    total: number;
+    successful: number;
+    failed: number;
+    errors: Array<{
+      row: number;
+      email: string;
+      error: string;
+    }>;
+  };
 }
 
 export default function SheetUploadPage() {
@@ -54,6 +68,76 @@ export default function SheetUploadPage() {
   const handleLogout = () => {
     logout();
     router.push("/admin/login");
+  };
+
+  const downloadSampleFile = () => {
+    // Create sample CSV content
+    const sampleData = [
+      {
+        name: "John Doe",
+        email: "john.doe@example.com",
+        phone: "+919876543210",
+        school: "ABC School",
+        grade: "10",
+        section: "A",
+        payment_id: "pay_1234567890",
+        is_overseas: "false",
+        dob: "2010-01-15",
+        city: "Mumbai",
+      },
+      {
+        name: "Jane Smith",
+        email: "jane.smith@example.com",
+        phone: "+919876543211",
+        school: "XYZ School",
+        grade: "9",
+        section: "B",
+        payment_id: "pay_1234567891",
+        is_overseas: "true",
+        dob: "2011-03-20",
+        city: "New York",
+      },
+    ];
+
+    // Convert to CSV
+    const headers = [
+      "name",
+      "email",
+      "phone",
+      "school",
+      "grade",
+      "section",
+      "payment_id",
+      "is_overseas",
+      "dob",
+      "city",
+    ];
+    const csvContent = [
+      headers.join(","),
+      ...sampleData.map((row) =>
+        headers
+          .map((header) => {
+            const value = row[header] || "";
+            // Escape commas and quotes in CSV
+            if (value.includes(",") || value.includes('"')) {
+              return `"${value.replace(/"/g, '""')}"`;
+            }
+            return value;
+          })
+          .join(",")
+      ),
+    ].join("\n");
+
+    // Create blob and download
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.setAttribute("download", "sample_student_upload.csv");
+    link.style.visibility = "hidden";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,34 +165,80 @@ export default function SheetUploadPage() {
           throw new Error("CSV file is empty");
         }
 
-        // Parse CSV header
-        const headers = lines[0].split(",").map((h) => h.trim());
-        const nameIndex = headers.findIndex((h) =>
-          h.toLowerCase().includes("name")
-        );
-        const emailIndex = headers.findIndex((h) =>
-          h.toLowerCase().includes("email")
-        );
-        const phoneIndex = headers.findIndex(
-          (h) =>
-            h.toLowerCase().includes("phone") ||
-            h.toLowerCase().includes("mobile")
+        // Parse CSV header - handle quoted values
+        const parseCSVLine = (line: string): string[] => {
+          const result: string[] = [];
+          let current = "";
+          let inQuotes = false;
+          for (let i = 0; i < line.length; i++) {
+            const char = line[i];
+            if (char === '"') {
+              if (inQuotes && line[i + 1] === '"') {
+                current += '"';
+                i++;
+              } else {
+                inQuotes = !inQuotes;
+              }
+            } else if (char === "," && !inQuotes) {
+              result.push(current.trim());
+              current = "";
+            } else {
+              current += char;
+            }
+          }
+          result.push(current.trim());
+          return result;
+        };
+
+        const headers = parseCSVLine(lines[0]).map((h) =>
+          h.toLowerCase().trim()
         );
 
-        if (nameIndex === -1 || emailIndex === -1) {
+        // Required columns
+        const requiredColumns = [
+          "name",
+          "email",
+          "phone",
+          "school",
+          "grade",
+          "section",
+          "payment_id",
+          "is_overseas",
+        ];
+        const missingColumns = requiredColumns.filter(
+          (col) => !headers.includes(col.toLowerCase())
+        );
+
+        if (missingColumns.length > 0) {
           throw new Error(
-            "CSV must contain 'name' and 'email' columns (case-insensitive)"
+            `CSV must contain required columns: ${requiredColumns.join(
+              ", "
+            )}. Missing: ${missingColumns.join(", ")}`
           );
         }
 
+        // Get column indices
+        const getIndex = (col: string) => headers.indexOf(col.toLowerCase());
+
         // Parse CSV rows
         for (let i = 1; i < lines.length; i++) {
-          const values = lines[i].split(",").map((v) => v.trim());
-          if (values.length >= Math.max(nameIndex, emailIndex) + 1) {
+          const values = parseCSVLine(lines[i]);
+          if (values.length >= headers.length) {
             data.push({
-              name: values[nameIndex] || "",
-              email: values[emailIndex] || "",
-              phone: phoneIndex !== -1 ? values[phoneIndex] || "" : "",
+              name: values[getIndex("name")] || "",
+              email: values[getIndex("email")] || "",
+              phone: values[getIndex("phone")] || "",
+              school: values[getIndex("school")] || "",
+              grade: values[getIndex("grade")] || "",
+              section: values[getIndex("section")] || "",
+              payment_id: values[getIndex("payment_id")] || "",
+              is_overseas: values[getIndex("is_overseas")] || "false",
+              dob: headers.includes("dob")
+                ? values[getIndex("dob")]
+                : undefined,
+              city: headers.includes("city")
+                ? values[getIndex("city")]
+                : undefined,
             });
           }
         }
@@ -127,32 +257,49 @@ export default function SheetUploadPage() {
           throw new Error("Excel file is empty");
         }
 
-        // Find column indices
+        // Find column keys (case-insensitive)
         const firstRow = jsonData[0];
         const headers = Object.keys(firstRow);
-        const nameKey = headers.find((h) => h.toLowerCase().includes("name"));
-        const emailKey = headers.find((h) => h.toLowerCase().includes("email"));
-        const phoneKey = headers.find(
-          (h) =>
-            h.toLowerCase().includes("phone") ||
-            h.toLowerCase().includes("mobile")
-        );
+        const getKey = (col: string) =>
+          headers.find((h) => h.toLowerCase() === col.toLowerCase());
 
-        if (!nameKey || !emailKey) {
+        // Required columns
+        const requiredColumns = [
+          "name",
+          "email",
+          "phone",
+          "school",
+          "grade",
+          "section",
+          "payment_id",
+          "is_overseas",
+        ];
+        const missingColumns = requiredColumns.filter((col) => !getKey(col));
+
+        if (missingColumns.length > 0) {
           throw new Error(
-            "Excel must contain 'name' and 'email' columns (case-insensitive)"
+            `Excel must contain required columns: ${requiredColumns.join(
+              ", "
+            )}. Missing: ${missingColumns.join(", ")}`
           );
         }
 
         // Parse Excel rows
         data = jsonData.map((row) => ({
-          name: String(row[nameKey] || ""),
-          email: String(row[emailKey] || ""),
-          phone: phoneKey ? String(row[phoneKey] || "") : "",
+          name: String(row[getKey("name")] || ""),
+          email: String(row[getKey("email")] || ""),
+          phone: String(row[getKey("phone")] || ""),
+          school: String(row[getKey("school")] || ""),
+          grade: String(row[getKey("grade")] || ""),
+          section: String(row[getKey("section")] || ""),
+          payment_id: String(row[getKey("payment_id")] || ""),
+          is_overseas: String(row[getKey("is_overseas")] || "false"),
+          dob: getKey("dob") ? String(row[getKey("dob")] || "") : undefined,
+          city: getKey("city") ? String(row[getKey("city")] || "") : undefined,
         }));
       } else {
         throw new Error(
-          "Unsupported file format. Please upload a CSV or Excel file (.xlsx, .xls, .xlsm)"
+          "Unsupported file format. Please upload a CSV file (.csv)"
         );
       }
 
@@ -167,59 +314,122 @@ export default function SheetUploadPage() {
     }
   };
 
-  const validateUserData = (user: UserData): string | null => {
-    if (!user.name || user.name.trim() === "") {
-      return "Name is required";
+  const uploadBulkFile = async (data: UserData[]): Promise<UploadResult> => {
+    const baseURL =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:1337/api"
+        : "https://api-nac.spacetopia.in/api";
+
+    if (!data || data.length === 0) {
+      throw new Error("No valid data to upload");
     }
-    if (!user.email || user.email.trim() === "") {
-      return "Email is required";
+
+    // Send JSON data to backend
+    const response = await fetch(`${baseURL}/v1/bulk-upload`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ data }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(
+        errorData.message || `Upload failed with status ${response.status}`
+      );
     }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(user.email)) {
-      return "Invalid email format";
+
+    const result = await response.json();
+    return result;
+  };
+
+  const validateCSVFile = (file: File): string | null => {
+    // Validate file type by extension
+    const fileExtension = file.name.split(".").pop()?.toLowerCase();
+    if (fileExtension !== "csv") {
+      return "Invalid file type. Please upload a CSV file (.csv extension required).";
     }
+
+    // Validate file type by MIME type (if available)
+    if (
+      file.type &&
+      file.type !== "text/csv" &&
+      file.type !== "application/vnd.ms-excel" &&
+      file.type !== "text/plain" &&
+      !file.type.includes("csv")
+    ) {
+      return `Invalid file MIME type: ${file.type}. Please upload a CSV file.`;
+    }
+
+    // Validate file size (max 10MB)
+    const maxSize = 10 * 1024 * 1024; // 10MB in bytes
+    if (file.size > maxSize) {
+      return `File size exceeds 10MB limit. Current size: ${(
+        file.size /
+        1024 /
+        1024
+      ).toFixed(2)}MB`;
+    }
+
+    if (file.size === 0) {
+      return "File is empty. Please upload a valid CSV file.";
+    }
+
     return null;
   };
 
-  const simulateAddUsers = async (users: UserData[]): Promise<UploadResult> => {
-    // Simulate API delay
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+  const validateCSVData = (data: UserData[]): string | null => {
+    if (!data || data.length === 0) {
+      return "No data found in CSV file. Please ensure the file contains at least one data row.";
+    }
 
-    const result: UploadResult = {
-      success: true,
-      totalRows: users.length,
-      successful: 0,
-      failed: 0,
-      errors: [],
-      users: [],
-    };
+    // Required fields for validation
+    const requiredFields = [
+      "name",
+      "email",
+      "phone",
+      "school",
+      "grade",
+      "section",
+      "payment_id",
+      "is_overseas",
+    ];
 
-    // Fake backend logic - simulate adding users
-    users.forEach((user, index) => {
-      const validationError = validateUserData(user);
-      if (validationError) {
-        result.failed++;
-        result.errors.push(
-          `Row ${index + 2}: ${validationError} - ${user.name || "Unknown"}`
-        );
-      } else {
-        // Simulate random success/failure (90% success rate for demo)
-        const randomSuccess = Math.random() > 0.1;
-        if (randomSuccess) {
-          result.successful++;
-          result.users.push(user);
-        } else {
-          result.failed++;
-          result.errors.push(
-            `Row ${index + 2}: Failed to add user - ${
-              user.name
-            } (simulated error)`
-          );
-        }
+    // Validate each row
+    for (let i = 0; i < data.length; i++) {
+      const row = data[i];
+      const rowNumber = i + 2; // +2 because CSV has header row and arrays are 0-indexed
+
+      // Check for missing required fields
+      const missingFields = requiredFields.filter((field) => {
+        const value = row[field as keyof UserData];
+        return !value || (typeof value === "string" && value.trim() === "");
+      });
+
+      if (missingFields.length > 0) {
+        return `Row ${rowNumber}: Missing required fields: ${missingFields.join(
+          ", "
+        )}`;
       }
-    });
 
-    return result;
+      // Validate email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (row.email && !emailRegex.test(row.email.trim())) {
+        return `Row ${rowNumber}: Invalid email format: ${row.email}`;
+      }
+
+      // Validate is_overseas is a valid boolean string
+      const isOverseasValue = row.is_overseas?.toLowerCase().trim();
+      if (
+        isOverseasValue &&
+        !["true", "false", "1", "0", "yes", "no"].includes(isOverseasValue)
+      ) {
+        return `Row ${rowNumber}: Invalid is_overseas value: ${row.is_overseas}. Must be true/false, 1/0, or yes/no`;
+      }
+    }
+
+    return null;
   };
 
   const handleUpload = async () => {
@@ -233,8 +443,37 @@ export default function SheetUploadPage() {
     setUploadResult(null);
 
     try {
-      const users = await parseFile(file, false);
-      const result = await simulateAddUsers(users);
+      // Step 1: Validate CSV file type
+      const fileValidationError = validateCSVFile(file);
+      if (fileValidationError) {
+        setError(fileValidationError);
+        setIsUploading(false);
+        return;
+      }
+
+      // Step 2: Parse and validate CSV structure (columns)
+      let parsedData: UserData[];
+      try {
+        parsedData = await parseFile(file, false);
+      } catch (parseError: any) {
+        setError(
+          parseError.message ||
+            "Failed to parse CSV file. Please check the file format."
+        );
+        setIsUploading(false);
+        return;
+      }
+
+      // Step 3: Validate CSV data (required fields, formats)
+      const dataValidationError = validateCSVData(parsedData);
+      if (dataValidationError) {
+        setError(dataValidationError);
+        setIsUploading(false);
+        return;
+      }
+
+      // Step 4: Upload to API
+      const result = await uploadBulkFile(parsedData);
       setUploadResult(result);
     } catch (err: any) {
       setError(err.message || "Failed to process file");
@@ -306,17 +545,27 @@ export default function SheetUploadPage() {
                   Upload User Sheet
                 </CardTitle>
                 <CardDescription>
-                  Upload a CSV or Excel file (.xlsx, .xls, .xlsm) with user
-                  data. The file should contain columns for name, email, and
-                  optionally phone.
+                  Upload a CSV file with student registration data. Required
+                  columns: name, email, phone, school, grade, section,
+                  payment_id, is_overseas. Optional: dob, city.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
+                <div className="flex justify-end">
+                  <Button
+                    onClick={downloadSampleFile}
+                    variant="outline"
+                    className="gap-2"
+                  >
+                    <Download className="h-4 w-4" />
+                    Download Sample CSV
+                  </Button>
+                </div>
                 <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-primary transition-colors">
                   <input
                     id="file-input"
                     type="file"
-                    accept=".csv,.xlsx,.xls,.xlsm"
+                    accept=".csv"
                     onChange={handleFileChange}
                     className="hidden"
                   />
@@ -330,7 +579,7 @@ export default function SheetUploadPage() {
                         {file ? file.name : "Click to upload or drag and drop"}
                       </p>
                       <p className="text-sm text-muted-foreground mt-1">
-                        CSV, XLSX, XLS, XLSM (Max 10MB)
+                        CSV only (Max 10MB)
                       </p>
                     </div>
                   </label>
@@ -356,6 +605,12 @@ export default function SheetUploadPage() {
                               <th className="px-4 py-2 text-left">Name</th>
                               <th className="px-4 py-2 text-left">Email</th>
                               <th className="px-4 py-2 text-left">Phone</th>
+                              <th className="px-4 py-2 text-left">School</th>
+                              <th className="px-4 py-2 text-left">Grade</th>
+                              <th className="px-4 py-2 text-left">Section</th>
+                              <th className="px-4 py-2 text-left">
+                                Payment ID
+                              </th>
                             </tr>
                           </thead>
                           <tbody>
@@ -368,6 +623,18 @@ export default function SheetUploadPage() {
                                 <td className="px-4 py-2">{user.email}</td>
                                 <td className="px-4 py-2">
                                   {user.phone || "-"}
+                                </td>
+                                <td className="px-4 py-2">
+                                  {user.school || "-"}
+                                </td>
+                                <td className="px-4 py-2">
+                                  {user.grade || "-"}
+                                </td>
+                                <td className="px-4 py-2">
+                                  {user.section || "-"}
+                                </td>
+                                <td className="px-4 py-2">
+                                  {user.payment_id || "-"}
                                 </td>
                               </tr>
                             ))}
@@ -414,7 +681,7 @@ export default function SheetUploadPage() {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    {uploadResult.successful > 0 ? (
+                    {uploadResult.results.successful > 0 ? (
                       <CheckCircle2 className="h-5 w-5 text-green-600" />
                     ) : (
                       <XCircle className="h-5 w-5 text-red-600" />
@@ -426,10 +693,35 @@ export default function SheetUploadPage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
+                  {/* Success/Error Message */}
+                  {uploadResult.message && (
+                    <Alert
+                      variant={
+                        uploadResult.success &&
+                        uploadResult.results.failed === 0
+                          ? "default"
+                          : uploadResult.results.successful > 0
+                          ? "default"
+                          : "destructive"
+                      }
+                    >
+                      {uploadResult.success &&
+                      uploadResult.results.failed === 0 ? (
+                        <CheckCircle2 className="h-4 w-4" />
+                      ) : (
+                        <XCircle className="h-4 w-4" />
+                      )}
+                      <AlertDescription>
+                        {uploadResult.message}
+                      </AlertDescription>
+                    </Alert>
+                  )}
+
+                  {/* Statistics */}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="p-4 bg-blue-50 rounded-lg text-center">
                       <div className="text-3xl font-bold text-blue-600">
-                        {uploadResult.totalRows}
+                        {uploadResult.results.total}
                       </div>
                       <div className="text-sm text-blue-600 mt-1">
                         Total Rows
@@ -437,7 +729,7 @@ export default function SheetUploadPage() {
                     </div>
                     <div className="p-4 bg-green-50 rounded-lg text-center">
                       <div className="text-3xl font-bold text-green-600">
-                        {uploadResult.successful}
+                        {uploadResult.results.successful}
                       </div>
                       <div className="text-sm text-green-600 mt-1 flex items-center justify-center gap-1">
                         <Users className="h-4 w-4" />
@@ -446,22 +738,54 @@ export default function SheetUploadPage() {
                     </div>
                     <div className="p-4 bg-red-50 rounded-lg text-center">
                       <div className="text-3xl font-bold text-red-600">
-                        {uploadResult.failed}
+                        {uploadResult.results.failed}
                       </div>
                       <div className="text-sm text-red-600 mt-1">Failed</div>
                     </div>
                   </div>
 
-                  {uploadResult.errors.length > 0 && (
+                  {/* Success Rate */}
+                  {uploadResult.results.total > 0 && (
+                    <div className="p-4 bg-gray-50 rounded-lg">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-sm font-medium text-gray-700">
+                          Success Rate
+                        </span>
+                        <span className="text-sm font-bold text-gray-900">
+                          {Math.round(
+                            (uploadResult.results.successful /
+                              uploadResult.results.total) *
+                              100
+                          )}
+                          %
+                        </span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div
+                          className="bg-green-600 h-2 rounded-full transition-all"
+                          style={{
+                            width: `${
+                              (uploadResult.results.successful /
+                                uploadResult.results.total) *
+                              100
+                            }%`,
+                          }}
+                        ></div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Errors List */}
+                  {uploadResult.results.errors.length > 0 && (
                     <div>
                       <h3 className="text-sm font-medium mb-2 text-red-600">
-                        Errors ({uploadResult.errors.length}):
+                        Errors ({uploadResult.results.errors.length}):
                       </h3>
                       <div className="border rounded-lg p-4 bg-red-50 max-h-60 overflow-y-auto">
                         <ul className="space-y-1 text-sm">
-                          {uploadResult.errors.map((error, index) => (
+                          {uploadResult.results.errors.map((error, index) => (
                             <li key={index} className="text-red-700">
-                              • {error}
+                              • Row {error.row} ({error.email}): {error.error}
                             </li>
                           ))}
                         </ul>
@@ -469,16 +793,29 @@ export default function SheetUploadPage() {
                     </div>
                   )}
 
-                  {uploadResult.successful > 0 && (
+                  {/* Success Message */}
+                  {uploadResult.results.successful > 0 && (
                     <Alert>
                       <CheckCircle2 className="h-4 w-4" />
                       <AlertDescription>
-                        Successfully processed {uploadResult.successful}{" "}
-                        user(s). The users have been added to the system
-                        (simulated).
+                        Successfully processed {uploadResult.results.successful}{" "}
+                        student(s). Students have been registered and
+                        notifications will be sent.
                       </AlertDescription>
                     </Alert>
                   )}
+
+                  {/* API Response Details (Collapsible) */}
+                  <details className="border rounded-lg p-4 bg-gray-50">
+                    <summary className="cursor-pointer text-sm font-medium text-gray-700 hover:text-gray-900">
+                      View Full API Response
+                    </summary>
+                    <div className="mt-4 p-4 bg-white rounded border overflow-auto max-h-96">
+                      <pre className="text-xs text-gray-800 whitespace-pre-wrap">
+                        {JSON.stringify(uploadResult, null, 2)}
+                      </pre>
+                    </div>
+                  </details>
                 </CardContent>
               </Card>
             )}
