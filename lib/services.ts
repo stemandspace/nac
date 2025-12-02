@@ -89,9 +89,39 @@ const createCosmicKidsAccount = async ({ username, email, password }: { username
             }
         });
         return response.data;
-    } catch (error) {
-        console.error(error);
-        throw new Error('Failed to create account in Cosmic Kids Club');
+    } catch (error: any) {
+        console.error('Error creating Cosmic Kids account:', error);
+        console.error('Error response:', error.response?.data);
+        console.error('Error status:', error.response?.status);
+
+        // Extract detailed error message from response
+        let errorMessage = 'Failed to create account in Cosmic Kids Club';
+
+        if (error.response?.data) {
+            const errorData = error.response.data;
+
+            // Handle Strapi error format
+            if (errorData.error) {
+                if (errorData.error.message) {
+                    errorMessage = `Failed to create account: ${errorData.error.message}`;
+                } else if (typeof errorData.error === 'string') {
+                    errorMessage = `Failed to create account: ${errorData.error}`;
+                }
+            }
+
+            // Handle validation errors
+            if (errorData.message) {
+                if (Array.isArray(errorData.message)) {
+                    errorMessage = `Validation error: ${errorData.message.join(', ')}`;
+                } else {
+                    errorMessage = `Failed to create account: ${errorData.message}`;
+                }
+            }
+        } else if (error.message) {
+            errorMessage = `Failed to create account: ${error.message}`;
+        }
+
+        throw new Error(errorMessage);
     }
 }
 

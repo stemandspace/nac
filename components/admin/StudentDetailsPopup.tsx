@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import {
   X,
   Mail,
@@ -391,10 +392,15 @@ export default function StudentDetailsPopup({
           </Button>
         </div>
 
-        <div>
-          {error && <p className="text-red-500">{error}</p>}
-          {whatsappError && <p className="text-red-500">{whatsappError}</p>}
-        </div>
+        {(error || whatsappError) && (
+          <Alert variant="destructive">
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>
+              {error && <div>{error}</div>}
+              {whatsappError && <div>{whatsappError}</div>}
+            </AlertDescription>
+          </Alert>
+        )}
       </DialogContent>
     </Dialog>
   );

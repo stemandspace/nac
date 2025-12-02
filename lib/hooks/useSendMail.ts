@@ -73,22 +73,41 @@ const useSendMail = (): UseSendMailReturn => {
 
             // Email not registered, create new account
             const newPassword = generatePassword();
-            await createCosmicKidsAccount({
-                username: student.email,
-                email: student.email,
-                password: newPassword,
-            });
+            try {
+                await createCosmicKidsAccount({
+                    username: student.email,
+                    email: student.email,
+                    password: newPassword,
+                });
 
-            // Send confirmation mail with new password
-            const payload = createMailPayload(student, newPassword);
-            const result = await triggerStudentConfirmationMail(payload);
-            await updateStudentMailStatus(student.documentId, true);
-            alert('Email sent successfully for new account');
-            return { success: true, data: result };
+                // Send confirmation mail with new password
+                const payload = createMailPayload(student, newPassword);
+                const result = await triggerStudentConfirmationMail(payload);
+                await updateStudentMailStatus(student.documentId, true);
+                alert('Email sent successfully for new account');
+                return { success: true, data: result };
+            } catch (accountError: any) {
+                // If account already exists (race condition or check missed it), handle gracefully
+                const errorMessage = accountError instanceof Error ? accountError.message : String(accountError);
+
+                if (errorMessage.includes('already taken') || errorMessage.includes('already exists')) {
+                    // Account exists, send with existing account message
+                    const payload = createMailPayload(student, EXISTING_ACCOUNT_MESSAGE);
+                    const result = await triggerStudentConfirmationMail(payload);
+                    await updateStudentMailStatus(student.documentId, true);
+                    alert('Email sent successfully for existing account');
+                    return { success: true, data: result };
+                }
+
+                // Re-throw other errors to be caught by outer catch
+                throw accountError;
+            }
         } catch (error) {
             console.error(error);
             const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred';
             setError(errorMessage);
+            // Show alert with error message
+            alert(`Error: ${errorMessage}`);
             return { success: false, error: errorMessage };
         } finally {
             setIsLoading(false);

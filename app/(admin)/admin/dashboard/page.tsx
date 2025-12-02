@@ -20,6 +20,7 @@ import {
   Users,
   Building2,
   Upload,
+  CreditCard,
 } from "lucide-react";
 import { useStudents } from "@/lib/hooks/useStudents";
 import { useSchools } from "@/lib/hooks/useSchools";
@@ -49,6 +50,10 @@ export default function AdminDashboard() {
 
   const handleSheetUpload = () => {
     router.push("/admin/upload");
+  };
+
+  const handleFixEntry = () => {
+    router.push("/admin/fix-entry");
   };
 
   return (
@@ -174,6 +179,23 @@ export default function AdminDashboard() {
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
                     Upload CSV or Excel files to add users in bulk
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card
+                className="hover:shadow-md transition-shadow cursor-pointer"
+                onClick={handleFixEntry}
+              >
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    <CreditCard className="h-5 w-5" />
+                    Fix Entry
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground">
+                    Fetch payment data from Razorpay by Payment ID
                   </p>
                 </CardContent>
               </Card>
