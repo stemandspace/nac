@@ -247,7 +247,7 @@ export default function HomePage() {
               <h3 className="text-white font-semibold text-sm uppercase tracking-wide mb-2">
                 OLYMPIAD EXAM
               </h3>
-              <p className="text-white text-sm">January 2026</p>
+              <p className="text-white text-sm">16 January 2026</p>
             </div>
 
             {/* Results Announced */}
