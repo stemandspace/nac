@@ -116,7 +116,7 @@ export default function LegacyPage() {
   return (
     <div className="min-h-screen bg-white font-medium">
       <Hero
-        bgimage="/legacy/bghero.jpg"
+        bgimage="https://s3.us-east-1.amazonaws.com/myckc/myckc/bg_d8a0bee212.jpg"
         title="National Astronomy Challenge: Celebrating the Legacy (2018-2024)"
       />
 
