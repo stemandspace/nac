@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import route from "@/lib/route";
 import { Button } from "@/components/ui/button";
+import { clsx } from "clsx";
 
 interface HeroProps {
   bgimage: string;
@@ -11,6 +12,7 @@ interface HeroProps {
   children?: React.ReactNode;
   isDanger?: boolean;
   alt?: string;
+  isDifferent?: boolean;
 }
 
 const Hero: React.FC<HeroProps> = ({
@@ -19,12 +21,13 @@ const Hero: React.FC<HeroProps> = ({
   desc,
   children,
   alt = "Hero background",
+  isDifferent = false,
 }) => {
   return (
     <section
       className="relative min-h-screen flex items-end justify-start px-4 sm:px-6 lg:px-8"
-      role="banner"
-      aria-label="Hero section"
+      // role="banner"
+      // aria-label="Hero section"
     >
       {/* Background Image */}
       <Image
@@ -32,7 +35,7 @@ const Hero: React.FC<HeroProps> = ({
         alt={alt}
         fill
         priority={true}
-        className="object-cover -z-10"
+        className={clsx("object-cover", isDifferent ? "" : "-z-10")}
         sizes="100vw"
         quality={30}
       />

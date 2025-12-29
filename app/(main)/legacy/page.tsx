@@ -118,6 +118,7 @@ export default function LegacyPage() {
       <Hero
         bgimage="https://s3.us-east-1.amazonaws.com/myckc/myckc/bg_d8a0bee212.jpg"
         title="National Astronomy Challenge: Celebrating the Legacy (2018-2024)"
+        isDifferent
       />
 
       {/* Inspiring Section */}
