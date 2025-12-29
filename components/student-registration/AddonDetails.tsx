@@ -145,12 +145,12 @@ const AddonDetails: React.FC<AddonDetailsProps> = ({
         <div className="bg-white p-2 rounded border text-xs">
           <div className="flex items-center gap-2 mb-2 flex-wrap">
             <span className={`text-lg font-bold ${colors.accent}`}>
-              {isOverseas ? "$" + plan.price : "₹" + plan.priceInr}
-            </span>
-            <span className="text-gray-500 line-through">
               {isOverseas
                 ? "$" + plan.originalPrice
                 : "₹" + plan.originalPriceInr}
+            </span>
+            <span className="text-gray-500 line-through">
+              {isOverseas ? "$" + plan.price : "₹" + plan.priceInr}
             </span>
             <span
               className={`inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium ${colors.badge}`}

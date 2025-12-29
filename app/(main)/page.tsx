@@ -232,7 +232,7 @@ export default function HomePage() {
               <h3 className="text-white font-semibold text-sm uppercase tracking-wide mb-2">
                 REGISTRATION CLOSES
               </h3>
-              <p className="text-white text-sm">31st December 2025</p>
+              <p className="text-white text-sm"> 31st December 2025</p>
             </div>
 
             {/* Olympiad Exam */}
@@ -247,7 +247,12 @@ export default function HomePage() {
               <h3 className="text-white font-semibold text-sm uppercase tracking-wide mb-2">
                 OLYMPIAD EXAM
               </h3>
-              <p className="text-white text-sm">January 2026</p>
+              <p className="text-white text-sm">
+                <ul>
+                  <li>•24th January for grades 7th, 8th, 9th </li>
+                  <li>•31st January for grades 4th, 5th, 6th</li>
+                </ul>
+              </p>
             </div>
 
             {/* Results Announced */}
