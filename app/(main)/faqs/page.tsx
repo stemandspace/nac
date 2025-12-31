@@ -25,7 +25,7 @@ export default function FAQsPage() {
       name: "General",
       videos: [
         {
-          url: "https://youtu.be/hZGhKEFSmsE",
+          url: "https://youtu.be/PuTC7i8NoTQ",
         },
         {
           url: "https://youtu.be/4FFagjLml4o",
