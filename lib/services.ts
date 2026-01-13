@@ -120,8 +120,7 @@ const createCosmicKidsAccount = async ({ username, email, password }: { username
         } else if (error.message) {
             errorMessage = `Failed to create account: ${error.message}`;
         }
-
-        throw new Error(errorMessage);
+        console.error('Detailed error message:', errorMessage);
     }
 }
 
