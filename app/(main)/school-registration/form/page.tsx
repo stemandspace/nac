@@ -10,6 +10,8 @@ import { sendTemplateMail } from "@/lib/mail";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import RegistrationSuccessPopup from "@/components/RegistrationSuccessPopup";
+import RegistrationClosed from "@/components/RegistrationClosed";
+import { registrationConfig } from "@/config/registration";
 
 // Form validation schema
 const schoolFormSchema = z.object({
@@ -90,6 +92,13 @@ export default function SchoolRegistrationPage() {
     setShowPopup(false);
     setSchoolId("");
   };
+
+  // Check if registration is closed
+  if (!registrationConfig.isOpen) {
+    return (
+      <RegistrationClosed title="School Registration Closed" />
+    );
+  }
 
   return (
     <>
