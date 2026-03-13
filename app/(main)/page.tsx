@@ -265,7 +265,7 @@ export default function HomePage() {
                 />
               </div>
               <h3 className="text-white font-semibold text-sm uppercase tracking-wide mb-2">
-                RESULTS ANNOUNCED
+                RESULTS announcement
               </h3>
               <p className="text-white text-sm">March 2026</p>
             </div>
