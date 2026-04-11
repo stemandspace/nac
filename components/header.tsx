@@ -1,9 +1,7 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useEffect } from "react";
 import Image from "next/image";
 
 import route from "@/lib/route";
@@ -39,44 +37,11 @@ const navItems = [
   },
 ];
 
-export default function Header() {
+const RESULTS_URL = "http://result.nationalastronomy.org/";
 
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
-  // Track hover state for dropdown
-  let hoverTimeout: NodeJS.Timeout | null = null;
+export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
-
-
-  // Close dropdown on outside click
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (
-        dropdownRef.current &&
-        !(dropdownRef.current as any).contains(event.target)
-      ) {
-        setDropdownOpen(false);
-      }
-    }
-    if (dropdownOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [dropdownOpen]);
-
-  // Dropdown hover handlers
-  const handleDropdownMouseEnter = () => {
-    if (hoverTimeout) clearTimeout(hoverTimeout);
-    setDropdownOpen(true);
-  };
-  const handleDropdownMouseLeave = () => {
-    hoverTimeout = setTimeout(() => setDropdownOpen(false), 150);
-  };
 
   // Helper to check if a nav item is active
   const isActive = (href: string) => {
@@ -148,7 +113,7 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Register Button Dropdown */}
+          {/* Register Button Dropdown (disabled — use Check result instead)
           <div
             className="flex-shrink-0 hidden md:block relative"
             ref={dropdownRef}
@@ -200,6 +165,16 @@ export default function Header() {
               </div>
             )}
           </div>
+          */}
+
+          <a
+            href={RESULTS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-shrink-0 hidden md:inline-flex items-center justify-center bg-[#EE7E1A] hover:bg-orange-500 text-white px-6 py-2 rounded-full font-semibold transition duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EE7E1A]"
+          >
+            Check result
+          </a>
         </div>
 
         {/* Mobile Menu */}
@@ -221,6 +196,7 @@ export default function Header() {
                 </Link>
               ))}
 
+              {/* Mobile register buttons (disabled — use Check result instead)
               <Link
                 href={route.SCHOOL_REGISTRATION}
                 onClick={() => setMenuOpen(false)}
@@ -237,6 +213,17 @@ export default function Header() {
                   Register as Student
                 </Button>
               </Link>
+              */}
+
+              <a
+                href={RESULTS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMenuOpen(false)}
+                className="inline-flex items-center justify-center bg-[#EE7E1A] hover:bg-orange-500 text-white w-full px-6 py-2 rounded-full font-semibold transition duration-150"
+              >
+                Check result
+              </a>
             </div>
           </div>
         )}
