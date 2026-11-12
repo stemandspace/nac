@@ -9,6 +9,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import SupportHelpSection from "@/components/SupportHelpSection";
 import ContactSupportBanner from "@/components/ContactSupportBanner";
 import SpacetopiaSubscriptionSection from "@/components/SpacetopiaSubscriptionSection";
+import IdosPromoPopup from "@/components/IdosPromoPopup";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -70,6 +71,7 @@ export default function RootLayout({
         {/* End Meta Pixel Code */}
 
         <Header />
+        <IdosPromoPopup />
         {children}
         <SupportHelpSection />
         <SpacetopiaSubscriptionSection />
